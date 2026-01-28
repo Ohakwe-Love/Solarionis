@@ -1,0 +1,47 @@
+@import "tailwindcss";
+
+@font-face {
+    font-family: 'Marcellus';
+    src: url('/src/assets/fonts/Marcellus/Marcellus-Regular.ttf') format('truetype');
+    font-weight: normal;
+}
+
+@font-face {
+    font-family: 'Mulish';
+    src: url('/src/assets/fonts/Mulish/Mulish-VariableFont_wght.ttf') format('truetype');
+    font-weight: 100 900;
+}
+
+@font-face {
+    font-family: 'Mulish';
+    src: url('/src/assets/fonts/Mulish/Mulish-Italic-VariableFont_wght.ttf') format('truetype');
+    font-weight: 100 900;
+    font-style: italic;
+}
+
+:root {
+    --font-heading-family: "Marcellus", serif;
+    --font-body-family: "Mulish", sans-serif;
+    --font-body-style: normal;
+    --font-body-weight: 700;
+    --font-body-weight-bold: 1000;
+    --font-body-scale: 1;
+    --font-base-size: 16px;
+    --font-additional-family: Nunito, sans-serif;
+    --font-h1-size: clamp(38px, calc(70 / 1920 * 100vw), 70px);
+    --font-h2-size: clamp(28px, calc(60 / 1920 * 100vw), 60px);
+    --font-h3-size: clamp(25px, calc(40 / 1920 * 100vw), 40px);
+    --font-h4-size: clamp(22px, calc(40 / 1920 * 100vw), 30px);
+    --primary-color: #f9ab38;
+    --secondary-color: #052C05E7;
+    --tertiary-color: rgba(221, 114, 16, 0.1);
+    --solar-gold: #FDBA4D;
+    --solar-orange: #F97316;
+    --electric-blue: #38BDF8;
+    --violet: #7C3AED;
+    --deep-black: #0B0F1A;
+    --white: #FFFFFF;
+    --light-gray: #E5E7EB;
+    --white-color: #FFF;
+    --grey-100: #f6f3f4;
+}

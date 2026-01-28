@@ -1,0 +1,168 @@
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    transition: all 0.3s ease-in-out;
+}
+
+body {
+    font-family: var(--font-body-family);
+}
+
+h1,
+h2,
+h3 {
+    font-family: var(--font-heading-family);
+    font-weight: var(--font-heading-weight);
+    font-style: var(--font-heading-style);
+}
+
+h1 {
+    font-size: var(--font-h1-size);
+}
+
+h2 {
+    font-size: var(--font-h2-size);
+}
+
+h3 {
+    /* font-size: var(--font-h3-size); */
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 10px;
+}
+
+header {
+    font-size: 12px !important;
+    font-weight: 600 !important;
+}
+
+header li a:hover {
+    color: var(--primary-color);
+}
+
+.header-action:hover {
+    color: var(--primary-color);
+}
+
+.cart-badge {
+    background-color: var(--primary-color);
+}
+
+.logo {
+    font-family: 'Marcellus', serif;
+}
+
+.hero-wrapper {
+    height: 100vh;
+    background: linear-gradient(rgb(0, 0, 0, 0.3), rgb(0, 0, 0, 0.3)), url('/src/assets/images/hero/1.webp') no-repeat center center/cover;
+}
+
+.hero-wrapper header {
+    background: transparent;
+}
+
+.hero-content {
+    max-width: 700px;
+}
+
+.hero-wrapper h1 {
+    font-size: 65px;
+    line-height: 1;
+}
+
+.hero-stats {
+    border-top: 2px solid var(--color-white);
+    backdrop-filter: blur(10px);
+    height: 170px;
+}
+
+.btn {
+    border: none;
+    padding: 15px 30px;
+    text-transform: capitalize;
+    font-weight: 600;
+    display: inline-flex;
+    gap: 10px;
+    align-items: center;
+    text-transform: uppercase;
+    border: 1px solid transparent;
+}
+
+.btn-primary {
+    background-color: var(--primary-color);
+    color: var(--color-black);
+}
+
+.btn-border {
+    background: transparent;
+    color: var(--color-white);
+    border-color: var(--color-white);
+}
+
+.section-label {
+    color: var(--primary-color);
+    font-size: var(--text-sm);
+    font-weight: var(--font-medium);
+    letter-spacing: var(--tracking-widest);
+    line-height: var(--tw-leading, var(--text-sm--line-height));
+    margin-bottom: calc(var(--spacing) * 4);
+    text-transform: uppercase;
+}
+
+.secondary-text {
+    color: var(--secondary-color);
+}
+
+.primary-text,
+.hover-primary-text:hover {
+    color: var(--primary-color);
+}
+
+.bg-primary {
+    background-color: var(--primary-color);
+}
+
+.streamlined-step h3 {
+    line-height: 1 !important;
+}
+
+.retirement-investment {
+    background: linear-gradient(rgb(0, 0, 0, 0.5), rgb(0, 0, 0, 0.5)), url('assets/images/hero/2.webp') center/cover;
+
+}
+
+
+@media (max-width: 768px) {
+
+    .hero-wrapper {
+        height: 120vh;
+    }
+
+    .container {
+        padding: 0 10px;
+    }
+
+    section {
+        padding: auto;
+    }
+
+    h2 {
+        font-size: 30px;
+    }
+
+    header {
+        padding: 10px !important;
+    }
+
+    p {
+        font-size: 14px !important
+    }
+
+    .testimonial-card {
+        width: 100% !important;
+    }
+}
