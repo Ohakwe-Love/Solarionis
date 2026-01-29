@@ -25,7 +25,7 @@ export default function RetirementInvestment() {
                         <div className="space-y-8">
 
                             {/* Description and CTA */}
-                            <div className="bg-white/95 w-[80%] ml-auto backdrop-blur-sm rounded-2xl p-8 shadow-xl">
+                            <div className="bg-white/95 w-[100%] sm:w-[80%] lg:w-[80%] ml-auto backdrop-blur-sm rounded-2xl p-8 shadow-xl">
                                 <p className="text-gray-800 text-lg mb-6 leading-relaxed">
                                     Diversify your IRA by owning premium, dividend-producing clean energy projects backed by long-term contracts.
                                 </p>

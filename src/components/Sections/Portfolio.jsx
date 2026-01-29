@@ -112,7 +112,7 @@ export default function Portfolio() {
                             <button
                                 className={`w-full py-4 px-6 rounded-full font-bold flex items-center justify-center gap-2 transition-all duration-300 group text-[12px] cursor-pointer ${portfolio.buttonStyle === 'white'
                                     ? 'bg-white text-gray-900 hover:bg-[var(--solar-gold)] hover:text-black'
-                                    : 'bg-black text-white hover:bg-[var(--solar-gold)] hover:text-black'
+                                    : 'bg-(--deep-black) text-white hover:bg-[var(--solar-gold)] hover:text-black'
                                     }`}
                             >
                                 {portfolio.buttonText}
