@@ -49,9 +49,9 @@ export default function ContactPage() {
                     <h2 className='text-6xl text-white mb-3'>Contact Us</h2>
 
                     <p className='text-2xl'>
-                        <Link to='/' className='text-white hover:text-[var(--primary-color)] transition'>Home</Link>
+                        <Link to='/' className='text-white hover:text-(--primary-color) transition'>Home</Link>
                         <ChevronRight className='inline mx-2 text-white' />
-                        <span className='text-[var(--primary-color)]'>Contact Us</span>
+                        <span className='text-(--primary-color)'>Contact Us</span>
                     </p>
                 </div>
             </section>
@@ -75,9 +75,9 @@ export default function ContactPage() {
                             <div className="grid sm:grid-cols-2 gap-4">
 
                                 {/* Address */}
-                                <div className="bg-slate-800 rounded-xl p-6 border border-slate-700 hover:border-[var(--primary-color)] transition-all duration-300 group">
-                                    <div className="w-12 h-12 bg-[var(--primary-color)]/10 rounded-full flex items-center justify-center mb-4 group-hover:bg-[var(--primary-color)] transition-all duration-300">
-                                        <MapPin className="w-6 h-6 text-[var(--primary-color)] group-hover:text-white transition-all duration-300" />
+                                <div className="bg-slate-800 rounded-xl p-6 border border-slate-700 hover:border-(--primary-color) transition-all duration-300 group">
+                                    <div className="w-12 h-12 bg-(--primary-color)/10 rounded-full flex items-center justify-center mb-4 group-hover:bg-(--primary-color) transition-all duration-300">
+                                        <MapPin className="w-6 h-6 text-(--primary-color) group-hover:text-white transition-all duration-300" />
                                     </div>
                                     <h3 className="text-white font-semibold mb-2">Visit Us</h3>
                                     <p className="text-gray-400 text-sm leading-relaxed">
@@ -86,18 +86,18 @@ export default function ContactPage() {
                                 </div>
 
                                 {/* Phone */}
-                                <div className="bg-slate-800 rounded-xl p-6 border border-slate-700 hover:border-[var(--primary-color)] transition-all duration-300 group">
-                                    <div className="w-12 h-12 bg-[var(--primary-color)]/10 rounded-full flex items-center justify-center mb-4 group-hover:bg-[var(--primary-color)] transition-all duration-300">
-                                        <Phone className="w-6 h-6 text-[var(--primary-color)] group-hover:text-white transition-all duration-300" />
+                                <div className="bg-slate-800 rounded-xl p-6 border border-slate-700 hover:border-(--primary-color) transition-all duration-300 group">
+                                    <div className="w-12 h-12 bg-(--primary-color)/10 rounded-full flex items-center justify-center mb-4 group-hover:bg-(--primary-color) transition-all duration-300">
+                                        <Phone className="w-6 h-6 text-(--primary-color) group-hover:text-white transition-all duration-300" />
                                     </div>
                                     <h3 className="text-white font-semibold mb-2">Call Us</h3>
                                     <p className="text-gray-400 text-sm">+1 (555) 123-4567</p>
                                 </div>
 
                                 {/* Email */}
-                                <div className="bg-slate-800 rounded-xl p-6 border border-slate-700 hover:border-[var(--primary-color)] transition-all duration-300 group">
-                                    <div className="w-12 h-12 bg-[var(--primary-color)]/10 rounded-full flex items-center justify-center mb-4 group-hover:bg-[var(--primary-color)] transition-all duration-300">
-                                        <Mail className="w-6 h-6 text-[var(--primary-color)] group-hover:text-white transition-all duration-300" />
+                                <div className="bg-slate-800 rounded-xl p-6 border border-slate-700 hover:border-(--primary-color) transition-all duration-300 group">
+                                    <div className="w-12 h-12 bg-(--primary-color)/10 rounded-full flex items-center justify-center mb-4 group-hover:bg-(--primary-color) transition-all duration-300">
+                                        <Mail className="w-6 h-6 text-(--primary-color) group-hover:text-white transition-all duration-300" />
                                     </div>
                                     <h3 className="text-white font-semibold mb-2">Email Us</h3>
                                     <p className="text-gray-400 text-sm">info@Solarionis.com</p>
@@ -105,9 +105,9 @@ export default function ContactPage() {
                                 </div>
 
                                 {/* Hours */}
-                                <div className="bg-slate-800 rounded-xl p-6 border border-slate-700 hover:border-[var(--primary-color)] transition-all duration-300 group">
-                                    <div className="w-12 h-12 bg-[var(--primary-color)]/10 rounded-full flex items-center justify-center mb-4 group-hover:bg-[var(--primary-color)] transition-all duration-300">
-                                        <Clock className="w-6 h-6 text-[var(--primary-color)] group-hover:text-white transition-all duration-300" />
+                                <div className="bg-slate-800 rounded-xl p-6 border border-slate-700 hover:border-(--primary-color) transition-all duration-300 group">
+                                    <div className="w-12 h-12 bg-(--primary-color)/10 rounded-full flex items-center justify-center mb-4 group-hover:bg-(--primary-color) transition-all duration-300">
+                                        <Clock className="w-6 h-6 text-(--primary-color) group-hover:text-white transition-all duration-300" />
                                     </div>
                                     <h3 className="text-white font-semibold mb-2">Working Hours</h3>
                                     <p className="text-gray-400 text-sm">Mon - Fri: 9AM - 6PM</p>
@@ -140,7 +140,7 @@ export default function ContactPage() {
                                                     onChange={handleChange}
                                                     placeholder="Name"
                                                     required
-                                                    className="w-full text-white px-5 py-4 rounded-lg border bg-slate-800 border-slate-700 hover:border-[var(--primary-color)]  focus:border-[var(--primary-color)] focus:outline-none transition"
+                                                    className="w-full text-white px-5 py-4 rounded-lg border bg-slate-800 border-slate-700 hover:border-(--primary-color)  focus:border-(--primary-color) focus:outline-none transition"
                                                 />
                                                 <span className="absolute right-4 top-4 text-red-500">*</span>
                                             </div>
@@ -152,7 +152,7 @@ export default function ContactPage() {
                                                     value={formData.phone}
                                                     onChange={handleChange}
                                                     placeholder="Call us anytime"
-                                                    className="w-full text-white px-5 py-4 rounded-lg border bg-slate-800 border-slate-700 hover:border-[var(--primary-color)]  focus:border-[var(--primary-color)] focus:outline-none transition"
+                                                    className="w-full text-white px-5 py-4 rounded-lg border bg-slate-800 border-slate-700 hover:border-(--primary-color)  focus:border-(--primary-color) focus:outline-none transition"
                                                 />
                                             </div>
                                         </div>
@@ -165,7 +165,7 @@ export default function ContactPage() {
                                                 onChange={handleChange}
                                                 placeholder="Email"
                                                 required
-                                                className="w-full text-white px-5 py-4 rounded-lg border bg-slate-800 border-slate-700 hover:border-[var(--primary-color)]  focus:border-[var(--primary-color)] focus:outline-none transition"
+                                                className="w-full text-white px-5 py-4 rounded-lg border bg-slate-800 border-slate-700 hover:border-(--primary-color)  focus:border-(--primary-color) focus:outline-none transition"
                                             />
                                             <span className="absolute right-4 top-4 text-red-500">*</span>
                                         </div>
@@ -178,7 +178,7 @@ export default function ContactPage() {
                                                 placeholder="Comment"
                                                 required
                                                 rows="6"
-                                                className="w-full text-white px-5 py-4 rounded-lg border bg-slate-800 border-slate-700 hover:border-[var(--primary-color)]  focus:border-[var(--primary-color)] focus:outline-none transition resize-none"
+                                                className="w-full text-white px-5 py-4 rounded-lg border bg-slate-800 border-slate-700 hover:border-(--primary-color)  focus:border-(--primary-color) focus:outline-none transition resize-none"
                                             ></textarea>
                                             <span className="absolute right-4 top-4 text-red-500">*</span>
                                         </div>
@@ -186,7 +186,7 @@ export default function ContactPage() {
                                         <button
                                             type="submit"
                                             disabled={isSubmitting}
-                                            className="w-full sm:w-auto px-10 py-4 bg-white text-black cursor-pointer hover:bg-[var(--primary-color)] font-medium rounded-full transition-all duration-300 shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 mx-auto"
+                                            className="w-full sm:w-auto px-10 py-4 bg-white text-black cursor-pointer hover:bg-(--primary-color) font-medium rounded-full transition-all duration-300 shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 mx-auto"
                                         >
                                             {isSubmitting ? (
                                                 <>
@@ -227,12 +227,12 @@ export default function ContactPage() {
                         ></iframe>
 
                         {/* Overlay */}
-                        <div className="absolute inset-0 bg-[var(--deep-black)]/20 group-hover:bg-[var(--deep-black)]/10 transition-all duration-300"></div>
+                        <div className="absolute inset-0 bg-(--deep-black)/20 group-hover:bg-(--deep-black)/10 transition-all duration-300"></div>
 
                         {/* Location Pin */}
                         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-full">
                             <div className="relative animate-bounce">
-                                <MapPin className="w-12 h-12 text-[var(--primary-color)] drop-shadow-lg" fill="currentColor" />
+                                <MapPin className="w-12 h-12 text-(--primary-color) drop-shadow-lg" fill="currentColor" />
                             </div>
                         </div>
                     </div>

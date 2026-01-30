@@ -1,18 +1,18 @@
 import React, { useState, useEffect } from 'react';
-import { User, Menu, X, ChevronDown, CircleQuestionMark, Zap } from 'lucide-react';
+import { Menu, X, ChevronDown, ArrowUpRight } from 'lucide-react';
 import { NavLink } from "react-router-dom";
 import logo from '../../assets/images/logo/logo.png';
 
 // const linkClass = ({ isActive }) =>
 //     `uppercase tracking-wide transition ${isActive
-//         ? "text-[var(--primary-color)]"
-//         : "text-white hover:text-[var(--primary-color)]"
+//         ? "text-(--primary-color)"
+//         : "text-white hover:text-(--primary-color)"
 //     }`;
 
 const mobileNavLinkClass = ({ isActive }) =>
     `${isActive
-        ? "text-[var(--primary-color)]"
-        : "text-white hover:text-[var(--primary-color)]"
+        ? "text-(--primary-color)"
+        : "text-white hover:text-(--primary-color)"
     } block font-medium uppercase tracking-wide py-2 border-b border-gray-700`;
 
 const Header = () => {
@@ -51,25 +51,22 @@ const Header = () => {
     }, []);
 
     const resourcesLinks = [
-        { name: 'FAQ', icon: CircleQuestionMark, href: '/faq' },
-        { name: 'Performance', icon: Zap, href: '/performance' },
-        { name: 'Articles', icon: '📄', href: '/articles' },
-        { name: 'Reviews', icon: '⭐', href: '/reviews' },
-        { name: 'Annual Reports', icon: '📈', href: '/annual-reports' },
-        { name: 'Quarterly Webinars', icon: '📹', href: '/webinars' },
-        { name: 'Energy Infrastructure', icon: '🔌', href: '/energy-infrastructure' },
-        { name: 'Private Markets', icon: '📊', href: '/private-markets' },
-        { name: 'IRA', icon: '👤', href: '/ira' },
-        { name: 'Films', icon: '🎬', href: '/films' }
+        { name: 'FAQ', href: '/faq' },
+        { name: 'Performance', href: '/performance' },
+        { name: 'Articles', href: '/articles' },
+        { name: 'Reviews', href: '/reviews' },
+        { name: 'Annual Reports', href: '/annual-reports' },
+        { name: 'Quarterly Webinars', href: '/webinars' },
+        { name: 'Energy Infrastructure', href: '/energy-infrastructure' },
+        { name: 'Private Markets', href: '/private-markets' },
+        { name: 'IRA', href: '/ira' },
+        { name: 'Films', href: '/films' }
     ];
 
     return (
         <header
-            className={`left-0 right-0 z-50 px-4 sm:px-6 lg:px-8 py-1 sm:py-1 transition-all duration-300 ${
-                isScrolled 
-                    ? 'fixed top-0 bg-[var(--electric-blue)] backdrop-blur-md shadow-lg' 
-                    : 'absolute top-0 bg-transparent'
-            }`}
+            className={`left-0 right-0 z-50 px-4 sm:px-6 lg:px-8 py-1 sm:py-1 transition-all duration-300 ${isScrolled ? 'fixed top-0 bg-(--deep-black) backdrop-blur-md shadow-lg' : 'relative top-0 bg-transparent'
+                }`}
         >
             <div className="max-w-7xl mx-auto flex items-center justify-between">
                 {/* LOGO */}
@@ -81,14 +78,14 @@ const Header = () => {
                 <nav className="hidden lg:block">
                     <ul className='flex gap-4 items-center'>
                         <li>
-                            <NavLink 
-                                to="/investment" 
+                            <NavLink
+                                to="/investment"
                                 className='text-white nav-link uppercase bg-[rgb(0,0,0,0.25)] px-3 py-3 rounded hover:bg-[rgb(0,0,0,0.4)] transition'
                             >
                                 Investment
                             </NavLink>
                         </li>
-                        
+
                         {/* Resources Dropdown */}
                         <li className="relative">
                             <button
@@ -98,9 +95,8 @@ const Header = () => {
                             >
                                 Resources
                                 <ChevronDown
-                                    className={`w-4 h-4 transition-transform ${
-                                        isResourcesOpen ? 'rotate-180' : ''
-                                    }`}
+                                    className={`w-4 h-4 transition-transform ${isResourcesOpen ? 'rotate-180' : ''
+                                        }`}
                                 />
                             </button>
 
@@ -114,15 +110,15 @@ const Header = () => {
                                         <NavLink
                                             key={index}
                                             to={link.href}
-                                            className="flex items-center gap-3 p-2 rounded-xl hover:bg-[rgb(0,0,0,0.4)] transition-all group"
+                                            className="flex items-center justify-between gap-3 p-2 rounded-xl hover:bg-[rgb(0,0,0,0.4)] transition-all group"
                                             onClick={() => setIsResourcesOpen(false)}
                                         >
-                                            <div className="w-10 h-10 bg-[rgb(0,0,0,0.25)] rounded-full flex items-center justify-center text-xl">
-                                                {link.icon}
-                                            </div>
-                                            <span className="text-white font-medium group-hover:text-[var(--solar-gold)] transition-colors">
+                                            <span className="text-white font-medium group-hover:text-(--solar-gold) transition-colors">
                                                 {link.name}
                                             </span>
+                                            <div className="w-10 text-white h-10 bg-[rgb(0,0,0,0.25)] rounded-full flex items-center justify-center text-xl">
+                                                <ArrowUpRight className='w-6 h-6' />
+                                            </div>
                                         </NavLink>
                                     ))}
                                 </div>
@@ -130,16 +126,16 @@ const Header = () => {
                         </li>
 
                         <li>
-                            <NavLink 
-                                to="/wealth" 
+                            <NavLink
+                                to="/wealth"
                                 className='text-white nav-link uppercase bg-[rgb(0,0,0,0.25)] px-3 py-3 rounded hover:bg-[rgb(0,0,0,0.4)] transition'
                             >
                                 Wealth
                             </NavLink>
                         </li>
                         <li>
-                            <NavLink 
-                                to="/about" 
+                            <NavLink
+                                to="/about"
                                 className='text-white nav-link uppercase bg-[rgb(0,0,0,0.25)] px-3 py-3 rounded hover:bg-[rgb(0,0,0,0.4)] transition'
                             >
                                 About Us
@@ -150,21 +146,21 @@ const Header = () => {
 
                 {/* Desktop Right Side Buttons */}
                 <div className='hidden lg:flex gap-3 items-center'>
-                    <NavLink 
-                        to="/login" 
+                    <NavLink
+                        to="/login"
                         className="text-white nav-link uppercase bg-[rgb(0,0,0,0.25)] px-3 py-3 rounded hover:bg-[rgb(0,0,0,0.4)] transition"
                     >
                         Login
                     </NavLink>
-                    <NavLink 
-                        to="/signup" 
-                        className="text-black nav-link uppercase bg-[var(--solar-gold)] px-3 py-3 rounded hover:opacity-90 transition"
+                    <NavLink
+                        to="/signup"
+                        className="text-black nav-link uppercase bg-(--solar-gold) px-3 py-3 rounded hover:opacity-90 transition"
                     >
                         create account
                     </NavLink>
-                    <NavLink 
-                        to="/help" 
-                        className="text-white nav-link uppercase bg-[var(--deep-black)] px-3 py-3 rounded hover:bg-opacity-80 transition"
+                    <NavLink
+                        to="/help"
+                        className="text-white nav-link uppercase bg-(--deep-black) px-3 py-3 rounded hover:bg-opacity-80 transition"
                     >
                         <svg fill="none" width="20" height="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18 18" alt="Message question" title="Question message">
                             <path d="M12.75 13.8225H9.75L6.41249 16.0425C5.91749 16.3725 5.25 16.02 5.25 15.42V13.8225C3 13.8225 1.5 12.3225 1.5 10.0725V5.57249C1.5 3.32249 3 1.82249 5.25 1.82249H12.75C15 1.82249 16.5 3.32249 16.5 5.57249V10.0725C16.5 12.3225 15 13.8225 12.75 13.8225Z" stroke="currentColor" strokeWidth="1.125" strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round"></path>
@@ -177,7 +173,7 @@ const Header = () => {
                 {/* Mobile Menu Button */}
                 <button
                     onClick={toggleMobileMenu}
-                    className="lg:hidden text-white p-2 hover:text-[var(--solar-gold)] transition z-50"
+                    className="lg:hidden text-white cursor-pointer p-2 hover:text-(--solar-gold) transition z-50"
                     aria-label="Toggle menu"
                 >
                     {mobileMenuOpen ? (
@@ -190,13 +186,12 @@ const Header = () => {
 
             {/* Mobile Menu */}
             <div
-                className={`lg:hidden fixed top-0 left-0 right-0 bg-[#101010]/98 backdrop-blur-lg transition-all duration-300 overflow-hidden ${
-                    mobileMenuOpen ? 'max-h-screen opacity-100 pt-24' : 'max-h-0 opacity-0'
-                }`}
+                className={`lg:hidden fixed top-0 left-0 right-0 bg-[#101010]/98 backdrop-blur-lg transition-all duration-300 overflow-hidden ${mobileMenuOpen ? 'max-h-screen opacity-100 pt-24' : 'max-h-0 opacity-0'
+                    }`}
             >
                 <nav className="px-4 py-6 space-y-4 max-h-[calc(100vh-6rem)] overflow-y-auto">
-                    <NavLink 
-                        to="/investment" 
+                    <NavLink
+                        to="/investment"
                         className={mobileNavLinkClass}
                         onClick={() => setMobileMenuOpen(false)}
                     >
@@ -207,13 +202,12 @@ const Header = () => {
                     <div>
                         <button
                             onClick={() => setIsResourcesOpen(!isResourcesOpen)}
-                            className="w-full flex items-center justify-between text-white font-medium uppercase tracking-wide py-2 border-b border-gray-700"
+                            className="w-full flex items-center cursor-pointer justify-between text-white font-medium uppercase tracking-wide py-2 border-b border-gray-700"
                         >
                             Resources
                             <ChevronDown
-                                className={`w-5 h-5 transition-transform ${
-                                    isResourcesOpen ? 'rotate-180' : ''
-                                }`}
+                                className={`w-5 h-5 transition-transform ${isResourcesOpen ? 'rotate-180' : ''
+                                    }`}
                             />
                         </button>
 
@@ -223,7 +217,7 @@ const Header = () => {
                                     <NavLink
                                         key={index}
                                         to={link.href}
-                                        className="flex items-center gap-3 py-2 text-gray-300 hover:text-[var(--solar-gold)] transition-colors"
+                                        className="flex items-center gap-3 py-2 text-gray-300 hover:text-(--solar-gold) transition-colors"
                                         onClick={() => {
                                             setMobileMenuOpen(false);
                                             setIsResourcesOpen(false);
@@ -237,15 +231,15 @@ const Header = () => {
                         )}
                     </div>
 
-                    <NavLink 
-                        to="/wealth" 
+                    <NavLink
+                        to="/wealth"
                         className={mobileNavLinkClass}
                         onClick={() => setMobileMenuOpen(false)}
                     >
                         Wealth
                     </NavLink>
-                    <NavLink 
-                        to="/about" 
+                    <NavLink
+                        to="/about"
                         className={mobileNavLinkClass}
                         onClick={() => setMobileMenuOpen(false)}
                     >
@@ -253,16 +247,16 @@ const Header = () => {
                     </NavLink>
 
                     <div className="pt-4 space-y-3 border-t border-gray-700">
-                        <NavLink 
-                            to="/login" 
+                        <NavLink
+                            to="/login"
                             className="block text-center text-white font-medium uppercase tracking-wide py-3 bg-[rgb(0,0,0,0.25)] rounded hover:bg-[rgb(0,0,0,0.4)] transition"
                             onClick={() => setMobileMenuOpen(false)}
                         >
                             Login
                         </NavLink>
-                        <NavLink 
-                            to="/signup" 
-                            className="block text-center text-black font-medium uppercase tracking-wide py-3 bg-[var(--solar-gold)] rounded hover:opacity-90 transition"
+                        <NavLink
+                            to="/signup"
+                            className="block text-center text-black font-medium uppercase tracking-wide py-3 bg-(--solar-gold) rounded hover:opacity-90 transition"
                             onClick={() => setMobileMenuOpen(false)}
                         >
                             Create Account

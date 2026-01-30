@@ -17,7 +17,7 @@ export default function RetirementInvestment() {
                                 <br />
                                 Investing Now
                                 <br />
-                                <span className="text-[var(--solar-gold)]">Available</span>
+                                <span className="text-(--solar-gold)">Available</span>
                             </h1>
                         </div>
 
@@ -29,7 +29,7 @@ export default function RetirementInvestment() {
                                 <p className="text-gray-800 text-lg mb-6 leading-relaxed">
                                     Diversify your IRA by owning premium, dividend-producing clean energy projects backed by long-term contracts.
                                 </p>
-                                <button className="w-full bg-[var(--solar-gold)] hover:bg-[var(--deep-black)] text-gray-900 font-bold py-4 px-8 rounded-full flex items-center justify-center gap-3 transition-all duration-300 shadow-lg hover:shadow-xl text-lg group hover:text-white">
+                                <button className="w-full bg-(--solar-gold) hover:bg-(--deep-black) text-gray-900 font-bold py-4 px-8 rounded-full flex items-center justify-center gap-3 transition-all duration-300 shadow-lg hover:shadow-xl text-lg group hover:text-white cursor-pointer">
                                     LEARN MORE
                                     <ArrowRight className="w-6 h-6 group-hover:translate-x-1 transition-transform" />
                                 </button>

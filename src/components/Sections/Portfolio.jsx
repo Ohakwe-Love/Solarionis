@@ -65,7 +65,7 @@ export default function Portfolio() {
                             Open Portfolios
                         </h2>
                     </div>
-                    <button className="hidden md:flex items-center gap-2 text-gray-900 font-medium hover:gap-4 transition-all">
+                    <button className="hidden md:flex cursor-pointer items-center gap-2 text-gray-900 font-medium hover:gap-4 transition-all">
                         EXPLORE ALL INVESTMENT OFFERINGS
                         <ArrowRight className="w-5 h-5" />
                     </button>
@@ -77,7 +77,7 @@ export default function Portfolio() {
                         <div
                             key={portfolio.id}
                             className={`rounded-3xl p-8 ${portfolio.isCore
-                                ? 'bg-[var(--deep-black)]'
+                                ? 'bg-(--deep-black)'
                                 : 'bg-white'
                                 } shadow-sm hover:shadow-lg transition-shadow duration-300`}
                         >
@@ -86,7 +86,7 @@ export default function Portfolio() {
                                 {portfolio.images.map((img, idx) => (
                                     <div
                                         key={idx}
-                                        className="w-16 h-16 bg-white rounded-full flex items-center justify-center text-2xl shadow-md border-2 border-[var(--solar-gold)] overflow-hidden"
+                                        className="w-16 h-16 bg-white rounded-full flex items-center justify-center text-2xl shadow-md border-2 border-(--solar-gold) overflow-hidden"
                                     >
                                         <img src={img} alt="Portfolio" className='w-full h-full' />
                                     </div>
@@ -111,8 +111,8 @@ export default function Portfolio() {
                             {/* CTA Button */}
                             <button
                                 className={`w-full py-4 px-6 rounded-full font-bold flex items-center justify-center gap-2 transition-all duration-300 group text-[12px] cursor-pointer ${portfolio.buttonStyle === 'white'
-                                    ? 'bg-white text-gray-900 hover:bg-[var(--solar-gold)] hover:text-black'
-                                    : 'bg-(--deep-black) text-white hover:bg-[var(--solar-gold)] hover:text-black'
+                                    ? 'bg-white text-gray-900 hover:bg-(--solar-gold) hover:text-black'
+                                    : 'bg-(--deep-black) text-white hover:bg-(--solar-gold) hover:text-black'
                                     }`}
                             >
                                 {portfolio.buttonText}
@@ -123,7 +123,7 @@ export default function Portfolio() {
                 </div>
 
                 {/* Mobile CTA */}
-                <button className="md:hidden mt-8 w-full flex items-center justify-center gap-2 text-gray-900 font-medium py-4">
+                <button className="md:hidden mt-8 w-full cursor-pointer flex items-center justify-center gap-2 text-gray-900 font-medium py-4">
                     EXPLORE ALL INVESTMENT OFFERINGS
                     <ArrowRight className="w-5 h-5" />
                 </button>

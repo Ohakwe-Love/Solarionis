@@ -4,12 +4,12 @@ import './App.css'
 
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import HomePage from "./Pages/HomePage";
-// import AboutPage from "./Pages/AboutPage";
+import InvestmentPage from "./Pages/InvestmentPage";
+import WealthPage from "./Pages/WealthPage";
+import AboutPage from "./Pages/AboutPage";
 // import ContactPage from "./Pages/ContactPage";
 // import ShopPage from "./Pages/ShopPage";
-// import CartPage from "./Pages/CartPage";
-// import CheckoutPage from "./Pages/CheckoutPage";
-// import FaqPage from "./Pages/FaqPage";
+import FaqPage from "./Pages/FaqPage";
 // import { CartProvider } from './context/CartContext';
 import NotFoundPage from "./Pages/NotFoundPage";
 
@@ -19,10 +19,11 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<HomePage />} />
-        {/* <Route path="/about" element={<AboutPage />} />
-          <Route path="/cart" element={<CartPage />} />
-          <Route path="/checkout" element={<CheckoutPage />} />
-          <Route path="/faq" element={<FaqPage />} />
+        <Route path="/investment" element={<InvestmentPage />} />
+        <Route path="/wealth" element={<WealthPage />} />
+        <Route path="/about" element={<AboutPage />} />
+        <Route path="/faq" element={<FaqPage />} />
+        {/* 
           <Route path="/contact" element={<ContactPage />} /> */}
           <Route path="*" element={<NotFoundPage />} />
       </Routes>

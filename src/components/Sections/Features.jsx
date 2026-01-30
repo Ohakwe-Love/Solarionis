@@ -41,13 +41,13 @@ const Features = () => {
                                 className="flex flex-row items-center sm:flex-row items-center sm:items-center gap-4 sm:gap-6 group cursor-pointer"
                             >
                                 {/* Icon */}
-                                <div className="w-15 h-15 sm:w-25 sm:h-25 flex-shrink-0 bg-slate-800 rounded-lg flex items-center sm-items-center justify-center border border-[var(--primary-color)]/30 group-hover:border-[var(--primary-color)] group-hover:bg-slate-700 transition-all duration-300">
+                                <div className="w-15 h-15 sm:w-25 sm:h-25 flex-shrink-0 bg-slate-800 rounded-lg flex items-center sm-items-center justify-center border border-(--primary-color)/30 group-hover:border-(--primary-color) group-hover:bg-slate-700 transition-all duration-300">
                                     <img src={feature.icon} alt="" className='w-[75%] h-[75%]' />
                                 </div>
 
                                 {/* Text */}
                                 <div className="flex-1 h-auto">
-                                    <h3 className="text-white text-lg sm:text-xl font-semibold group-hover:text-[var(--primary-color)] transition-colors">
+                                    <h3 className="text-white text-lg sm:text-xl font-semibold group-hover:text-(--primary-color) transition-colors">
                                         {feature.title}
                                     </h3>
                                     {/* <p className="text-gray-400 text-sm sm:text-base leading-relaxed">

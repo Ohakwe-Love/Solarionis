@@ -89,13 +89,13 @@ export default function BlogPage() {
     : blogPosts.filter(post => post.category === selectedCategory);
 
   return (
-    <div className="min-h-screen bg-[var(--deep-black)]">
+    <div className="min-h-screen bg-(--deep-black)">
       <Header />
       <div className="max-w-7xl mx-auto">
 
         {/* Header */}
         <div className="text-center mb-12">
-          <p className="text-[var(--primary-color)] text-sm font-medium tracking-widest mb-4">
+          <p className="text-(--primary-color) text-sm font-medium tracking-widest mb-4">
             OUR BLOG
           </p>
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-serif text-white mb-6">
@@ -114,7 +114,7 @@ export default function BlogPage() {
                 key={cat}
                 onClick={() => setSelectedCategory(cat)}
                 className={`px-6 py-2 rounded-full font-medium transition-all ${selectedCategory === cat
-                  ? 'bg-[var(--primary-color)] text-white'
+                  ? 'bg-(--primary-color) text-white'
                   : 'bg-slate-800 text-gray-400 hover:bg-gray-800 hover:text-white'
                   }`}
               >
@@ -127,7 +127,7 @@ export default function BlogPage() {
             <input
               type="text"
               placeholder="Search articles..."
-              className="w-full bg-slate-800 text-white px-4 py-2 pl-10 rounded-lg border border-gray-800 focus:border-[var(--primary-color)] focus:outline-none"
+              className="w-full bg-slate-800 text-white px-4 py-2 pl-10 rounded-lg border border-gray-800 focus:border-(--primary-color) focus:outline-none"
             />
             <Search className="absolute left-3 top-2.5 w-5 h-5 text-gray-500" />
           </div>
@@ -138,7 +138,7 @@ export default function BlogPage() {
           {filteredPosts.map((post, index) => (
             <article
               key={post.id}
-              className={`group bg-slate-800 rounded-xl overflow-hidden border border-gray-800 hover:border-[var(--primary-color)] transition-all duration-300 ${index === 0 ? 'md:col-span-2 md:row-span-2' : ''
+              className={`group bg-slate-800 rounded-xl overflow-hidden border border-gray-800 hover:border-(--primary-color) transition-all duration-300 ${index === 0 ? 'md:col-span-2 md:row-span-2' : ''
                 }`}
             >
               <div className={`relative overflow-hidden ${index === 0 ? 'h-96' : 'h-64'}`}>
@@ -150,14 +150,14 @@ export default function BlogPage() {
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent"></div>
 
                 <div className="absolute top-4 right-4">
-                  <span className="px-3 py-1 bg-[var(--primary-color)] text-white text-xs font-bold rounded-full">
+                  <span className="px-3 py-1 bg-(--primary-color) text-white text-xs font-bold rounded-full">
                     {post.category}
                   </span>
                 </div>
 
                 {index === 0 && (
                   <div className="absolute bottom-6 left-6 right-6">
-                    <h2 className="text-white text-3xl font-serif mb-3 group-hover:text-[var(--primary-color)] transition-colors">
+                    <h2 className="text-white text-3xl font-serif mb-3 group-hover:text-(--primary-color) transition-colors">
                       {post.title}
                     </h2>
                     <p className="text-gray-300 mb-4 line-clamp-2">
@@ -179,7 +179,7 @@ export default function BlogPage() {
 
               {index !== 0 && (
                 <div className="p-6">
-                  <h3 className="text-white text-xl font-serif mb-2 group-hover:text-[var(--primary-color)] transition-colors line-clamp-2">
+                  <h3 className="text-white text-xl font-serif mb-2 group-hover:text-(--primary-color) transition-colors line-clamp-2">
                     {post.title}
                   </h3>
                   <p className="text-gray-400 text-sm mb-4 line-clamp-2">
@@ -203,7 +203,7 @@ export default function BlogPage() {
 
         {/* Pagination */}
         <div className="flex justify-center items-center gap-2 mt-12">
-          <button className="w-10 h-10 rounded-full bg-[var(--primary-color)] text-white flex items-center justify-center hover:bg-[var(--primary-color)]/90 transition">
+          <button className="w-10 h-10 rounded-full bg-(--primary-color) text-white flex items-center justify-center hover:bg-(--primary-color)/90 transition">
             1
           </button>
           <button className="w-10 h-10 rounded-full bg-slate-800 text-gray-400 flex items-center justify-center hover:bg-gray-800 hover:text-white transition">
@@ -225,7 +225,7 @@ export default function BlogPage() {
                 className="w-full h-48 object-cover rounded-lg mb-4"
               />
               <h4 className="text-white font-semibold mb-2">Classic Timepiece</h4>
-              <p className="text-[var(--primary-color)] text-xl font-bold">$3,299</p>
+              <p className="text-(--primary-color) text-xl font-bold">$3,299</p>
             </div>
             <div className="text-center">
               <img
@@ -234,7 +234,7 @@ export default function BlogPage() {
                 className="w-full h-48 object-cover rounded-lg mb-4"
               />
               <h4 className="text-white font-semibold mb-2">Sport Watch</h4>
-              <p className="text-[var(--primary-color)] text-xl font-bold">$4,199</p>
+              <p className="text-(--primary-color) text-xl font-bold">$4,199</p>
             </div>
             <div className="text-center">
               <img
@@ -243,7 +243,7 @@ export default function BlogPage() {
                 className="w-full h-48 object-cover rounded-lg mb-4"
               />
               <h4 className="text-white font-semibold mb-2">Luxury Edition</h4>
-              <p className="text-[var(--primary-color)] text-xl font-bold">$5,999</p>
+              <p className="text-(--primary-color) text-xl font-bold">$5,999</p>
             </div>
           </div>
         </div>

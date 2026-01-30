@@ -10,9 +10,9 @@ const ScrollingCarousel = () => {
   ];
 
   return (
-    <div className="bg-[var(--primary-color)] py-6 px-8 relative overflow-hidden">
+    <div className="bg-(--primary-color) py-6 px-8 relative overflow-hidden">
       <div className="relative">
-        
+
         {/* Scrolling Content */}
         <div className="flex animate-scroll whitespace-nowrap">
           {/* First set */}
@@ -24,7 +24,7 @@ const ScrollingCarousel = () => {
               <span className="mx-8 text-black text-2xl">•</span>
             </div>
           ))}
-          
+
           {/* Duplicate set for seamless loop */}
           {slides.map((slide, index) => (
             <div key={`second-${index}`} className="inline-flex items-center mx-8">

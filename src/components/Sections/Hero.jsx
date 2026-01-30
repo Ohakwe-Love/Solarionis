@@ -68,7 +68,7 @@ const Hero = () => {
                     <div className="hero-content px-0 sm:px-6 lg:px-8 text-white max-w-7xl h-[80%]">
                         <div className="max-w-5xl">
                             <h1 className='text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold leading-tight'>
-                                Invest in <span className='text-[var(--solar-gold)]'>Energy</span><br className="hidden sm:block" /> Infrastructure
+                                Invest in <span className='text-(--solar-gold)'>Energy</span><br className="hidden sm:block" /> Infrastructure
                             </h1>
                             <p className='font-medium text-lg sm:text-xl md:text-2xl mt-4 sm:mt-6 text-gray-200'>
                                 Diversify with direct access to private markets
@@ -119,7 +119,7 @@ const Hero = () => {
                                         </p>
                                         {/* Info Icon */}
                                         <button
-                                            className="text-gray-400 hover:text-white transition-colors"
+                                            className="text-gray-400 cursor-pointer hover:text-white transition-colors"
                                             aria-label={`Info about ${stat.label}`}
                                         >
                                             <svg

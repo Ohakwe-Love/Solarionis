@@ -63,12 +63,12 @@ export default function HomePage() {
     <div>
       <Hero />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-20 bg-[var(--deep-black)] text-white">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-20 bg-(--deep-black) text-white">
         <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-start">
           {/* Left Side - Features */}
           <div className="space-y-8 lg:space-y-12">
             <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold leading-tight"
-      >
+            >
               Why Choose<br />Solarionis
             </h1>
 
@@ -180,7 +180,7 @@ export default function HomePage() {
           </div>
 
           <h2 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold mb-6"
-    >
+          >
             Converging Market Trends
           </h2>
 
@@ -189,23 +189,23 @@ export default function HomePage() {
           </p>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-6 lg:gap-8 relative bg-white rounded-4xl p-8">
+        <div className="grid lg:grid-cols-2 gap-6 lg:gap-8 relative bg-white rounded-4xl p-4">
           {/* Energy Infrastructure Card */}
-          <div className="bg-white/5 backdrop-blur-sm rounded-3xl p-8 lg:p-10 border border-white/10 hover:border-[#FDBA4D]/50 transition-all duration-300 hover:bg-white/10 group relative overflow-hidden">
-            <div className="absolute inset-0 bg-gradient-to-br from-[#FDBA4D]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+          <div className="bg-white/5 backdrop-blur-sm rounded-3xl p-6 lg:p-10 border sm:border-white/10 lg:border-white/10 hover:border-[#FDBA4D]/50 border-[#FDBA4D]/50 transition-all duration-300 hover:bg-white/10 group relative overflow-hidden">
+            <div className="absolute inset-0 bg-linear-to-br from-[#FDBA4D]/5 to-transparent opacity-100 sm:opacity-0 lg:opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
 
             <div className="relative z-10">
               <div className="flex flex-wrap gap-3 mb-6">
                 <span className="inline-flex items-center gap-1 px-4 py-2 bg-green-500/20 rounded text-sm font-bold text-green-600">
-                  <Check  className='w-6 h-6'/> STABLE
+                  <Check className='w-6 h-6' /> STABLE
                 </span>
                 <span className="inline-flex items-center gap-2 px-4 py-2 bg-[#FDBA4D]/20 rounded text-sm font-bold text-[#f99b04]">
-                  <Check  className='w-6 h-6'/> INFLATION-HEDGED YIELD
+                  <Check className='w-6 h-6' /> INFLATION-HEDGED YIELD
                 </span>
               </div>
 
               <h3 className="text-3xl lg:text-4xl font-bold mb-4"
-        >
+              >
                 Energy<br />Infrastructure
               </h3>
 
@@ -221,16 +221,16 @@ export default function HomePage() {
           </div>
 
           {/* Private Markets Card */}
-          <div className="bg-white/5 backdrop-blur-sm rounded-3xl p-8 lg:p-10 border border-white/10 hover:border-[#38BDF8]/50 transition-all duration-300 hover:bg-white/10 group relative overflow-hidden">
-            <div className="absolute inset-0 bg-gradient-to-br from-[#38BDF8]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+          <div className="bg-white/5 backdrop-blur-sm rounded-3xl p-8 lg:p-10 border sm:border-white/10 lg:border-white/10 hover:border-[#38BDF8]/50 border-[#38BDF8]/50 transition-all duration-300 hover:bg-white/10 group relative overflow-hidden">
+            <div className="absolute inset-0 bg-linear-to-br from-[#38BDF8]/5 to-transparent  opacity-100 sm:opacity-0 lg:opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
 
             <div className="relative z-10">
               <div className="flex flex-wrap gap-3 mb-6">
                 <span className="inline-flex items-center gap-2 px-4 py-2 bg-[#F97316]/20 rounded text-sm font-bold text-[#F97316]">
-                  <Check  className='w-6 h-6'/> HIGHER RETURNS
+                  <Check className='w-6 h-6' /> HIGHER RETURNS
                 </span>
                 <span className="inline-flex items-center gap-2 px-4 py-2 bg-[#7C3AED]/20 rounded text-sm font-bold text-[#7C3AED]">
-                  <Check  className='w-6 h-6'/> DIVERSIFICATION
+                  <Check className='w-6 h-6' /> DIVERSIFICATION
                 </span>
               </div>
 
@@ -251,8 +251,8 @@ export default function HomePage() {
 
           {/* Center Icon */}
           <div className="hidden lg:flex absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-20">
-            <div className="w-20 h-20 rounded-full border-4 border-[var(--violet)] bg-white flex items-center justify-center shadow-2xl">
-                <img src={Icon} alt="" />
+            <div className="w-20 h-20 rounded-full border-4 border-(--violet) bg-white flex items-center justify-center shadow-2xl">
+              <img src={Icon} alt="" />
             </div>
           </div>
         </div>
@@ -260,7 +260,7 @@ export default function HomePage() {
 
       <HowItWorks />
 
-      <InvestorTypes   />
+      <InvestorTypes />
 
       <RetirementInvestment />
 

@@ -56,11 +56,11 @@ const FAQ = () => {
                     onClick={() => toggleFaq(index)}
                     className="w-full flex items-start cursor-pointer justify-between text-left group"
                   >
-                    <span className={`text-lg font-medium transition-colors ${openIndex === index ? 'text-[var(--primary-color)]' : 'text-white group-hover:[var(--primary-color)]'
+                    <span className={`text-lg font-medium transition-colors ${openIndex === index ? 'text-(--primary-color)' : 'text-white group-hover:(--primary-color)'
                       }`}>
                       {faq.question}
                     </span>
-                    <div className={`flex-shrink-0 ml-4 w-6 h-6 rounded-full flex items-center justify-center transition-all duration-300 ${openIndex === index ? 'bg-[var(--primary-color)]' : 'bg-slate-700 group-hover:bg-slate-600'
+                    <div className={`flex-shrink-0 ml-4 w-6 h-6 rounded-full flex items-center justify-center transition-all duration-300 ${openIndex === index ? 'bg-(--primary-color)' : 'bg-slate-700 group-hover:bg-slate-600'
                       }`}>
                       {openIndex === index ? (
                         <Minus className="w-4 h-4 text-white" />

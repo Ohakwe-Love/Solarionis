@@ -64,8 +64,8 @@ export default function InvestorTypes() {
                                 key={index}
                                 className="bg-white rounded-2xl p-8 shadow-sm hover:shadow-md transition-shadow duration-300"
                             >
-                                <div className="w-14 h-14 bg-[var(--deep-black)] rounded-full flex items-center justify-center mb-6">
-                                    <IconComponent className="w-7 h-7 text-[var(--solar-gold)]" strokeWidth={2} />
+                                <div className="w-14 h-14 bg-(--deep-black) rounded-full flex items-center justify-center mb-6">
+                                    <IconComponent className="w-7 h-7 text-(--solar-gold)" strokeWidth={2} />
                                 </div>
                                 <h3 className="text-xl font-semibold text-gray-900 mb-3">
                                     {category.title}

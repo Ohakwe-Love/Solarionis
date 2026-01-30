@@ -18,9 +18,9 @@ const HowItWorks = () => {
                     <span className="rounded-full w-15 h-15 bg-gray-200 flex items-center justify-center"><UserRound className='text-[var(--electric-blue)]' /></span>
                     <h3 className='text-2xl  flex-1 font-bold mb-4'>Create your Solarionis account</h3>
                 </div>
-                <div className='p-5 bg-[var(--deep-black)] rounded-full flex items-center gap-3 streamlined-step'>
-                    <span className="rounded-full w-15 h-15 bg-slate-800 flex items-center justify-center"><Layers className='text-[var(--solar-gold)]' /></span>
-                    <h3 className='text-2xl  flex-1 text-[var(--solar-gold)] font-bold mb-4'>Build your Solarionis portfolio</h3>
+                <div className='p-5 bg-(--deep-black) rounded-full flex items-center gap-3 streamlined-step'>
+                    <span className="rounded-full w-15 h-15 bg-slate-800 flex items-center justify-center"><Layers className='text-(--solar-gold)' /></span>
+                    <h3 className='text-2xl  flex-1 text-(--solar-gold) font-bold mb-4'>Build your Solarionis portfolio</h3>
                 </div>
                 <div className='p-5 bg-gray-100 rounded-full flex items-center gap-3 streamlined-step'>
                     <span className="rounded-full w-15 h-15 bg-gray-200 flex items-center justify-center"><BrainCircuit className='text-[var(--electric-blue)]' /></span>

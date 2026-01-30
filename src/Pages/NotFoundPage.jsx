@@ -28,12 +28,12 @@ const NotFoundPage = () => {
     ];
 
     return (
-        <div className="min-h-screen bg-[var(--deep-black)] relative overflow-hidden">
+        <div className="min-h-screen bg-(--deep-black) relative overflow-hidden">
 
             {/* Background Elements */}
             <div className="absolute inset-0 overflow-hidden">
-                <div className="absolute top-1/4 -left-32 w-96 h-96 bg-[var(--primary-color)]/5 rounded-full blur-3xl"></div>
-                <div className="absolute bottom-1/4 -right-32 w-96 h-96 bg-[var(--primary-color)]/5 rounded-full blur-3xl"></div>
+                <div className="absolute top-1/4 -left-32 w-96 h-96 bg-(--primary-color)/5 rounded-full blur-3xl"></div>
+                <div className="absolute bottom-1/4 -right-32 w-96 h-96 bg-(--primary-color)/5 rounded-full blur-3xl"></div>
             </div>
 
             <div className="relative z-10 flex items-center justify-center min-h-screen px-4 py-10">
@@ -46,13 +46,13 @@ const NotFoundPage = () => {
 
                             {/* 404 Number */}
                             <div className="mb-8">
-                                <h1 className="text-[180px] sm:text-[200px] lg:text-[250px] font-bold leading-none bg-gradient-to-br from-[var(--primary-color)] via-orange-400 to-orange-600 bg-clip-text text-transparent">
+                                <h1 className="text-[180px] sm:text-[200px] lg:text-[250px] font-bold leading-none bg-gradient-to-br from-(--primary-color) via-orange-400 to-orange-600 bg-clip-text text-transparent">
                                     404
                                 </h1>
                                 <div className="flex items-center justify-center lg:justify-start gap-3 -mt-12">
-                                    <div className="h-1 w-16 bg-[var(--primary-color)]"></div>
-                                    <Clock className="w-8 h-8 text-[var(--primary-color)] animate-pulse" />
-                                    <div className="h-1 w-16 bg-[var(--primary-color)]"></div>
+                                    <div className="h-1 w-16 bg-(--primary-color)"></div>
+                                    <Clock className="w-8 h-8 text-(--primary-color) animate-pulse" />
+                                    <div className="h-1 w-16 bg-(--primary-color)"></div>
                                 </div>
                             </div>
 
@@ -69,7 +69,7 @@ const NotFoundPage = () => {
                             <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start mb-12">
                                 <a
                                     href="/"
-                                    className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-[var(--primary-color)] text-white rounded-lg font-medium hover:bg-[var(--primary-color)]/90 transition-all duration-300 shadow-lg hover:shadow-xl"
+                                    className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-(--primary-color) text-white rounded-lg font-medium hover:bg-(--primary-color)/90 transition-all duration-300 shadow-lg hover:shadow-xl"
                                 >
                                     <Home className="w-5 h-5" />
                                     <span>Back to Home</span>
@@ -93,7 +93,7 @@ const NotFoundPage = () => {
                                         <a
                                             key={index}
                                             href={link.path}
-                                            className="px-4 py-2 bg-[#1a1a1a] text-gray-400 rounded-lg hover:bg-gray-800 hover:text-white transition-all duration-300 text-sm border border-gray-800 hover:border-[var(--primary-color)]"
+                                            className="px-4 py-2 bg-[#1a1a1a] text-gray-400 rounded-lg hover:bg-gray-800 hover:text-white transition-all duration-300 text-sm border border-gray-800 hover:border-(--primary-color)"
                                         >
                                             {link.label}
                                         </a>
@@ -108,7 +108,7 @@ const NotFoundPage = () => {
                             <div className="bg-[#1a1a1a] rounded-2xl p-8 border border-gray-800">
                                 <div className="flex items-center justify-between mb-6">
                                     <h3 className="text-white text-2xl font-serif">While You're Here...</h3>
-                                    <Clock className="w-8 h-8 text-[var(--primary-color)]" />
+                                    <Clock className="w-8 h-8 text-(--primary-color)" />
                                 </div>
                                 <p className="text-gray-400 mb-8">
                                     Explore our latest timepieces and find the perfect watch for your collection
@@ -118,7 +118,7 @@ const NotFoundPage = () => {
                                     {featuredProducts.map((product, index) => (
                                         <div
                                             key={index}
-                                            className="group flex items-center gap-4 p-4 bg-[var(--deep-black)]/50 rounded-lg hover:bg-[var(--deep-black)]/70 transition-all duration-300 cursor-pointer border border-gray-800 hover:border-[var(--primary-color)]"
+                                            className="group flex items-center gap-4 p-4 bg-(--deep-black)/50 rounded-lg hover:bg-(--deep-black)/70 transition-all duration-300 cursor-pointer border border-gray-800 hover:border-(--primary-color)"
                                         >
                                             <div className="w-20 h-20 rounded-lg overflow-hidden flex-shrink-0">
                                                 <img
@@ -128,21 +128,21 @@ const NotFoundPage = () => {
                                                 />
                                             </div>
                                             <div className="flex-1">
-                                                <h4 className="text-white font-semibold mb-1 group-hover:text-[var(--primary-color)] transition-colors">
+                                                <h4 className="text-white font-semibold mb-1 group-hover:text-(--primary-color) transition-colors">
                                                     {product.name}
                                                 </h4>
-                                                <p className="text-[var(--primary-color)] font-bold text-lg">
+                                                <p className="text-(--primary-color) font-bold text-lg">
                                                     {product.price}
                                                 </p>
                                             </div>
-                                            <ArrowRight className="w-5 h-5 text-gray-600 group-hover:text-[var(--primary-color)] transition-colors" />
+                                            <ArrowRight className="w-5 h-5 text-gray-600 group-hover:text-(--primary-color) transition-colors" />
                                         </div>
                                     ))}
                                 </div>
 
                                 <a
                                     href="/shop"
-                                    className="block w-full mt-6 text-center px-6 py-3 bg-[var(--primary-color)] text-white rounded-lg font-medium hover:bg-[var(--primary-color)]/90 transition-all duration-300"
+                                    className="block w-full mt-6 text-center px-6 py-3 bg-(--primary-color) text-white rounded-lg font-medium hover:bg-(--primary-color)/90 transition-all duration-300"
                                 >
                                     View All Products
                                 </a>
@@ -161,9 +161,9 @@ const NotFoundPage = () => {
                                 <input
                                     type="text"
                                     placeholder="Search for watches, accessories, or guides..."
-                                    className="w-full bg-[var(--deep-black)] text-white px-6 py-4 pr-12 rounded-lg border border-gray-800 focus:border-[var(--primary-color)] focus:outline-none transition"
+                                    className="w-full bg-(--deep-black) text-white px-6 py-4 pr-12 rounded-lg border border-gray-800 focus:border-(--primary-color) focus:outline-none transition"
                                 />
-                                <button className="absolute right-2 top-1/2 -translate-y-1/2 w-10 h-10 bg-[var(--primary-color)] rounded-lg flex items-center justify-center hover:bg-[var(--primary-color)]/90 transition">
+                                <button className="absolute right-2 top-1/2 -translate-y-1/2 w-10 h-10 bg-(--primary-color) rounded-lg flex items-center justify-center hover:bg-(--primary-color)/90 transition">
                                     <Search className="w-5 h-5 text-white" />
                                 </button>
                             </div>
@@ -174,7 +174,7 @@ const NotFoundPage = () => {
                     <div className="text-center mt-12">
                         <p className="text-gray-500 text-sm">
                             Error Code: 404 | Page Not Found | Need help? {' '}
-                            <a href="/contact" className="text-[var(--primary-color)] hover:underline">
+                            <a href="/contact" className="text-(--primary-color) hover:underline">
                                 Contact Support
                             </a>
                         </p>

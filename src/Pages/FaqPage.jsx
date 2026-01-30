@@ -45,22 +45,21 @@ export default function FaqPage() {
     };
 
     return (
-        <div className="min-h-screen bg-[var(--deep-black)] ">
+        <div className="min-h-screen bg-gray-100">
 
 
             <Header />
 
-            <section className="flex items-center page-hero shopPage-hero justify-center h-110 group overflow-hidden relative ">
-                <div className="text-center">
-                    <h2 className='text-6xl text-white mb-3 capitalize'>frequently asked questions</h2>
-
-                    <p className='text-2xl'>
-                        <Link to='/' className='text-white hover:text-[var(--primary-color)] transition'>Home</Link>
-                        <ChevronRight className='inline mx-2 text-white' />
-                        <span className='text-[var(--primary-color)]'>FAQ</span>
+            <div className="max-w-7xl mx-auto py-8 px-12 pt-20">
+                <div className="text-center mb-8 sm:mb-12">
+                    <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-3 sm:mb-4">
+                        Frequently Asked Questions
+                    </h2>
+                    <p className="text-base sm:text-lg text-gray-600">
+                        Clean, Contracted, Monthly Dividends
                     </p>
                 </div>
-            </section>
+            </div>
 
             <div className="max-w-7xl mx-auto py-20 px-4 sm:px-6 lg:px-8">
 
@@ -68,17 +67,17 @@ export default function FaqPage() {
                     {/* Left Sidebar */}
                     <div className="lg:col-span-1">
                         <div className="sticky top-24">
-                            <p className="text-[var(--primary-color)] text-sm font-medium tracking-widest mb-4">
+                            <p className="text-(--primary-color) text-sm font-medium tracking-widest mb-4">
                                 NEED HELP?
                             </p>
-                            <h1 className="text-4xl sm:text-5xl font-serif text-white mb-6">
+                            <h1 className="text-4xl sm:text-5xl font-serif text-(--deep-black) mb-6">
                                 Products & Service
                             </h1>
 
                             {/* Contact Info */}
-                            <div className="bg-slate-800 rounded-xl p-6 border border-gray-800 mb-6">
-                                <h3 className="text-white font-semibold mb-4">Contact Us</h3>
-                                <div className="space-y-3 text-gray-400 text-sm">
+                            <div className="bg-gray-200 rounded-xl p-6 border border-gray-300 mb-6">
+                                <h3 className="text-(--deep-black) font-semibold mb-4">Contact Us</h3>
+                                <div className="space-y-3 text-gray-600 text-sm">
                                     <p>123 Fifth Avenue, New York, NY 10160, USA</p>
                                     <p>+1 (555) 123-4567</p>
                                     <p>info@Solarionis.com</p>
@@ -88,7 +87,7 @@ export default function FaqPage() {
                             {/* Image */}
                             <div className="rounded-xl overflow-hidden">
                                 <img
-                                    src="/src/assets/images/product/5.webp"
+                                    src="/src/assets/images/portfolio/2.webp"
                                     alt="Luxury Watch"
                                     className="w-full h-80 object-cover"
                                 />
@@ -102,22 +101,21 @@ export default function FaqPage() {
                             {faqs.map((faq, index) => (
                                 <div
                                     key={index}
-                                    className="bg-slate-800 rounded-xl border border-gray-800 overflow-hidden transition-all duration-300"
+                                    className="bg-gray-200 rounded-xl border border-gray-300 overflow-hidden transition-all duration-300"
                                 >
                                     <button
                                         onClick={() => toggleFAQ(index)}
                                         className="w-full flex items-center cursor-pointer justify-between p-6 text-left group"
                                     >
-                                        <span className={`text-lg font-medium pr-4 transition-colors ${openIndex === index ? 'text-[var(--primary-color)]' : 'text-white group-hover:text-[var(--primary-color)]'
-                                            }`}>
+                                        <span className="text-lg font-medium pr-4  text-(--primary-color)transition-colors">
                                             {faq.question}
                                         </span>
-                                        <div className={`flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center transition-all duration-300 ${openIndex === index ? 'bg-[var(--primary-color)]' : 'bg-gray-800 group-hover:bg-gray-700'
+                                        <div className={`flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center transition-all duration-300 ${openIndex === index ? 'bg-(--primary-color)' : 'bg-(--deep-black)'
                                             }`}>
                                             {openIndex === index ? (
                                                 <Minus className="w-5 h-5 text-black bg-[var(--primary-color)" />
                                             ) : (
-                                                <Plus className="w-5 h-5 text-white" />
+                                                <Plus className="w-5 h-5 text-white " />
                                             )}
                                         </div>
                                     </button>
@@ -127,7 +125,7 @@ export default function FaqPage() {
                                             }`}
                                     >
                                         <div className="px-6 pb-6">
-                                            <p className="text-gray-400 leading-relaxed">
+                                            <p className="text-gray-600 leading-relaxed">
                                                 {faq.answer}
                                             </p>
                                         </div>
