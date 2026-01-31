@@ -43,10 +43,6 @@ header li a:hover {
     background: linear-gradient(rgb(0, 0, 0, 0.3), rgb(0, 0, 0, 0.3)), url('/src/assets/images/hero/1.webp') no-repeat center center/cover;
 }
 
-.hero-wrapper header {
-    background: transparent;
-}
-
 .hero-content {
     max-width: 700px;
 }

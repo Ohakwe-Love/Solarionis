@@ -7,7 +7,7 @@ import HomePage from "./Pages/HomePage";
 import InvestmentPage from "./Pages/InvestmentPage";
 import WealthPage from "./Pages/WealthPage";
 import AboutPage from "./Pages/AboutPage";
-// import ContactPage from "./Pages/ContactPage";
+import Register from "./Pages/Register";
 // import ShopPage from "./Pages/ShopPage";
 import FaqPage from "./Pages/FaqPage";
 // import { CartProvider } from './context/CartContext';
@@ -23,9 +23,8 @@ function App() {
         <Route path="/wealth" element={<WealthPage />} />
         <Route path="/about" element={<AboutPage />} />
         <Route path="/faq" element={<FaqPage />} />
-        {/* 
-          <Route path="/contact" element={<ContactPage />} /> */}
-          <Route path="*" element={<NotFoundPage />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </BrowserRouter>
   );

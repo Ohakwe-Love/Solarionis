@@ -3,12 +3,6 @@ import { Menu, X, ChevronDown, ArrowUpRight } from 'lucide-react';
 import { NavLink } from "react-router-dom";
 import logo from '../../assets/images/logo/logo.png';
 
-// const linkClass = ({ isActive }) =>
-//     `uppercase tracking-wide transition ${isActive
-//         ? "text-(--primary-color)"
-//         : "text-white hover:text-(--primary-color)"
-//     }`;
-
 const mobileNavLinkClass = ({ isActive }) =>
     `${isActive
         ? "text-(--primary-color)"
@@ -153,7 +147,7 @@ const Header = () => {
                         Login
                     </NavLink>
                     <NavLink
-                        to="/signup"
+                        to="/register"
                         className="text-black nav-link uppercase bg-(--solar-gold) px-3 py-3 rounded hover:opacity-90 transition"
                     >
                         create account
