@@ -11,7 +11,7 @@ export default function AboutPage() {
   return (
     <div>
       <section className="p-0 sm:5 w-full h-[100vh]">
-        <div className="page-hero-content gradient relative rounded-4xl sm:rounded-t-none w-full h-full overflow-hidden z-1">
+        <div className="page-hero-content relative rounded-4xl sm:rounded-t-none lg:rounded-4xl w-full h-full overflow-hidden z-1">
           <Header />
           <div className='absolute top-0 left-0 w-full h-full z-[-1]'>
             <img src={image} alt="" className='w-full h-full' />

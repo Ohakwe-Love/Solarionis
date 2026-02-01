@@ -47,6 +47,33 @@ header li a:hover {
     max-width: 700px;
 }
 
+.continue-with {
+    span {
+        display: block;
+        position: relative;
+        background: transparent;
+
+        &::before, &::after {
+            content: '';
+            width: 100px;
+            height: 2px;
+            background: var(--color-gray-200);
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            display: block;
+        }
+
+        &::before {
+            left: -100%;
+        }
+
+        &::after {
+            right: -100%;
+        }
+    }
+}
+
 .hero-wrapper h1 {
     font-size: 65px;
     line-height: 1;
@@ -75,12 +102,9 @@ header li a:hover {
     color: var(--color-black);
 }
 
-.page-hero-content h1 {
-    /* font-size: ; */
-}
-
 .btn-border {
     background: transparent;
+    backdrop-filter: blur(5px);
     color: var(--color-white);
     border-color: var(--color-white);
 }

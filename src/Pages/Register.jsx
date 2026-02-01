@@ -6,11 +6,11 @@ export default function Register() {
   const [formData, setFormData] = useState({
     // Step 1: Investment Type
     investmentType: '',
-    
+
     // Step 2: Email Verification
     email: '',
     verificationCode: '',
-    
+
     // Step 3: Personal Details
     firstName: '',
     lastName: '',
@@ -98,7 +98,7 @@ export default function Register() {
   const validateStep2 = () => {
     const newErrors = {};
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    
+
     if (!formData.email) {
       newErrors.email = 'Email is required';
     } else if (!emailRegex.test(formData.email)) {
@@ -118,7 +118,7 @@ export default function Register() {
   // Step 3 Validation
   const validateStep3 = () => {
     const newErrors = {};
-    
+
     if (!formData.firstName.trim()) newErrors.firstName = 'First name is required';
     if (!formData.lastName.trim()) newErrors.lastName = 'Last name is required';
     if (!formData.phone.trim()) newErrors.phone = 'Phone number is required';
@@ -127,17 +127,17 @@ export default function Register() {
     if (!formData.city.trim()) newErrors.city = 'City is required';
     if (!formData.state.trim()) newErrors.state = 'State is required';
     if (!formData.zipCode.trim()) newErrors.zipCode = 'ZIP code is required';
-    
+
     if (!formData.password) {
       newErrors.password = 'Password is required';
     } else if (formData.password.length < 8) {
       newErrors.password = 'Password must be at least 8 characters';
     }
-    
+
     if (formData.password !== formData.confirmPassword) {
       newErrors.confirmPassword = 'Passwords do not match';
     }
-    
+
     if (!formData.agreeToTerms) {
       newErrors.agreeToTerms = 'You must agree to the terms and conditions';
     }
@@ -162,7 +162,7 @@ export default function Register() {
       });
 
       const data = await response.json();
-      
+
       if (response.ok) {
         setEmailSent(true);
         // Show success message
@@ -194,7 +194,7 @@ export default function Register() {
       });
 
       const data = await response.json();
-      
+
       if (response.ok) {
         setCurrentStep(3);
       } else {
@@ -235,7 +235,7 @@ export default function Register() {
       });
 
       const data = await response.json();
-      
+
       if (response.ok) {
         // Store token if using Sanctum
         if (data.token) {
@@ -287,11 +287,10 @@ export default function Register() {
               <React.Fragment key={step}>
                 <div className="flex flex-col items-center flex-1">
                   <div
-                    className={`w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center font-bold text-sm sm:text-base transition-all ${
-                      currentStep >= step
-                        ? 'bg-[var(--solar-gold)] text-black'
+                    className={`w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center font-bold text-sm sm:text-base transition-all ${currentStep >= step
+                        ? 'bg-(--solar-gold) text-black'
                         : 'bg-gray-300 text-gray-600'
-                    }`}
+                      }`}
                   >
                     {currentStep > step ? <Check className="w-5 h-5 sm:w-6 sm:h-6" /> : step}
                   </div>
@@ -301,9 +300,8 @@ export default function Register() {
                 </div>
                 {step < 3 && (
                   <div
-                    className={`flex-1 h-1 mx-2 transition-all ${
-                      currentStep > step ? 'bg-[var(--solar-gold)]' : 'bg-gray-300'
-                    }`}
+                    className={`flex-1 h-1 mx-2 transition-all ${currentStep > step ? 'bg-(--solar-gold)' : 'bg-gray-300'
+                      }`}
                   ></div>
                 )}
               </React.Fragment>
@@ -313,7 +311,7 @@ export default function Register() {
 
         {/* Form Container */}
         <div className="bg-white rounded-3xl shadow-xl p-6 sm:p-8 lg:p-10">
-          
+
           {/* Step 1: Investment Type */}
           {currentStep === 1 && (
             <div>
@@ -331,11 +329,10 @@ export default function Register() {
                     <button
                       key={type.id}
                       onClick={() => handleInvestmentTypeSelect(type.id)}
-                      className={`p-6 rounded-2xl border-2 transition-all text-left hover:shadow-lg ${
-                        formData.investmentType === type.id
-                          ? 'border-[var(--solar-gold)] bg-[var(--solar-gold)]/10'
-                          : 'border-gray-200 hover:border-[var(--solar-gold)]/50'
-                      }`}
+                      className={`p-6 rounded-2xl cursor-pointer border-2 transition-all text-left hover:shadow-lg ${formData.investmentType === type.id
+                          ? 'border-(--solar-gold) bg-(--solar-gold)/10'
+                          : 'border-gray-200 hover:border-(--solar-gold)/50'
+                        }`}
                     >
                       <div className="flex items-start gap-4">
                         <div className={`w-12 h-12 rounded-full bg-${type.color}-100 flex items-center justify-center flex-shrink-0`}>
@@ -346,7 +343,7 @@ export default function Register() {
                           <p className="text-sm text-gray-600">{type.description}</p>
                         </div>
                         {formData.investmentType === type.id && (
-                          <Check className="w-6 h-6 text-[var(--solar-gold)] flex-shrink-0" />
+                          <Check className="w-6 h-6 text-(--solar-gold) flex-shrink-0" />
                         )}
                       </div>
                     </button>
@@ -360,7 +357,7 @@ export default function Register() {
 
               <button
                 onClick={handleNext}
-                className="w-full bg-[var(--solar-gold)] text-black font-bold py-4 rounded-full hover:opacity-90 transition-all flex items-center justify-center gap-2"
+                className="w-full cursor-pointer bg-(--solar-gold) text-black font-bold py-4 rounded-full hover:opacity-90 transition-all flex items-center justify-center gap-2"
               >
                 Continue
                 <ArrowRight className="w-5 h-5" />
@@ -375,7 +372,7 @@ export default function Register() {
                 Verify Your Email
               </h2>
               <p className="text-gray-600 mb-8">
-                {!emailSent 
+                {!emailSent
                   ? 'Enter your email address to receive a verification code'
                   : 'Enter the 6-digit code sent to your email'}
               </p>
@@ -393,7 +390,7 @@ export default function Register() {
                         name="email"
                         value={formData.email}
                         onChange={handleInputChange}
-                        className="w-full pl-12 pr-4 py-3 border-2 border-gray-200 rounded-xl focus:border-[var(--solar-gold)] focus:outline-none transition-all"
+                        className="w-full pl-12 pr-4 py-3 border-2 border-gray-200 rounded-xl focus:border-(--solar-gold) focus:outline-none transition-all"
                         placeholder="you@example.com"
                       />
                     </div>
@@ -412,7 +409,7 @@ export default function Register() {
                       value={formData.verificationCode}
                       onChange={handleInputChange}
                       maxLength="6"
-                      className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-[var(--solar-gold)] focus:outline-none transition-all text-center text-2xl tracking-widest"
+                      className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-(--solar-gold) focus:outline-none transition-all text-center text-2xl tracking-widest"
                       placeholder="000000"
                     />
                     {errors.verificationCode && (
@@ -421,7 +418,7 @@ export default function Register() {
                     <button
                       onClick={sendVerificationEmail}
                       disabled={isLoading}
-                      className="text-[var(--solar-gold)] text-sm mt-2 hover:underline"
+                      className="text-(--solar-gold) cursor-pointer text-sm mt-2 hover:underline"
                     >
                       Resend Code
                     </button>
@@ -432,7 +429,7 @@ export default function Register() {
               <div className="flex gap-4">
                 <button
                   onClick={handleBack}
-                  className="flex-1 bg-gray-200 text-gray-700 font-bold py-4 rounded-full hover:bg-gray-300 transition-all flex items-center justify-center gap-2"
+                  className="flex-1 cursor-pointer bg-gray-200 text-gray-700 font-bold py-4 rounded-full hover:bg-gray-300 transition-all flex items-center justify-center gap-2"
                 >
                   <ArrowLeft className="w-5 h-5" />
                   Back
@@ -440,7 +437,7 @@ export default function Register() {
                 <button
                   onClick={handleNext}
                   disabled={isLoading}
-                  className="flex-1 bg-[var(--solar-gold)] text-black font-bold py-4 rounded-full hover:opacity-90 transition-all flex items-center justify-center gap-2 disabled:opacity-50"
+                  className="flex-1 cursor-pointer bg-(--solar-gold) text-black font-bold py-4 rounded-full hover:opacity-90 transition-all flex items-center justify-center gap-2 disabled:opacity-50"
                 >
                   {isLoading ? 'Processing...' : 'Continue'}
                   <ArrowRight className="w-5 h-5" />
@@ -471,7 +468,7 @@ export default function Register() {
                       name="firstName"
                       value={formData.firstName}
                       onChange={handleInputChange}
-                      className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-[var(--solar-gold)] focus:outline-none transition-all"
+                      className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-(--solar-gold) focus:outline-none transition-all"
                       placeholder="John"
                     />
                     {errors.firstName && (
@@ -487,7 +484,7 @@ export default function Register() {
                       name="lastName"
                       value={formData.lastName}
                       onChange={handleInputChange}
-                      className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-[var(--solar-gold)] focus:outline-none transition-all"
+                      className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-(--solar-gold) focus:outline-none transition-all"
                       placeholder="Doe"
                     />
                     {errors.lastName && (
@@ -507,7 +504,7 @@ export default function Register() {
                       name="phone"
                       value={formData.phone}
                       onChange={handleInputChange}
-                      className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-[var(--solar-gold)] focus:outline-none transition-all"
+                      className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-(--solar-gold) focus:outline-none transition-all"
                       placeholder="+1 (555) 000-0000"
                     />
                     {errors.phone && (
@@ -523,7 +520,7 @@ export default function Register() {
                       name="dateOfBirth"
                       value={formData.dateOfBirth}
                       onChange={handleInputChange}
-                      className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-[var(--solar-gold)] focus:outline-none transition-all"
+                      className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-(--solar-gold) focus:outline-none transition-all"
                     />
                     {errors.dateOfBirth && (
                       <p className="text-red-500 text-sm mt-1">{errors.dateOfBirth}</p>
@@ -541,7 +538,7 @@ export default function Register() {
                     name="address"
                     value={formData.address}
                     onChange={handleInputChange}
-                    className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-[var(--solar-gold)] focus:outline-none transition-all"
+                    className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-(--solar-gold) focus:outline-none transition-all"
                     placeholder="123 Main Street"
                   />
                   {errors.address && (
@@ -560,7 +557,7 @@ export default function Register() {
                       name="city"
                       value={formData.city}
                       onChange={handleInputChange}
-                      className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-[var(--solar-gold)] focus:outline-none transition-all"
+                      className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-(--solar-gold) focus:outline-none transition-all"
                       placeholder="New York"
                     />
                     {errors.city && (
@@ -576,7 +573,7 @@ export default function Register() {
                       name="state"
                       value={formData.state}
                       onChange={handleInputChange}
-                      className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-[var(--solar-gold)] focus:outline-none transition-all"
+                      className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-(--solar-gold) focus:outline-none transition-all"
                       placeholder="NY"
                     />
                     {errors.state && (
@@ -592,7 +589,7 @@ export default function Register() {
                       name="zipCode"
                       value={formData.zipCode}
                       onChange={handleInputChange}
-                      className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-[var(--solar-gold)] focus:outline-none transition-all"
+                      className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-(--solar-gold) focus:outline-none transition-all"
                       placeholder="10001"
                     />
                     {errors.zipCode && (
@@ -612,7 +609,7 @@ export default function Register() {
                       name="password"
                       value={formData.password}
                       onChange={handleInputChange}
-                      className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-[var(--solar-gold)] focus:outline-none transition-all"
+                      className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-(--solar-gold) focus:outline-none transition-all"
                       placeholder="••••••••"
                     />
                     {errors.password && (
@@ -628,7 +625,7 @@ export default function Register() {
                       name="confirmPassword"
                       value={formData.confirmPassword}
                       onChange={handleInputChange}
-                      className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-[var(--solar-gold)] focus:outline-none transition-all"
+                      className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-(--solar-gold) focus:outline-none transition-all"
                       placeholder="••••••••"
                     />
                     {errors.confirmPassword && (
@@ -645,15 +642,15 @@ export default function Register() {
                       name="agreeToTerms"
                       checked={formData.agreeToTerms}
                       onChange={handleInputChange}
-                      className="w-5 h-5 mt-0.5 accent-[var(--solar-gold)] cursor-pointer"
+                      className="w-5 h-5 mt-0.5 accent-(--solar-gold) cursor-pointer"
                     />
                     <span className="text-sm text-gray-700">
                       I agree to the{' '}
-                      <a href="/terms" className="text-[var(--solar-gold)] hover:underline">
+                      <a href="/terms" className="text-(--solar-gold) hover:underline">
                         Terms and Conditions
                       </a>{' '}
                       and{' '}
-                      <a href="/privacy" className="text-[var(--solar-gold)] hover:underline">
+                      <a href="/privacy" className="text-(--solar-gold) hover:underline">
                         Privacy Policy
                       </a>
                     </span>
@@ -674,7 +671,7 @@ export default function Register() {
                   <button
                     type="button"
                     onClick={handleBack}
-                    className="flex-1 bg-gray-200 text-gray-700 font-bold py-4 rounded-full hover:bg-gray-300 transition-all flex items-center justify-center gap-2"
+                    className="flex-1 cursor-pointer bg-gray-200 text-gray-700 font-bold py-4 rounded-full hover:bg-gray-300 transition-all flex items-center justify-center gap-2"
                   >
                     <ArrowLeft className="w-5 h-5" />
                     Back
@@ -682,7 +679,7 @@ export default function Register() {
                   <button
                     type="submit"
                     disabled={isLoading}
-                    className="flex-1 bg-[var(--solar-gold)] text-black font-bold py-4 rounded-full hover:opacity-90 transition-all flex items-center justify-center gap-2 disabled:opacity-50"
+                    className="flex-1 cursor-pointer bg-(--solar-gold) text-black font-bold py-4 rounded-full hover:opacity-90 transition-all flex items-center justify-center gap-2 disabled:opacity-50"
                   >
                     {isLoading ? 'Creating Account...' : 'Create Account'}
                     <ArrowRight className="w-5 h-5" />
@@ -697,7 +694,7 @@ export default function Register() {
         <div className="text-center mt-6">
           <p className="text-gray-600">
             Already have an account?{' '}
-            <a href="/login" className="text-[var(--solar-gold)] font-semibold hover:underline">
+            <a href="/login" className="text-(--solar-gold) font-semibold hover:underline">
               Log in
             </a>
           </p>
