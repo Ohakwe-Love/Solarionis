@@ -358,8 +358,8 @@ Hours: Monday-Friday, 9:00 AM - 6:00 PM PST`
       {/* Hero Section */}
       <section className="bg-gradient-to-br from-gray-900 via-gray-800 to-black text-white py-16 sm:py-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-4xl mx-auto text-center">
-          <div className="w-16 h-16 bg-[var(--solar-gold)]/20 rounded-2xl flex items-center justify-center mx-auto mb-6">
-            <Scale className="w-8 h-8 text-[var(--solar-gold)]" />
+          <div className="w-16 h-16 bg-(--solar-gold)/20 rounded-2xl flex items-center justify-center mx-auto mb-6">
+            <Scale className="w-8 h-8 text-(--solar-gold)" />
           </div>
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-4">
             Terms of Service
@@ -414,7 +414,7 @@ Hours: Monday-Friday, 9:00 AM - 6:00 PM PST`
                 <a
                   key={index}
                   href={`#${section.id}`}
-                  className="text-[var(--solar-gold)] hover:underline text-sm"
+                  className="text-(--solar-gold) hover:underline text-sm"
                 >
                   {section.title}
                 </a>
@@ -463,7 +463,7 @@ Hours: Monday-Friday, 9:00 AM - 6:00 PM PST`
           </div>
 
           {/* Acceptance CTA */}
-          <div className="bg-gradient-to-r from-[var(--solar-gold)] to-yellow-500 rounded-2xl p-8 sm:p-10 text-center mt-12">
+          <div className="bg-gradient-to-r from-(--solar-gold) to-yellow-500 rounded-2xl p-8 sm:p-10 text-center mt-12">
             <FileText className="w-12 h-12 text-gray-900 mx-auto mb-4" />
             <h3 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-4">
               Questions About Our Terms?
