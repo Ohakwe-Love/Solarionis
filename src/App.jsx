@@ -9,9 +9,11 @@ import WealthPage from "./Pages/WealthPage";
 import AboutPage from "./Pages/AboutPage";
 import Register from "./Pages/Register";
 import TermsOfService from "./Pages/TermsOfService";
+import PrivacyPolicy from "./Pages/PrivacyPolicy";
+import HelpPage from "./Pages/HelpPage";
 import FaqPage from "./Pages/FaqPage";
-// import { CartProvider } from './context/CartContext';
 import NotFoundPage from "./Pages/NotFoundPage";
+import Login from "./Pages/Login";
 
 
 function App() {
@@ -25,7 +27,9 @@ function App() {
         <Route path="/faq" element={<FaqPage />} />
         <Route path="/register" element={<Register />} />
         <Route path="/Login" element={<Login />} />
+        <Route path="/help" element={<HelpPage />} />
         <Route path="/terms" element={<TermsOfService />} />
+        <Route path="/privacy-policy" element={<PrivacyPolicy />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </BrowserRouter>

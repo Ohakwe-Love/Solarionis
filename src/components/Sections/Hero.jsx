@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { ArrowRight } from 'lucide-react';
 import Header from '../Layout/Header';
-import { NavLink } from 'react-router-dom';
+import { NavLink, Link } from 'react-router-dom';
 
 const Hero = () => {
     const [counts, setCounts] = useState({
@@ -75,8 +75,8 @@ const Hero = () => {
                             </p>
 
                             <div className="cta-con flex flex-col sm:flex-row mt-8 sm:mt-10 gap-4">
-                                <NavLink
-                                    to="/get-started"
+                                <Link
+                                    to="/login"
                                     className="btn rounded btn-primary flex items-center justify-center gap-2 px-6 py-4 text-base sm:text-lg font-semibold"
                                 >
                                     Get Started
@@ -84,7 +84,7 @@ const Hero = () => {
                                         <path d="M6.745 3.79982L0.8 7.38482C0.45 7.59482 0 7.34482 0 6.93482V2.93482C0 1.18982 1.885 0.0998235 3.4 0.969824L5.695 2.28982L6.74 2.88982C7.085 3.09482 7.09 3.59482 6.745 3.79982Z" fill="#0E0F0C"></path>
                                         <path d="M7.04442 6.72982L5.01942 7.89982L2.99942 9.06482C2.27442 9.47982 1.45442 9.39482 0.859417 8.97482C0.569417 8.77482 0.604417 8.32982 0.909417 8.14982L7.26442 4.33982C7.56442 4.15982 7.95942 4.32982 8.01442 4.67482C8.13942 5.44982 7.81942 6.28482 7.04442 6.72982Z" fill="#0E0F0C"></path>
                                     </svg>
-                                </NavLink>
+                                </Link>
                                 <NavLink
                                     to="/learn-more"
                                     className="btn rounded btn-border flex items-center justify-center gap-2 px-6 py-4 text-base sm:text-lg font-semibold"

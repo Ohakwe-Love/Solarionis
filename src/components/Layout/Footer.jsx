@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { ArrowRight, Plus, Minus, Instagram, Facebook, Linkedin, Youtube } from 'lucide-react';
-import { NavLink } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 import logo from '../../assets/images/logo/logo.png';
 
 export default function Footer() {
@@ -70,11 +70,11 @@ export default function Footer() {
 
                         {/* CTA Buttons */}
                         <div className="flex flex-col sm:flex-row gap-4 mb-8">
-                            <NavLink className="btn rounded btn-primary">
+                            <NavLink to='login' className="btn rounded btn-primary">
                                 GET STARTED
                                 <ArrowRight className="w-5 h-5" />
                             </NavLink>
-                            <NavLink className="btn rounded btn-border">
+                            <NavLink to="contact" className="btn rounded btn-border">
                                 CONTACT US
                                 <ArrowRight className="w-5 h-5" />
                             </NavLink>
@@ -126,8 +126,6 @@ export default function Footer() {
                     </div>
                 </div>
 
-
-
                 {/* Mobile Accordion - Visible on Mobile Only */}
                 <div className="lg:hidden mb-8 border-t border-gray-800">
                     {Object.entries(footerSections).map(([key, section]) => (
@@ -166,10 +164,10 @@ export default function Footer() {
                 <div className="text-gray-400 text-xs leading-relaxed mb-8 space-y-4">
                     <p>
                         Solarionis Global LLC ("Solarionis") operates a website at www.Solarionis.com (the "Site"). By creating an account, you accept our{' '}
-                        <a href="#" className="text-(--solar-gold) hover:underline">Terms of Service</a> and{' '}
-                        <a href="#" className="text-(--solar-gold) hover:underline">Privacy Policy</a> as well as our partner Dwolla's{' '}
-                        <a href="#" className="text-(--solar-gold) hover:underline">Terms of Service</a> and{' '}
-                        <a href="#" className="text-(--solar-gold) hover:underline">Privacy Policy</a>. Creating an account on the Site simultaneously creates a Dwolla account to handle ACH transfers when making investments or receiving dividends. For more information on Dwolla, please reference our FAQ. Past performance is no guarantee of future returns, nor of profitability. investments may not reflect future performance and are not intended to reflect the future return of Solarionis, its projects, or historical performance may not reflect the real or probabilistic properties and/or in partial or in total loss. Neither Solarionis nor any of its affiliates provide tax advice and do not represent in any manner that the outcome described herein will result in any particular tax consequence. Prospective investors should confer with their personal tax advisors regarding the tax consequences of an investment based on their particular circumstances. Neither Solarionis nor any of its affiliates assume responsibility for the tax consequences of any investment for any investor. Additionally, neither Solarionis nor any of its affiliates provide investment advice in any manner. We can only provide information about our offerings and how to use our platform. Any investment decisions based on the information we provide are purely that of the investor.
+                        <Link to="#" className="text-(--solar-gold) hover:underline">Terms of Service</Link> and{' '}
+                        <Link to="#" className="text-(--solar-gold) hover:underline">Privacy Policy</Link> as well as our partner Dwolla's{' '}
+                        <Link to="#" className="text-(--solar-gold) hover:underline">Terms of Service</Link> and{' '}
+                        <Link to="#" className="text-(--solar-gold) hover:underline">Privacy Policy</Link>. Creating an account on the Site simultaneously creates a Dwolla account to handle ACH transfers when making investments or receiving dividends. For more information on Dwolla, please reference our FAQ. Past performance is no guarantee of future returns, nor of profitability. investments may not reflect future performance and are not intended to reflect the future return of Solarionis, its projects, or historical performance may not reflect the real or probabilistic properties and/or in partial or in total loss. Neither Solarionis nor any of its affiliates provide tax advice and do not represent in any manner that the outcome described herein will result in any particular tax consequence. Prospective investors should confer with their personal tax advisors regarding the tax consequences of an investment based on their particular circumstances. Neither Solarionis nor any of its affiliates assume responsibility for the tax consequences of any investment for any investor. Additionally, neither Solarionis nor any of its affiliates provide investment advice in any manner. We can only provide information about our offerings and how to use our platform. Any investment decisions based on the information we provide are purely that of the investor.
                     </p>
                     <p>
                         Solarionis does not in any way sell personal information. In compliance with the California Consumer Compliancy Act (CCPA) you may request to retrieve or delete any data that we have collected about you by{' '}
