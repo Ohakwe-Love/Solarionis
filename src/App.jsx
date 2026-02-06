@@ -8,6 +8,7 @@ import InvestmentPage from "./Pages/InvestmentPage";
 import WealthPage from "./Pages/WealthPage";
 import AboutPage from "./Pages/AboutPage";
 import Register from "./Pages/Register";
+import Dashboard from "./Pages/Dashboard";
 import TermsOfService from "./Pages/TermsOfService";
 import PrivacyPolicy from "./Pages/PrivacyPolicy";
 import HelpPage from "./Pages/HelpPage";
@@ -27,6 +28,7 @@ function App() {
         <Route path="/faq" element={<FaqPage />} />
         <Route path="/register" element={<Register />} />
         <Route path="/Login" element={<Login />} />
+        <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/help" element={<HelpPage />} />
         <Route path="/terms" element={<TermsOfService />} />
         <Route path="/privacy-policy" element={<PrivacyPolicy />} />

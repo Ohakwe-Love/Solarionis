@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { ArrowRight, ArrowLeft, Check, Mail, User, Building, Users, PiggyBank, Shield } from 'lucide-react';
+import { API_ENDPOINTS } from '../config/api';
 
 export default function Register() {
   const [currentStep, setCurrentStep] = useState(1);
@@ -150,7 +151,7 @@ export default function Register() {
   const sendVerificationEmail = async () => {
     setIsLoading(true);
     try {
-      const response = await fetch('YOUR_API_URL/api/auth/send-verification', {
+      const response = await fetch(API_ENDPOINTS.SEND_VERIFICATION, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -181,7 +182,7 @@ export default function Register() {
   const verifyCode = async () => {
     setIsLoading(true);
     try {
-      const response = await fetch('YOUR_API_URL/api/auth/verify-code', {
+      const response = await fetch(API_ENDPOINTS.VERIFY_CODE, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -211,7 +212,7 @@ export default function Register() {
   const completeRegistration = async () => {
     setIsLoading(true);
     try {
-      const response = await fetch('YOUR_API_URL/api/auth/register', {
+      const response = await fetch(API_ENDPOINTS.REGISTER, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -220,7 +221,6 @@ export default function Register() {
         body: JSON.stringify({
           investment_type: formData.investmentType,
           email: formData.email,
-          verification_code: formData.verificationCode,
           first_name: formData.firstName,
           last_name: formData.lastName,
           phone: formData.phone,
@@ -288,8 +288,8 @@ export default function Register() {
                 <div className="flex flex-col items-center flex-1">
                   <div
                     className={`w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center font-bold text-sm sm:text-base transition-all ${currentStep >= step
-                        ? 'bg-(--solar-gold) text-black'
-                        : 'bg-gray-300 text-gray-600'
+                      ? 'bg-(--solar-gold) text-black'
+                      : 'bg-gray-300 text-gray-600'
                       }`}
                   >
                     {currentStep > step ? <Check className="w-5 h-5 sm:w-6 sm:h-6" /> : step}
@@ -330,8 +330,8 @@ export default function Register() {
                       key={type.id}
                       onClick={() => handleInvestmentTypeSelect(type.id)}
                       className={`p-6 rounded-2xl cursor-pointer border-2 transition-all text-left hover:shadow-lg ${formData.investmentType === type.id
-                          ? 'border-(--solar-gold) bg-(--solar-gold)/10'
-                          : 'border-gray-200 hover:border-(--solar-gold)/50'
+                        ? 'border-(--solar-gold) bg-(--solar-gold)/10'
+                        : 'border-gray-200 hover:border-(--solar-gold)/50'
                         }`}
                     >
                       <div className="flex items-start gap-4">
