@@ -15,7 +15,6 @@ import NotFoundPage from "./Pages/NotFoundPage";
 
 import Login from "./Pages/Login";
 import Register from "./Pages/Register";
-import Dashboard from "./Pages/Dashboard";
 import DashboardLayout from "./components/Layout/DashboardLayout";
 import UserOverview from "./Pages/UserOverview";
 import UserPortfolio from "./Pages/UserPortfolio";
@@ -34,13 +33,14 @@ function App() {
         <Route path="/wealth" element={<WealthPage />} />
         <Route path="/about" element={<AboutPage />} />
         <Route path="/faq" element={<FaqPage />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/Login" element={<Login />} />
-        <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/help" element={<HelpPage />} />
         <Route path="/terms" element={<TermsOfService />} />
         <Route path="/privacy-policy" element={<PrivacyPolicy />} />
         <Route path="*" element={<NotFoundPage />} />
+
+        {/* authentication files */}
+        <Route path="/register" element={<Register />} />
+        <Route path="/Login" element={<Login />} />
 
         {/* Protected Dashboard Routes */}
         <Route path="/dashboard" element={<DashboardLayout />}>
