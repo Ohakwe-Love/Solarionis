@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Outlet } from 'react-router-dom';
-import Sidebar from '../components/Sidebar';
-import DashboardHeader from '../components/DashboardHeader';
+import Sidebar from './Sidebar';
+import DashboardHeader from './DashboardHeader';
 import { Sun } from 'lucide-react';
 
 export default function DashboardLayout() {
