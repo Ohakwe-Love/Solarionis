@@ -3,6 +3,8 @@ import { Outlet } from 'react-router-dom';
 import Sidebar from './Sidebar';
 import DashboardHeader from './DashboardHeader';
 import { Sun } from 'lucide-react';
+import Logo from '../../assets/images/logo/icon.png';
+
 
 export default function DashboardLayout() {
     const [user, setUser] = useState(null);
@@ -48,9 +50,9 @@ export default function DashboardLayout() {
     if (loading) {
         return (
             <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-                <div className="text-center">
-                    <Sun className="w-12 h-12 text-yellow-500 animate-spin mx-auto mb-4" />
-                    <p className="text-gray-600">Loading your dashboard...</p>
+                <div className="flex flex-col items-center gap-4">
+                    <img src={Logo} alt=""  className="animate-spin w-25"/>
+                    <p className="text-gray-600">Loading your data...</p>
                 </div>
             </div>
         );

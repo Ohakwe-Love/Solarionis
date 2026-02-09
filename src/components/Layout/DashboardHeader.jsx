@@ -3,7 +3,7 @@ import { Bell, Search, Menu } from 'lucide-react';
 
 export default function DashboardHeader({ user, onMenuClick, title, subtitle }) {
     return (
-        <header className="h-16 bg-white border-b border-gray-200 flex items-center justify-between px-6 sticky top-0 z-30">
+        <header className="h-25 bg-white border-b border-gray-200 flex items-center justify-between px-6 sticky top-0 z-30">
             <div className="flex items-center gap-4">
                 <button
                     onClick={onMenuClick}
@@ -11,7 +11,7 @@ export default function DashboardHeader({ user, onMenuClick, title, subtitle }) 
                 >
                     <Menu className="w-6 h-6 text-gray-600" />
                 </button>
-                <div className="hidden md:block">
+                <div className="hidden md:block pb-2">
                     <h1 className="text-xl font-bold text-gray-900">
                         {title || 'Dashboard'}
                     </h1>

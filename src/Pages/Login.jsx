@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { ArrowRight, Mail, Lock, Eye, EyeOff, AlertCircle } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import logo from '../assets/images/logo/logo.png';
+import { API_ENDPOINTS } from '../config/api';
+
 
 export default function Login() {
     const [formData, setFormData] = useState({
@@ -54,19 +56,13 @@ export default function Login() {
         setIsLoading(true);
 
         try {
-            // First, get CSRF cookie (for Laravel Sanctum)
-            await fetch('YOUR_API_URL/sanctum/csrf-cookie', {
-                credentials: 'include'
-            });
-
-            // Then, attempt login
-            const response = await fetch('YOUR_API_URL/api/auth/login', {
+            // Attempt login with bearer token authentication
+            const response = await fetch(API_ENDPOINTS.LOGIN, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                     'Accept': 'application/json'
                 },
-                credentials: 'include',
                 body: JSON.stringify({
                     email: formData.email,
                     password: formData.password,
@@ -109,9 +105,6 @@ export default function Login() {
             <div className="max-w-lg w-full">
                 <div className="bg-white backdrop-blur-lg rounded-3xl shadow-2xl p-6 sm:p-8 border border-(--deep-black)/10">
                     <div className="text-center mb-8">
-                        {/* <Link to="/" className="inline-block">
-            <img src={logo} alt="Logo" className="h-12 sm:h-16 mx-auto mb-6" />
-          </Link> */}
                         <h2 className="text-3xl sm:text-4xl font-bold text-(--deep-black) mb-2">
                             Welcome Back
                         </h2>

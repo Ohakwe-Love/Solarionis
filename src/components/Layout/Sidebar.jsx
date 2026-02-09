@@ -11,6 +11,7 @@ import {
     X,
     PieChart
 } from 'lucide-react';
+import Logo from '../../assets/images/logo/logo.png';
 
 export default function Sidebar({ user, isOpen, onClose }) {
     const location = useLocation();
@@ -54,12 +55,11 @@ export default function Sidebar({ user, isOpen, onClose }) {
             )}
 
             {/* Sidebar */}
-            <aside className={`fixed top-0 left-0 h-full w-64 bg-white border-r border-gray-200 z-50 transform transition-transform duration-300 lg:translate-x-0 ${isOpen ? 'translate-x-0' : '-translate-x-full'}`}>
+            <aside className={`fixed top-0 left-0 h-full w-64 bg-(--deep-black) border-r border-gray-200 z-50 transform transition-transform duration-300 lg:translate-x-0 ${isOpen ? 'translate-x-0' : '-translate-x-full'}`}>
                 {/* Logo */}
-                <div className="h-16 flex items-center justify-between px-6 border-b border-gray-200">
+                <div className="h-25 flex items-center justify-between px-6 border-b border-gray-200 bg-(--deep-black)">
                     <Link to="/dashboard" className="flex items-center gap-2">
-                        <Sun className="w-8 h-8 text-yellow-500" />
-                        <span className="text-xl font-bold text-gray-900">Solarionis</span>
+                        <img src={Logo} alt="Solarionis Logo" className="w-12 h-12" />
                     </Link>
                     <button
                         onClick={onClose}
@@ -100,7 +100,7 @@ export default function Sidebar({ user, isOpen, onClose }) {
                             {user?.first_name?.[0]}{user?.last_name?.[0]}
                         </div>
                         <div className="flex-1 min-w-0">
-                            <p className="text-sm font-semibold text-gray-900 truncate">
+                            <p className="text-sm font-semibold text-white truncate">
                                 {user?.first_name} {user?.last_name}
                             </p>
                             <p className="text-xs text-gray-500 truncate">{user?.email}</p>

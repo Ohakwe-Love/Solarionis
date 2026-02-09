@@ -12,6 +12,8 @@ import {
     Zap
 } from 'lucide-react';
 
+import Logo from '../assets/images/logo/logo.png';
+
 export default function UserOverview() {
     const [stats, setStats] = useState({
         totalInvested: 0,
@@ -88,7 +90,7 @@ export default function UserOverview() {
     if (loading) {
         return (
             <div className="flex items-center justify-center h-64">
-                <Sun className="w-12 h-12 text-yellow-500 animate-spin" />
+                <img src={Logo} alt="Loading..." className="animate-spin w-12" />
             </div>
         );
     }

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Menu, X, ChevronDown, ArrowUpRight } from 'lucide-react';
+import { Menu, X, ChevronDown, ArrowUpRight, LogOut } from 'lucide-react';
 import { NavLink } from "react-router-dom";
 import logo from '../../assets/images/logo/logo.png';
 
@@ -13,9 +13,22 @@ const Header = () => {
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
     const [isScrolled, setIsScrolled] = useState(false);
     const [isResourcesOpen, setIsResourcesOpen] = useState(false);
+    const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+    useEffect(() => {
+        const token = localStorage.getItem('auth_token');
+        setIsAuthenticated(!!token);
+    }, []);
 
     const toggleMobileMenu = () => {
         setMobileMenuOpen(!mobileMenuOpen);
+    };
+
+    const handleLogout = () => {
+        localStorage.removeItem('auth_token');
+        localStorage.removeItem('user');
+        setIsAuthenticated(false);
+        window.location.href = '/';
     };
 
     // Handle scroll effect
@@ -140,18 +153,38 @@ const Header = () => {
 
                 {/* Desktop Right Side Buttons */}
                 <div className='hidden lg:flex gap-3 items-center'>
-                    <NavLink
-                        to="/login"
-                        className="text-white nav-link uppercase bg-[rgb(0,0,0,0.25)] px-3 py-3 rounded hover:bg-[rgb(0,0,0,0.4)] transition"
-                    >
-                        Login
-                    </NavLink>
-                    <NavLink
-                        to="/register"
-                        className="text-black nav-link uppercase bg-(--solar-gold) px-3 py-3 rounded hover:opacity-90 transition"
-                    >
-                        create account
-                    </NavLink>
+                    {isAuthenticated ? (
+                        <>
+                            <NavLink
+                                to="/dashboard"
+                                className="text-white nav-link uppercase bg-[rgb(0,0,0,0.25)] px-3 py-3 rounded hover:bg-[rgb(0,0,0,0.4)] transition"
+                            >
+                                Dashboard
+                            </NavLink>
+                            <button
+                                onClick={handleLogout}
+                                className="text-white nav-link uppercase bg-(--deep-black) px-3 py-3 rounded hover:bg-opacity-80 transition flex items-center gap-2 cursor-pointer"
+                            >
+                                <LogOut className="w-4 h-4" />
+                                Logout
+                            </button>
+                        </>
+                    ) : (
+                        <>
+                            <NavLink
+                                to="/login"
+                                className="text-white nav-link uppercase bg-[rgb(0,0,0,0.25)] px-3 py-3 rounded hover:bg-[rgb(0,0,0,0.4)] transition"
+                            >
+                                Login
+                            </NavLink>
+                            <NavLink
+                                to="/register"
+                                className="text-black nav-link uppercase bg-(--solar-gold) px-3 py-3 rounded hover:opacity-90 transition"
+                            >
+                                create account
+                            </NavLink>
+                        </>
+                    )}
                     <NavLink
                         to="/help"
                         className="text-white nav-link uppercase bg-(--deep-black) px-3 py-3 rounded hover:bg-opacity-80 transition"
@@ -241,20 +274,43 @@ const Header = () => {
                     </NavLink>
 
                     <div className="pt-4 space-y-3 border-t border-gray-700">
-                        <NavLink
-                            to="/login"
-                            className="block text-center text-white font-medium uppercase tracking-wide py-3 bg-[rgb(0,0,0,0.25)] rounded hover:bg-[rgb(0,0,0,0.4)] transition"
-                            onClick={() => setMobileMenuOpen(false)}
-                        >
-                            Login
-                        </NavLink>
-                        <NavLink
-                            to="/signup"
-                            className="block text-center text-black font-medium uppercase tracking-wide py-3 bg-(--solar-gold) rounded hover:opacity-90 transition"
-                            onClick={() => setMobileMenuOpen(false)}
-                        >
-                            Create Account
-                        </NavLink>
+                        {isAuthenticated ? (
+                            <>
+                                <NavLink
+                                    to="/dashboard"
+                                    className="block text-center text-white font-medium uppercase tracking-wide py-3 bg-[rgb(0,0,0,0.25)] rounded hover:bg-[rgb(0,0,0,0.4)] transition"
+                                    onClick={() => setMobileMenuOpen(false)}
+                                >
+                                    Dashboard
+                                </NavLink>
+                                <button
+                                    onClick={() => {
+                                        handleLogout();
+                                        setMobileMenuOpen(false);
+                                    }}
+                                    className="w-full text-center text-white font-medium uppercase tracking-wide py-3 bg-(--deep-black) rounded hover:bg-opacity-80 transition"
+                                >
+                                    Logout
+                                </button>
+                            </>
+                        ) : (
+                            <>
+                                <NavLink
+                                    to="/login"
+                                    className="block text-center text-white font-medium uppercase tracking-wide py-3 bg-[rgb(0,0,0,0.25)] rounded hover:bg-[rgb(0,0,0,0.4)] transition"
+                                    onClick={() => setMobileMenuOpen(false)}
+                                >
+                                    Login
+                                </NavLink>
+                                <NavLink
+                                    to="/signup"
+                                    className="block text-center text-black font-medium uppercase tracking-wide py-3 bg-(--solar-gold) rounded hover:opacity-90 transition"
+                                    onClick={() => setMobileMenuOpen(false)}
+                                >
+                                    Create Account
+                                </NavLink>
+                            </>
+                        )}
                     </div>
                 </nav>
             </div>
