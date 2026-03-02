@@ -117,6 +117,15 @@ header li a:hover {
     background: linear-gradient(rgb(0, 0, 0, 0.5), rgb(0, 0, 0, 0.5)), url('assets/images/hero/2.webp') center/cover;
 }
 
+.aside-nav::-webkit-scrollbar {
+    width: 8px;
+}
+
+.aside-nav::-webkit-scrollbar-thumb {
+    background-color: var(--solar-gold);
+    border-radius: 30px;
+}
+
 
 @media (max-width: 768px) {
 

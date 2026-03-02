@@ -171,7 +171,7 @@ export default function Register() {
       } else {
         setErrors({ email: data.message || 'Failed to send verification email' });
       }
-    } catch (error) {
+    } catch {
       setErrors({ email: 'Network error. Please try again.' });
     } finally {
       setIsLoading(false);
@@ -201,7 +201,7 @@ export default function Register() {
       } else {
         setErrors({ verificationCode: data.message || 'Invalid verification code' });
       }
-    } catch (error) {
+    } catch {
       setErrors({ verificationCode: 'Network error. Please try again.' });
     } finally {
       setIsLoading(false);
@@ -247,7 +247,7 @@ export default function Register() {
       } else {
         setErrors(data.errors || { general: data.message });
       }
-    } catch (error) {
+    } catch {
       setErrors({ general: 'Network error. Please try again.' });
     } finally {
       setIsLoading(false);

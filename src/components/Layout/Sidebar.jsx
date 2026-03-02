@@ -7,11 +7,12 @@ import {
     FileText,
     Settings,
     LogOut,
-    Sun,
+    ShieldCheck,
     X,
     PieChart
 } from 'lucide-react';
 import Logo from '../../assets/images/logo/logo.png';
+import { API_ENDPOINTS } from '../../config/api';
 
 export default function Sidebar({ user, isOpen, onClose }) {
     const location = useLocation();
@@ -20,6 +21,7 @@ export default function Sidebar({ user, isOpen, onClose }) {
         { path: '/dashboard', icon: LayoutDashboard, label: 'Overview' },
         { path: '/dashboard/portfolio', icon: PieChart, label: 'Portfolio' },
         { path: '/dashboard/invest', icon: TrendingUp, label: 'Invest' },
+        { path: '/dashboard/kyc', icon: ShieldCheck, label: 'KYC' },
         { path: '/dashboard/wallet', icon: Wallet, label: 'Wallet' },
         { path: '/dashboard/documents', icon: FileText, label: 'Documents' },
         { path: '/dashboard/settings', icon: Settings, label: 'Settings' }
@@ -28,7 +30,7 @@ export default function Sidebar({ user, isOpen, onClose }) {
     const handleLogout = async () => {
         try {
             const token = localStorage.getItem('auth_token');
-            await fetch('https://solarionis.test/api/auth/logout', {
+            await fetch(API_ENDPOINTS.LOGOUT, {
                 method: 'POST',
                 headers: {
                     'Authorization': `Bearer ${token}`,
@@ -70,7 +72,7 @@ export default function Sidebar({ user, isOpen, onClose }) {
                 </div>
 
                 {/* Navigation */}
-                <nav className="p-4">
+                <nav className="p-4 overflow-y-scroll max-h-[calc(100vh-250px)] aside-nav" >
                     {navItems.map((item) => {
                         const Icon = item.icon;
                         const isActive = location.pathname === item.path;

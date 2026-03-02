@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Header from '../components/Layout/Header';
 import image from '../assets/images/hero/wealth.webp';
 import Footer from '../components/Layout/Footer';

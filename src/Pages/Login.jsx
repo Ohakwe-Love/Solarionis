@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { ArrowRight, Mail, Lock, Eye, EyeOff, AlertCircle } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import logo from '../assets/images/logo/logo.png';
 import { API_ENDPOINTS } from '../config/api';
 
 
@@ -93,7 +92,7 @@ export default function Login() {
                     setErrors({ general: data.message || 'Invalid credentials. Please try again.' });
                 }
             }
-        } catch (error) {
+        } catch {
             setErrors({ general: 'Network error. Please check your connection and try again.' });
         } finally {
             setIsLoading(false);

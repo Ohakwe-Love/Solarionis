@@ -1,7 +1,7 @@
 import React from 'react'
 import './App.css'
 
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import HomePage from "./Pages/HomePage";
 import InvestmentPage from "./Pages/InvestmentPage";
 import WealthPage from "./Pages/WealthPage";
@@ -21,6 +21,16 @@ import UserInvest from "./Pages/UserInvest";
 import UserWallet from "./Pages/UserWallet";
 import UserDocuments from "./Pages/UserDocuments";
 import UserSettings from "./Pages/UserSettings";
+import KycVerification from './Pages/KycVerification';
+import AdminLogin from "./admin/AdminLogin";
+import AdminLayout from "./admin/AdminLayout";
+import AdminRoute from "./admin/AdminRoute";
+import AdminGuestRoute from "./admin/AdminGuestRoute";
+import AdminDashboard from "./admin/pages/AdminDashboard";
+import AdminUsers from "./admin/pages/AdminUsers";
+import AdminOrders from "./admin/pages/AdminOrders";
+import AdminProducts from "./admin/pages/AdminProducts";
+import AdminProfile from "./admin/pages/AdminProfile";
 
 // Import route guards
 import ProtectedRoute from "./components/ProtectedRoute";
@@ -59,6 +69,15 @@ function App() {
           } 
         />
 
+        <Route
+          path="/admin/login"
+          element={
+            <AdminGuestRoute>
+              <AdminLogin />
+            </AdminGuestRoute>
+          }
+        />
+
         {/* Protected Dashboard Routes - Only authenticated users can access */}
         <Route 
           path="/dashboard" 
@@ -71,9 +90,26 @@ function App() {
           <Route index element={<UserOverview />} />
           <Route path="portfolio" element={<UserPortfolio />} />
           <Route path="invest" element={<UserInvest />} />
+          <Route path="kyc" element={<KycVerification />} />
           <Route path="wallet" element={<UserWallet />} />
           <Route path="documents" element={<UserDocuments />} />
           <Route path="settings" element={<UserSettings />} />
+        </Route>
+
+        <Route
+          path="/admin"
+          element={
+            <AdminRoute>
+              <AdminLayout />
+            </AdminRoute>
+          }
+        >
+          <Route index element={<AdminDashboard />} />
+          <Route path="dashboard" element={<AdminDashboard />} />
+          <Route path="users" element={<AdminUsers />} />
+          <Route path="orders" element={<AdminOrders />} />
+          <Route path="products" element={<AdminProducts />} />
+          <Route path="profile" element={<AdminProfile />} />
         </Route>
 
         {/* 404 - Not Found */}

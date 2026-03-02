@@ -4,6 +4,7 @@ import Sidebar from './Sidebar';
 import DashboardHeader from './DashboardHeader';
 import { Sun } from 'lucide-react';
 import Logo from '../../assets/images/logo/icon.png';
+import { API_ENDPOINTS } from '../../config/api';
 
 
 export default function DashboardLayout() {
@@ -24,7 +25,7 @@ export default function DashboardLayout() {
                 return;
             }
 
-            const response = await fetch('https://solarionis.test/api/auth/user', {
+            const response = await fetch(API_ENDPOINTS.USER, {
                 headers: {
                     'Authorization': `Bearer ${token}`,
                     'Accept': 'application/json'

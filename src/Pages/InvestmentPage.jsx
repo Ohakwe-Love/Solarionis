@@ -1,9 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { ArrowRight } from 'lucide-react';
 import Header from '../components/Layout/Header';
 import NewsLetter from '../components/Sections/NewsLetter';
 import Footer from '../components/Layout/Footer';
-import { Link } from 'react-router-dom';
 import image1 from '../assets/images/portfolio/1.webp';
 import image2 from '../assets/images/portfolio/2.webp';
 import image3 from '../assets/images/portfolio/3.webp';

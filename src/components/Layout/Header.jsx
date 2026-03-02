@@ -13,12 +13,7 @@ const Header = () => {
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
     const [isScrolled, setIsScrolled] = useState(false);
     const [isResourcesOpen, setIsResourcesOpen] = useState(false);
-    const [isAuthenticated, setIsAuthenticated] = useState(false);
-
-    useEffect(() => {
-        const token = localStorage.getItem('auth_token');
-        setIsAuthenticated(!!token);
-    }, []);
+    const [isAuthenticated, setIsAuthenticated] = useState(() => !!localStorage.getItem('auth_token'));
 
     const toggleMobileMenu = () => {
         setMobileMenuOpen(!mobileMenuOpen);
