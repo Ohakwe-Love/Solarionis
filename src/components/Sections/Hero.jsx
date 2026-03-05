@@ -1,7 +1,12 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { ArrowRight } from 'lucide-react';
 import Header from '../Layout/Header';
 import { NavLink, Link } from 'react-router-dom';
+
+const STATS = [
+    { key: 'invest', end: 462545600, suffix: '', prefix: '$', label: 'Total Invested' },
+    { key: 'return', end: 12.06, suffix: '%', prefix: '', label: 'Realized Return (IRR)' }
+];
 
 const Hero = () => {
     const [counts, setCounts] = useState({
@@ -12,10 +17,23 @@ const Hero = () => {
     const [hasAnimated, setHasAnimated] = useState(false);
     const sectionRef = useRef(null);
 
-    const stats = [
-        { key: 'invest', end: 462545600, suffix: '', prefix: '$', label: 'Total Invested' },
-        { key: 'return', end: 12.06, suffix: '%', prefix: '', label: 'Realized Return (IRR)' }
-    ];
+    const animateCounters = useCallback(() => {
+        STATS.forEach((stat) => {
+            let current = 0;
+            const increment = stat.end / 60;
+            const timer = setInterval(() => {
+                current += increment;
+                if (current >= stat.end) {
+                    current = stat.end;
+                    clearInterval(timer);
+                }
+                setCounts((prev) => ({
+                    ...prev,
+                    [stat.key]: stat.key === 'return' ? Number(current.toFixed(2)) : Math.floor(current)
+                }));
+            }, 30);
+        });
+    }, []);
 
     useEffect(() => {
         const observer = new IntersectionObserver(
@@ -33,25 +51,7 @@ const Hero = () => {
         }
 
         return () => observer.disconnect();
-    }, [hasAnimated]);
-
-    const animateCounters = () => {
-        stats.forEach((stat) => {
-            let current = 0;
-            const increment = stat.end / 60;
-            const timer = setInterval(() => {
-                current += increment;
-                if (current >= stat.end) {
-                    current = stat.end;
-                    clearInterval(timer);
-                }
-                setCounts((prev) => ({
-                    ...prev,
-                    [stat.key]: stat.key === 'return' ? current.toFixed(2) : Math.floor(current)
-                }));
-            }, 30);
-        });
-    };
+    }, [hasAnimated, animateCounters]);
 
     // Format large numbers with commas
     const formatNumber = (num) => {
@@ -99,7 +99,7 @@ const Hero = () => {
                     {/* Stats Section */}
                     <div ref={sectionRef} className="relative hero-stats w-full h-[20%]">
                         <div className="max-w-7xl mx-auto relative grid grid-cols-1 sm:grid-cols-2 gap-8 sm:gap-6 lg:gap-8 py-8 sm:py-10 lg:py-6 px-4 sm:px-6 lg:px-8">
-                            {stats.map((stat, index) => (
+                            {STATS.map((stat, index) => (
                                 <div
                                     key={stat.key}
                                     className="text-center flex items-center justify-center flex-col sm:text-left group relative"

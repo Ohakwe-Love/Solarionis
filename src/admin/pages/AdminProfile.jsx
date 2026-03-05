@@ -4,25 +4,25 @@ import { API_ENDPOINTS } from "../../config/api";
 import { adminJson, getAdminEmail } from "../adminApi";
 
 export default function AdminProfile() {
-    const [email, setEmail] = useState("");
+    const [email] = useState(() => getAdminEmail());
     const [status, setStatus] = useState("Checking session...");
-    const checkSession = async () => {
-        try {
-            const { response } = await adminJson(API_ENDPOINTS.ADMIN_DEPOSITS);
-            if (response.status === 200) {
-                setStatus("Active admin session");
-            } else if (response.status === 401) {
-                setStatus("Session expired");
-            } else {
-                setStatus(`Session check returned ${response.status}`);
-            }
-        } catch {
-            setStatus("Session check unavailable");
-        }
-    };
 
     useEffect(() => {
-        setEmail(getAdminEmail());
+        const checkSession = async () => {
+            try {
+                const { response } = await adminJson(API_ENDPOINTS.ADMIN_DEPOSITS);
+                if (response.status === 200) {
+                    setStatus("Active admin session");
+                } else if (response.status === 401) {
+                    setStatus("Session expired");
+                } else {
+                    setStatus(`Session check returned ${response.status}`);
+                }
+            } catch {
+                setStatus("Session check unavailable");
+            }
+        };
+
         checkSession();
     }, []);
 

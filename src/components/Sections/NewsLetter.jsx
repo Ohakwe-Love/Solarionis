@@ -1,17 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { ArrowRight, Zap } from 'lucide-react';
 import { NavLink } from "react-router-dom";
 
 const NewsLetter = () => {
-  const [email, setEmail] = useState('');
-
-  const handleSubmit = () => {
-    if (email) {
-      console.log('Email submitted:', email);
-      setEmail('');
-    }
-  };
-
   return (
     <section className="relative bg-slate-900">
 

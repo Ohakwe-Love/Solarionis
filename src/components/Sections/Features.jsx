@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 // import { Send, FileText, MessageCircle, Mail } from 'lucide-react';
 import ReturnPolicySvg from '../../assets/icons/return-policy.svg?react';
 import ChatSvg from '../../assets/icons/chat.svg';
