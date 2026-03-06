@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useState } from "react";
-import { Users, ShoppingBag, DollarSign, Clock3, Copy } from "lucide-react";
+import { Users, ArrowDownCircle, ArrowUpCircle, Clock3, Copy } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { API_ENDPOINTS } from "../../config/api";
 import {
@@ -15,10 +15,10 @@ function money(value) {
 export default function AdminDashboard() {
     const navigate = useNavigate();
     const [metrics, setMetrics] = useState({
-        totalUsers: 0,
-        totalOrders: 0,
-        totalRevenue: 0,
-        pendingOrders: 0,
+        activeUsers: 0,
+        totalDeposits: 0,
+        totalWithdrawals: 0,
+        pendingRequests: 0,
     });
     const [transactions, setTransactions] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -31,10 +31,10 @@ export default function AdminDashboard() {
 
     const cards = useMemo(
         () => [
-            { key: "users", label: "Total Users", value: metrics.totalUsers, icon: Users, color: "bg-[var(--solar-gold)]/15 text-[var(--solar-gold)]" },
-            { key: "orders", label: "Total Orders", value: metrics.totalOrders, icon: ShoppingBag, color: "bg-emerald-500/15 text-emerald-400" },
-            { key: "revenue", label: "Total Revenue", value: `$${money(metrics.totalRevenue)}`, icon: DollarSign, color: "bg-[var(--solar-gold)]/15 text-[var(--solar-gold)]" },
-            { key: "pending", label: "Pending Orders", value: metrics.pendingOrders, icon: Clock3, color: "bg-orange-500/15 text-orange-400" },
+            { key: "users", label: "Active Users", value: metrics.activeUsers, icon: Users, color: "bg-[var(--solar-gold)]/15 text-[var(--solar-gold)]" },
+            { key: "deposits", label: "Deposits", value: metrics.totalDeposits, icon: ArrowDownCircle, color: "bg-emerald-500/15 text-emerald-400" },
+            { key: "withdrawals", label: "Withdrawals", value: metrics.totalWithdrawals, icon: ArrowUpCircle, color: "bg-sky-500/15 text-sky-400" },
+            { key: "pending", label: "Pending Queue", value: metrics.pendingRequests, icon: Clock3, color: "bg-orange-500/15 text-orange-400" },
         ],
         [metrics]
     );
@@ -71,10 +71,6 @@ export default function AdminDashboard() {
                 deposits.filter((item) => pendingStatuses.has(String(item.payment_status).toLowerCase())).length +
                 withdrawals.filter((item) => pendingStatuses.has(String(item.status).toLowerCase())).length;
 
-            const totalRevenue = deposits
-                .filter((item) => String(item.payment_status).toLowerCase() === "finished")
-                .reduce((sum, item) => sum + Number(item.price_amount || 0), 0);
-
             const txRows = [
                 ...deposits.map((item) => ({
                     id: `dep_${item.id}`,
@@ -97,10 +93,10 @@ export default function AdminDashboard() {
                 .slice(0, 10);
 
             setMetrics({
-                totalUsers: uniqueUsers.size,
-                totalOrders: deposits.length + withdrawals.length,
-                totalRevenue,
-                pendingOrders: pendingCount,
+                activeUsers: uniqueUsers.size,
+                totalDeposits: deposits.length,
+                totalWithdrawals: withdrawals.length,
+                pendingRequests: pendingCount,
             });
             setTransactions(txRows);
         } catch (err) {

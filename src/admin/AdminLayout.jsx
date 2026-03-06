@@ -4,8 +4,11 @@ import {
     Menu,
     LayoutDashboard,
     Users,
-    ShoppingBag,
-    Boxes,
+    Landmark,
+    ArrowDownCircle,
+    ArrowUpCircle,
+    BriefcaseBusiness,
+    FolderKanban,
     UserCircle2,
     LogOut,
     X,
@@ -15,9 +18,12 @@ import { adminLogout } from "./adminApi";
 
 const navItems = [
     { to: "/admin/dashboard", label: "Dashboard", icon: LayoutDashboard },
-    { to: "/admin/users", label: "Users", icon: Users },
-    { to: "/admin/orders", label: "Orders", icon: ShoppingBag },
-    { to: "/admin/products", label: "All Products", icon: Boxes },
+    { to: "/admin/deposits", label: "Deposits", icon: ArrowDownCircle },
+    { to: "/admin/withdrawals", label: "Withdrawals", icon: ArrowUpCircle },
+    { to: "/admin/investments", label: "Investments", icon: BriefcaseBusiness },
+    { to: "/admin/projects", label: "Projects", icon: FolderKanban },
+    { to: "/admin/users", label: "Users & KYC", icon: Users },
+    { to: "/admin/ledger", label: "Ledger", icon: Landmark },
     { to: "/admin/profile", label: "Profile", icon: UserCircle2 },
 ];
 

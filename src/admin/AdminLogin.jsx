@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ShieldCheck, Loader, ArrowRight } from "lucide-react";
 import { API_ENDPOINTS } from "../config/api";
-import { adminJson, adminRequest, setAdminAuthenticated } from "./adminApi";
+import { adminJson, setAdminAuthenticated } from "./adminApi";
 
 export default function AdminLogin() {
     const navigate = useNavigate();
@@ -21,7 +21,7 @@ export default function AdminLogin() {
         setError("");
 
         try {
-            const { response } = await adminJson(API_ENDPOINTS.ADMIN_LOGIN, {
+            const { response, data } = await adminJson(API_ENDPOINTS.ADMIN_LOGIN, {
                 method: "POST",
                 body: {
                     email: form.email.trim(),
@@ -30,19 +30,10 @@ export default function AdminLogin() {
             });
 
             if (!response.ok && !response.redirected) {
-                throw new Error("Invalid admin credentials.");
+                throw new Error(data?.message || "Invalid admin credentials.");
             }
 
-            // Probe a protected endpoint to confirm session auth.
-            const probe = await adminRequest(API_ENDPOINTS.ADMIN_DEPOSITS, {
-                method: "GET",
-            });
-
-            if (probe.status === 401) {
-                throw new Error("Invalid admin credentials.");
-            }
-
-            setAdminAuthenticated(form.email.trim());
+            setAdminAuthenticated(form.email.trim(), data?.token);
             navigate("/admin/dashboard");
         } catch (err) {
             setError(err.message || "Login failed. Please try again.");

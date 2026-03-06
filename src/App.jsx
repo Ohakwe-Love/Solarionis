@@ -28,8 +28,11 @@ import AdminRoute from "./admin/AdminRoute";
 import AdminGuestRoute from "./admin/AdminGuestRoute";
 import AdminDashboard from "./admin/pages/AdminDashboard";
 import AdminUsers from "./admin/pages/AdminUsers";
-import AdminOrders from "./admin/pages/AdminOrders";
-import AdminProducts from "./admin/pages/AdminProducts";
+import AdminDeposits from "./admin/pages/AdminDeposits";
+import AdminWithdrawals from "./admin/pages/AdminWithdrawals";
+import AdminInvestments from "./admin/pages/AdminInvestments";
+import AdminProjects from "./admin/pages/AdminProjects";
+import AdminLedger from "./admin/pages/AdminLedger";
 import AdminProfile from "./admin/pages/AdminProfile";
 
 // Import route guards
@@ -106,9 +109,14 @@ function App() {
         >
           <Route index element={<AdminDashboard />} />
           <Route path="dashboard" element={<AdminDashboard />} />
+          <Route path="deposits" element={<AdminDeposits />} />
+          <Route path="withdrawals" element={<AdminWithdrawals />} />
+          <Route path="investments" element={<AdminInvestments />} />
+          <Route path="projects" element={<AdminProjects />} />
           <Route path="users" element={<AdminUsers />} />
-          <Route path="orders" element={<AdminOrders />} />
-          <Route path="products" element={<AdminProducts />} />
+          <Route path="ledger" element={<AdminLedger />} />
+          <Route path="orders" element={<AdminDeposits />} />
+          <Route path="products" element={<AdminWithdrawals />} />
           <Route path="profile" element={<AdminProfile />} />
         </Route>
 
