@@ -228,14 +228,14 @@ export default function Login() {
                     </form>
 
                     {/* Divider */}
-                    <div className="my-8">
+                    {/* <div className="my-8">
                         <div className="continue-with flex justify-center text-sm">
                             <span className="px-4 text-gray-400">Or continue with</span>
                         </div>
-                    </div>
+                    </div> */}
 
                     {/* Social Login Buttons */}
-                    <div className="grid grid-cols-2 gap-4">
+                    {/* <div className="grid grid-cols-2 gap-4">
                         <button
                             type="button"
                             className="flex items-center justify-center gap-2 px-4 py-3 hover:bg-(--deep-black)/10 border border-white/20 rounded-xl bg-(--deep-black) text-white cursor-pointer transition-all hover:text-(--deep-black) font-medium"
@@ -257,7 +257,7 @@ export default function Login() {
                             </svg>
                             GitHub
                         </button>
-                    </div>
+                    </div> */}
                 </div>
 
                 {/* Sign Up Link */}

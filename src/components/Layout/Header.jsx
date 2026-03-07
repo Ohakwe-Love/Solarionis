@@ -9,11 +9,15 @@ const mobileNavLinkClass = ({ isActive }) =>
         : "text-white hover:text-(--primary-color)"
     } block font-medium uppercase tracking-wide py-2 border-b border-gray-700`;
 
+const getAdminAuthState = () =>
+    localStorage.getItem('admin_auth') === '1' || !!localStorage.getItem('admin_token');
+
 const Header = () => {
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
     const [isScrolled, setIsScrolled] = useState(false);
     const [isResourcesOpen, setIsResourcesOpen] = useState(false);
     const [isAuthenticated, setIsAuthenticated] = useState(() => !!localStorage.getItem('auth_token'));
+    const [isAdminAuthenticated, setIsAdminAuthenticated] = useState(getAdminAuthState);
 
     const toggleMobileMenu = () => {
         setMobileMenuOpen(!mobileMenuOpen);
@@ -23,6 +27,14 @@ const Header = () => {
         localStorage.removeItem('auth_token');
         localStorage.removeItem('user');
         setIsAuthenticated(false);
+        window.location.href = '/';
+    };
+
+    const handleAdminLogout = () => {
+        localStorage.removeItem('admin_auth');
+        localStorage.removeItem('admin_email');
+        localStorage.removeItem('admin_token');
+        setIsAdminAuthenticated(false);
         window.location.href = '/';
     };
 
@@ -50,6 +62,20 @@ const Header = () => {
 
         window.addEventListener('resize', handleResize);
         return () => window.removeEventListener('resize', handleResize);
+    }, []);
+
+    useEffect(() => {
+        const syncAuth = () => {
+            setIsAuthenticated(!!localStorage.getItem('auth_token'));
+            setIsAdminAuthenticated(getAdminAuthState());
+        };
+
+        window.addEventListener('focus', syncAuth);
+        window.addEventListener('storage', syncAuth);
+        return () => {
+            window.removeEventListener('focus', syncAuth);
+            window.removeEventListener('storage', syncAuth);
+        };
     }, []);
 
     const resourcesLinks = [
@@ -158,6 +184,22 @@ const Header = () => {
                             </NavLink>
                             <button
                                 onClick={handleLogout}
+                                className="text-white nav-link uppercase bg-(--deep-black) px-3 py-3 rounded hover:bg-opacity-80 transition flex items-center gap-2 cursor-pointer"
+                            >
+                                <LogOut className="w-4 h-4" />
+                                Logout
+                            </button>
+                        </>
+                    ) : isAdminAuthenticated ? (
+                        <>
+                            <NavLink
+                                to="/admin/dashboard"
+                                className="text-white nav-link uppercase bg-[rgb(0,0,0,0.25)] px-3 py-3 rounded hover:bg-[rgb(0,0,0,0.4)] transition"
+                            >
+                                Admin Panel
+                            </NavLink>
+                            <button
+                                onClick={handleAdminLogout}
                                 className="text-white nav-link uppercase bg-(--deep-black) px-3 py-3 rounded hover:bg-opacity-80 transition flex items-center gap-2 cursor-pointer"
                             >
                                 <LogOut className="w-4 h-4" />
@@ -288,6 +330,25 @@ const Header = () => {
                                     Logout
                                 </button>
                             </>
+                        ) : isAdminAuthenticated ? (
+                            <>
+                                <NavLink
+                                    to="/admin/dashboard"
+                                    className="block text-center text-white font-medium uppercase tracking-wide py-3 bg-[rgb(0,0,0,0.25)] rounded hover:bg-[rgb(0,0,0,0.4)] transition"
+                                    onClick={() => setMobileMenuOpen(false)}
+                                >
+                                    Admin Panel
+                                </NavLink>
+                                <button
+                                    onClick={() => {
+                                        handleAdminLogout();
+                                        setMobileMenuOpen(false);
+                                    }}
+                                    className="w-full text-center text-white font-medium uppercase tracking-wide py-3 bg-(--deep-black) rounded hover:bg-opacity-80 transition"
+                                >
+                                    Logout
+                                </button>
+                            </>
                         ) : (
                             <>
                                 <NavLink
@@ -298,7 +359,7 @@ const Header = () => {
                                     Login
                                 </NavLink>
                                 <NavLink
-                                    to="/signup"
+                                    to="/register"
                                     className="block text-center text-black font-medium uppercase tracking-wide py-3 bg-(--solar-gold) rounded hover:opacity-90 transition"
                                     onClick={() => setMobileMenuOpen(false)}
                                 >

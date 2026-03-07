@@ -32,12 +32,14 @@ import AdminDeposits from "./admin/pages/AdminDeposits";
 import AdminWithdrawals from "./admin/pages/AdminWithdrawals";
 import AdminInvestments from "./admin/pages/AdminInvestments";
 import AdminProjects from "./admin/pages/AdminProjects";
+import AdminTestimonials from "./admin/pages/AdminTestimonials";
 import AdminLedger from "./admin/pages/AdminLedger";
 import AdminProfile from "./admin/pages/AdminProfile";
 
 // Import route guards
 import ProtectedRoute from "./components/ProtectedRoute";
 import GuestRoute from "./components/GuestRoute";
+import ReviewsPage from "./Pages/ReviewsPage";
 
 
 function App() {
@@ -51,6 +53,7 @@ function App() {
         <Route path="/about" element={<AboutPage />} />
         <Route path="/faq" element={<FaqPage />} />
         <Route path="/help" element={<HelpPage />} />
+        <Route path="/reviews" element={<ReviewsPage />} />
         <Route path="/terms" element={<TermsOfService />} />
         <Route path="/privacy-policy" element={<PrivacyPolicy />} />
 
@@ -113,6 +116,7 @@ function App() {
           <Route path="withdrawals" element={<AdminWithdrawals />} />
           <Route path="investments" element={<AdminInvestments />} />
           <Route path="projects" element={<AdminProjects />} />
+          <Route path="testimonials" element={<AdminTestimonials />} />
           <Route path="users" element={<AdminUsers />} />
           <Route path="ledger" element={<AdminLedger />} />
           <Route path="orders" element={<AdminDeposits />} />

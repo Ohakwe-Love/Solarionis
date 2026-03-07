@@ -44,6 +44,10 @@ export const API_ENDPOINTS = {
     WALLET: api("/api/wallet"),
     DEPOSITS: api("/api/deposits"),
     WITHDRAWALS: api("/api/withdrawals"),
+    TESTIMONIALS_PUBLIC: api("/api/testimonials"),
+    TESTIMONIALS_STATS: api("/api/testimonials/stats"),
+    TESTIMONIALS_ME: api("/api/testimonials/me"),
+    TESTIMONIALS_SUBMIT: api("/api/testimonials"),
 
     // Admin
     ADMIN_LOGIN: api("/api/admin/login"),
@@ -70,6 +74,11 @@ export const API_ENDPOINTS = {
     ADMIN_PROJECT_DETAIL: (id) => api(`/api/admin/projects/${id}`),
     ADMIN_PROJECT_OFFERINGS: (projectId) => api(`/api/admin/projects/${projectId}/offerings`),
     ADMIN_OFFERING_DETAIL: (offeringId) => api(`/api/admin/offerings/${offeringId}`),
+    ADMIN_TESTIMONIALS: api("/api/admin/testimonials"),
+    ADMIN_TESTIMONIAL_DETAIL: (id) => api(`/api/admin/testimonials/${id}`),
+    ADMIN_TESTIMONIAL_APPROVE: (id) => api(`/api/admin/testimonials/${id}/approve`),
+    ADMIN_TESTIMONIAL_REJECT: (id) => api(`/api/admin/testimonials/${id}/reject`),
+    ADMIN_TESTIMONIAL_FEATURE: (id) => api(`/api/admin/testimonials/${id}/feature`),
 };
 
 export default API_BASE_URL;

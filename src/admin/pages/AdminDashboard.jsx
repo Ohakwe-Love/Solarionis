@@ -44,14 +44,16 @@ export default function AdminDashboard() {
         setError("");
 
         try {
-            const [depositsRes, withdrawalsRes] = await Promise.all([
+            const [depositsRes, withdrawalsRes, usersRes] = await Promise.all([
                 adminJson(API_ENDPOINTS.ADMIN_DEPOSITS),
                 adminJson(API_ENDPOINTS.ADMIN_WITHDRAWALS),
+                adminJson(API_ENDPOINTS.ADMIN_USERS),
             ]);
 
             if (
                 depositsRes.response.status === 401 ||
-                withdrawalsRes.response.status === 401
+                withdrawalsRes.response.status === 401 ||   
+                usersRes.response.status === 401
             ) {
                 clearAdminAuthenticated();
                 navigate("/admin/login");
@@ -60,10 +62,12 @@ export default function AdminDashboard() {
 
             const deposits = normalizePaginatedRows(depositsRes.data);
             const withdrawals = normalizePaginatedRows(withdrawalsRes.data);
+            const users = normalizePaginatedRows(usersRes.data);
 
             const uniqueUsers = new Set([
                 ...deposits.map((item) => item.user_id),
                 ...withdrawals.map((item) => item.user_id),
+                ...users.map((item) => item.id),
             ]);
 
             const pendingStatuses = new Set(["waiting", "requested", "processing", "pending"]);

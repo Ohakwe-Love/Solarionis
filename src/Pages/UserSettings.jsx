@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Settings, ShieldCheck, Loader } from 'lucide-react';
+import { Settings, ShieldCheck, Loader, Star } from 'lucide-react';
 import { API_ENDPOINTS } from '../config/api';
 
 function safeJson(response) {
@@ -18,6 +18,13 @@ function kycStatusClass(status) {
 export default function UserSettings() {
     const [user, setUser] = useState(null);
     const [kyc, setKyc] = useState(null);
+    const [testimonial, setTestimonial] = useState(null);
+    const [testimonialForm, setTestimonialForm] = useState({
+        rating: 5,
+        message: '',
+    });
+    const [testimonialSaving, setTestimonialSaving] = useState(false);
+    const [testimonialNotice, setTestimonialNotice] = useState('');
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState('');
 
@@ -42,18 +49,23 @@ export default function UserSettings() {
                 Accept: 'application/json',
             };
 
-            const [userRes, kycRes] = await Promise.all([
+            const [userRes, kycRes, testimonialRes] = await Promise.all([
                 fetch(API_ENDPOINTS.USER, { headers }),
                 fetch(API_ENDPOINTS.KYC_STATUS, { headers }),
+                fetch(API_ENDPOINTS.TESTIMONIALS_ME, { headers }),
             ]);
 
-            if ([userRes, kycRes].some((r) => r.status === 401)) {
+            if ([userRes, kycRes, testimonialRes].some((r) => r.status === 401)) {
                 localStorage.removeItem('auth_token');
                 window.location.href = '/login';
                 return;
             }
 
-            const [userData, kycData] = await Promise.all([safeJson(userRes), safeJson(kycRes)]);
+            const [userData, kycData, testimonialData] = await Promise.all([
+                safeJson(userRes),
+                safeJson(kycRes),
+                safeJson(testimonialRes),
+            ]);
 
             if (!userRes.ok) {
                 throw new Error(userData?.message || 'Failed to load user profile.');
@@ -61,10 +73,63 @@ export default function UserSettings() {
 
             setUser(userData?.user || null);
             setKyc(kycRes.ok ? kycData : null);
+            const existing = testimonialRes.ok ? (testimonialData?.testimonial || null) : null;
+            setTestimonial(existing);
+            if (existing) {
+                setTestimonialForm({
+                    rating: Number(existing.rating || 5),
+                    message: String(existing.message || ''),
+                });
+            }
         } catch (err) {
             setError(err.message || 'Failed to load settings.');
         } finally {
             setLoading(false);
+        }
+    };
+
+    const submitTestimonial = async (event) => {
+        event.preventDefault();
+        setTestimonialNotice('');
+        setError('');
+
+        if (!token) {
+            setError('Please log in again.');
+            return;
+        }
+
+        const message = testimonialForm.message.trim();
+        if (message.length < 20) {
+            setError('Testimonial message must be at least 20 characters.');
+            return;
+        }
+
+        setTestimonialSaving(true);
+        try {
+            const response = await fetch(API_ENDPOINTS.TESTIMONIALS_SUBMIT, {
+                method: 'POST',
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                    Accept: 'application/json',
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    rating: Number(testimonialForm.rating),
+                    message,
+                }),
+            });
+
+            const data = await safeJson(response);
+            if (!response.ok) {
+                throw new Error(data?.message || 'Failed to submit testimonial.');
+            }
+
+            setTestimonial(data?.testimonial || null);
+            setTestimonialNotice(data?.message || 'Testimonial submitted and pending review.');
+        } catch (err) {
+            setError(err.message || 'Failed to submit testimonial.');
+        } finally {
+            setTestimonialSaving(false);
         }
     };
 
@@ -156,6 +221,80 @@ export default function UserSettings() {
                         Manage KYC
                     </Link>
                 </div>
+            </div>
+
+            <div className="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm">
+                <h3 className="text-lg font-bold text-gray-900 mb-4">Your Testimonial</h3>
+                <p className="text-sm text-gray-600 mb-4">
+                    Submit your review. Testimonials are moderated by admin before appearing publicly.
+                </p>
+
+                {testimonial && (
+                    <div className="mb-4 rounded-xl border border-gray-200 bg-gray-50 p-4 text-sm">
+                        <div className="flex items-center gap-2 mb-2">
+                            <span className="text-gray-500">Current Status:</span>
+                            <span className="px-2 py-1 rounded-full text-xs font-semibold bg-gray-200 text-gray-700 capitalize">
+                                {testimonial.status}
+                            </span>
+                            {testimonial.featured && (
+                                <span className="px-2 py-1 rounded-full text-xs font-semibold bg-yellow-100 text-yellow-700">
+                                    Featured
+                                </span>
+                            )}
+                        </div>
+                        <p className="text-gray-700">Last submitted: {testimonial.updated_at ? new Date(testimonial.updated_at).toLocaleString() : '-'}</p>
+                    </div>
+                )}
+
+                {testimonialNotice && (
+                    <div className="mb-4 rounded-xl border border-green-200 bg-green-50 p-3 text-sm text-green-700">
+                        {testimonialNotice}
+                    </div>
+                )}
+
+                <form onSubmit={submitTestimonial} className="space-y-4">
+                    <div>
+                        <p className="text-sm font-medium text-gray-700 mb-2">Rating</p>
+                        <div className="flex items-center gap-2">
+                            {Array.from({ length: 5 }).map((_, i) => {
+                                const value = i + 1;
+                                const selected = Number(testimonialForm.rating) >= value;
+                                return (
+                                    <button
+                                        type="button"
+                                        key={`rating-${value}`}
+                                        onClick={() => setTestimonialForm((prev) => ({ ...prev, rating: value }))}
+                                        className="p-1"
+                                        aria-label={`Rate ${value} star${value > 1 ? 's' : ''}`}
+                                    >
+                                        <Star className={`w-6 h-6 ${selected ? 'fill-yellow-400 text-yellow-400' : 'text-gray-300'}`} />
+                                    </button>
+                                );
+                            })}
+                        </div>
+                    </div>
+
+                    <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-1">Message</label>
+                        <textarea
+                            rows={4}
+                            value={testimonialForm.message}
+                            onChange={(e) => setTestimonialForm((prev) => ({ ...prev, message: e.target.value }))}
+                            className="w-full border border-gray-300 rounded-xl px-3 py-2 text-sm"
+                            placeholder="Share your experience with Solarionis..."
+                            minLength={20}
+                            required
+                        />
+                    </div>
+
+                    <button
+                        type="submit"
+                        disabled={testimonialSaving}
+                        className="bg-yellow-400 text-black font-semibold px-4 py-2 rounded-xl hover:bg-yellow-500 transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
+                    >
+                        {testimonialSaving ? 'Submitting...' : 'Submit Testimonial'}
+                    </button>
+                </form>
             </div>
         </div>
     );
