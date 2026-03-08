@@ -10,6 +10,10 @@ import TermsOfService from "./Pages/TermsOfService";
 import PrivacyPolicy from "./Pages/PrivacyPolicy";
 import HelpPage from "./Pages/HelpPage";
 import FaqPage from "./Pages/FaqPage";
+import ArticlesPage from "./Pages/ArticlesPage";
+import ArticleDetailPage from "./Pages/ArticleDetailPage";
+import PerformancePage from "./Pages/PerformancePage";
+import ContactPage from "./Pages/ContactPage";
 import NotFoundPage from "./Pages/NotFoundPage";
 
 import Login from "./Pages/Login";
@@ -32,6 +36,7 @@ import AdminDeposits from "./admin/pages/AdminDeposits";
 import AdminWithdrawals from "./admin/pages/AdminWithdrawals";
 import AdminInvestments from "./admin/pages/AdminInvestments";
 import AdminProjects from "./admin/pages/AdminProjects";
+import AdminArticles from "./admin/pages/AdminArticles";
 import AdminTestimonials from "./admin/pages/AdminTestimonials";
 import AdminLedger from "./admin/pages/AdminLedger";
 import AdminProfile from "./admin/pages/AdminProfile";
@@ -51,8 +56,12 @@ function App() {
         <Route path="/investment" element={<InvestmentPage />} />
         <Route path="/wealth" element={<WealthPage />} />
         <Route path="/about" element={<AboutPage />} />
+        <Route path="/contact" element={<ContactPage />} />
         <Route path="/faq" element={<FaqPage />} />
         <Route path="/help" element={<HelpPage />} />
+        <Route path="/performance" element={<PerformancePage />} />
+        <Route path="/articles" element={<ArticlesPage />} />
+        <Route path="/articles/:slug" element={<ArticleDetailPage />} />
         <Route path="/reviews" element={<ReviewsPage />} />
         <Route path="/terms" element={<TermsOfService />} />
         <Route path="/privacy-policy" element={<PrivacyPolicy />} />
@@ -116,6 +125,7 @@ function App() {
           <Route path="withdrawals" element={<AdminWithdrawals />} />
           <Route path="investments" element={<AdminInvestments />} />
           <Route path="projects" element={<AdminProjects />} />
+          <Route path="articles" element={<AdminArticles />} />
           <Route path="testimonials" element={<AdminTestimonials />} />
           <Route path="users" element={<AdminUsers />} />
           <Route path="ledger" element={<AdminLedger />} />

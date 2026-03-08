@@ -63,7 +63,7 @@ const InvestmentPage = () => {
     return (
         <div>
             <section className='relative w-full'>
-                <Header />
+                <Header forceSolid />
 
                 <div className="max-w-7xl mx-auto py-8 px-12 pt-20">
                     <div className="text-center mb-8 sm:mb-12">

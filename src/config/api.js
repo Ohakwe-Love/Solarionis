@@ -48,6 +48,8 @@ export const API_ENDPOINTS = {
     TESTIMONIALS_STATS: api("/api/testimonials/stats"),
     TESTIMONIALS_ME: api("/api/testimonials/me"),
     TESTIMONIALS_SUBMIT: api("/api/testimonials"),
+    ARTICLES: api("/api/articles"),
+    ARTICLE_DETAIL: (slug) => api(`/api/articles/${slug}`),
 
     // Admin
     ADMIN_LOGIN: api("/api/admin/login"),
@@ -74,6 +76,9 @@ export const API_ENDPOINTS = {
     ADMIN_PROJECT_DETAIL: (id) => api(`/api/admin/projects/${id}`),
     ADMIN_PROJECT_OFFERINGS: (projectId) => api(`/api/admin/projects/${projectId}/offerings`),
     ADMIN_OFFERING_DETAIL: (offeringId) => api(`/api/admin/offerings/${offeringId}`),
+    ADMIN_ARTICLES: api("/api/admin/articles"),
+    ADMIN_ARTICLE_DETAIL: (id) => api(`/api/admin/articles/${id}`),
+    ADMIN_ARTICLE_PUBLISH: (id) => api(`/api/admin/articles/${id}/publish`),
     ADMIN_TESTIMONIALS: api("/api/admin/testimonials"),
     ADMIN_TESTIMONIAL_DETAIL: (id) => api(`/api/admin/testimonials/${id}`),
     ADMIN_TESTIMONIAL_APPROVE: (id) => api(`/api/admin/testimonials/${id}/approve`),

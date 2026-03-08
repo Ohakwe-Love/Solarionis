@@ -20,7 +20,7 @@ export default function Footer() {
                 { name: 'Referral Program', href: '#' },
                 { name: 'Solarionis IRA', href: '#' },
                 { name: 'Wealth Advisors', href: '#' },
-                { name: 'Performance', href: '#' },
+                { name: 'Performance', href: '/performance' },
                 { name: 'Liquidity', href: '#' }
             ]
         },
@@ -28,10 +28,10 @@ export default function Footer() {
             title: 'COMPANY',
             links: [
                 { name: 'About Us', href: '#' },
-                { name: 'Contact', href: '#' },
+                { name: 'Contact', href: '/contact' },
                 { name: 'Project Developers', href: '#' },
                 { name: 'Careers', href: '#' },
-                { name: 'Reviews', href: '#' },
+                { name: 'Reviews', href: '/reviews' },
                 { name: 'Solarionis Apparel', href: '#' }
             ]
         },
@@ -39,7 +39,7 @@ export default function Footer() {
             title: 'RESOURCES',
             links: [
                 { name: 'FAQ', href: '#' },
-                { name: 'Articles', href: '#' },
+                { name: 'Articles', href: '/articles' },
                 { name: 'Quarterly Webinars', href: '#' },
                 { name: 'Films', href: '#' },
                 { name: 'Annual Reports', href: '#' },
@@ -70,11 +70,11 @@ export default function Footer() {
 
                         {/* CTA Buttons */}
                         <div className="flex flex-col sm:flex-row gap-4 mb-8">
-                            <NavLink to='login' className="btn rounded btn-primary">
+                            <NavLink to="/login" className="btn rounded btn-primary">
                                 GET STARTED
                                 <ArrowRight className="w-5 h-5" />
                             </NavLink>
-                            <NavLink to="contact" className="btn rounded btn-border">
+                            <NavLink to="/contact" className="btn rounded btn-border">
                                 CONTACT US
                                 <ArrowRight className="w-5 h-5" />
                             </NavLink>

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Menu, X, ChevronDown, ArrowUpRight, LogOut } from 'lucide-react';
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import logo from '../../assets/images/logo/logo.png';
 
 const mobileNavLinkClass = ({ isActive }) =>
@@ -12,7 +12,8 @@ const mobileNavLinkClass = ({ isActive }) =>
 const getAdminAuthState = () =>
     localStorage.getItem('admin_auth') === '1' || !!localStorage.getItem('admin_token');
 
-const Header = () => {
+const Header = ({ forceSolid = false }) => {
+    const location = useLocation();
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
     const [isScrolled, setIsScrolled] = useState(false);
     const [isResourcesOpen, setIsResourcesOpen] = useState(false);
@@ -84,17 +85,32 @@ const Header = () => {
         { name: 'Articles', href: '/articles' },
         { name: 'Reviews', href: '/reviews' },
         { name: 'Annual Reports', href: '/annual-reports' },
-        { name: 'Quarterly Webinars', href: '/webinars' },
-        { name: 'Energy Infrastructure', href: '/energy-infrastructure' },
-        { name: 'Private Markets', href: '/private-markets' },
-        { name: 'IRA', href: '/ira' },
-        { name: 'Films', href: '/films' }
+        { name: 'Contact', href: '/contact' },
+        // { name: 'Quarterly Webinars', href: '/webinars' },
+        // { name: 'Energy Infrastructure', href: '/energy-infrastructure' },
+        // { name: 'Private Markets', href: '/private-markets' },
+        // { name: 'IRA', href: '/ira' },
+        // { name: 'Films', href: '/films' }
     ];
+
+    const transparentTopRoutes = new Set([
+        '/',
+        '/wealth',
+        '/about',
+        '/contact',
+        '/help',
+        '/terms',
+        '/privacy-policy',
+    ]);
+
+    const useSolidHeaderAtTop = forceSolid || !transparentTopRoutes.has(location.pathname);
+    const headerClassName = isScrolled
+        ? 'fixed top-0 bg-(--deep-black) backdrop-blur-md shadow-lg'
+        : `relative top-0 ${useSolidHeaderAtTop ? 'bg-(--deep-black)' : 'bg-transparent'}`;
 
     return (
         <header
-            className={`left-0 right-0 z-50 px-4 sm:px-6 lg:px-8 py-1 sm:py-1 transition-all duration-300 ${isScrolled ? 'fixed top-0 bg-(--deep-black) backdrop-blur-md shadow-lg' : 'relative top-0 bg-transparent'
-                }`}
+            className={`left-0 right-0 z-50 px-4 sm:px-6 lg:px-8 py-1 sm:py-1 transition-all duration-300 ${headerClassName}`}
         >
             <div className="max-w-7xl mx-auto flex items-center justify-between">
                 {/* LOGO */}
