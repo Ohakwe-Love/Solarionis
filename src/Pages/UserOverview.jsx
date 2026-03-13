@@ -535,7 +535,7 @@ export default function UserOverview() {
 
                 {recentActivity.length > 0 ? (
                     <div className="overflow-x-auto">
-                        <table className="w-full">
+                        <table className="w-full min-w-[720px]">
                             <thead>
                                 <tr className="border-b border-gray-200">
                                     <th className="text-left text-xs font-semibold text-gray-500 pb-3">Type</th>

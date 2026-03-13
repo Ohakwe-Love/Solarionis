@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Menu, X, ChevronDown, ArrowUpRight, LogOut } from 'lucide-react';
 import { NavLink, useLocation } from "react-router-dom";
-import logo from '../../assets/images/logo/logo.png';
 
 const mobileNavLinkClass = ({ isActive }) =>
     `${isActive
@@ -81,16 +80,13 @@ const Header = ({ forceSolid = false }) => {
 
     const resourcesLinks = [
         { name: 'FAQ', href: '/faq' },
+        { name: 'Getting Started', href: '/getting-started' },
+        { name: 'Investment Guide', href: '/investment-guide' },
         { name: 'Performance', href: '/performance' },
         { name: 'Articles', href: '/articles' },
         { name: 'Reviews', href: '/reviews' },
-        { name: 'Annual Reports', href: '/annual-reports' },
+        { name: 'Help', href: '/help' },
         { name: 'Contact', href: '/contact' },
-        // { name: 'Quarterly Webinars', href: '/webinars' },
-        // { name: 'Energy Infrastructure', href: '/energy-infrastructure' },
-        // { name: 'Private Markets', href: '/private-markets' },
-        // { name: 'IRA', href: '/ira' },
-        // { name: 'Films', href: '/films' }
     ];
 
     const transparentTopRoutes = new Set([
@@ -115,7 +111,7 @@ const Header = ({ forceSolid = false }) => {
             <div className="max-w-7xl mx-auto flex items-center justify-between">
                 {/* LOGO */}
                 <NavLink to="/" className="z-50">
-                    <img src={logo} alt="Logo" className='w-25 h-auto' />
+                    <img src="/images/logo/logo.png" alt="Logo" className='w-25 h-auto' />
                 </NavLink>
 
                 {/* Desktop Navigation */}
@@ -148,7 +144,7 @@ const Header = ({ forceSolid = false }) => {
                             {isResourcesOpen && (
                                 <div
                                     onMouseLeave={() => setIsResourcesOpen(false)}
-                                    className="absolute top-full right-0 mt-2 w-[500px] bg-[#1a1a1a]/95 backdrop-blur-lg rounded-2xl shadow-2xl p-2 grid grid-cols-2 gap-1 translate-x-[-50%] left-[0%]"
+                                    className="absolute top-full right-0 mt-2 w-125 bg-[#1a1a1a]/95 backdrop-blur-lg rounded-2xl shadow-2xl p-2 grid grid-cols-2 gap-1 translate-x-[-50%] left-[0%]"
                                 >
                                     {resourcesLinks.map((link, index) => (
                                         <NavLink

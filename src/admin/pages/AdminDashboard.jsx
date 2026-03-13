@@ -5,7 +5,6 @@ import { API_ENDPOINTS } from "../../config/api";
 import {
     adminJson,
     clearAdminAuthenticated,
-    normalizePaginatedRows,
 } from "../adminApi";
 
 function money(value) {
@@ -31,7 +30,7 @@ export default function AdminDashboard() {
 
     const cards = useMemo(
         () => [
-            { key: "users", label: "Active Users", value: metrics.activeUsers, icon: Users, color: "bg-[var(--solar-gold)]/15 text-[var(--solar-gold)]" },
+            { key: "users", label: "Active Users", value: metrics.activeUsers, icon: Users, color: "bg-(--solar-gold)/15 text-(--solar-gold)" },
             { key: "deposits", label: "Deposits", value: metrics.totalDeposits, icon: ArrowDownCircle, color: "bg-emerald-500/15 text-emerald-400" },
             { key: "withdrawals", label: "Withdrawals", value: metrics.totalWithdrawals, icon: ArrowUpCircle, color: "bg-sky-500/15 text-sky-400" },
             { key: "pending", label: "Pending Queue", value: metrics.pendingRequests, icon: Clock3, color: "bg-orange-500/15 text-orange-400" },
@@ -44,63 +43,35 @@ export default function AdminDashboard() {
         setError("");
 
         try {
-            const [depositsRes, withdrawalsRes, usersRes] = await Promise.all([
-                adminJson(API_ENDPOINTS.ADMIN_DEPOSITS),
-                adminJson(API_ENDPOINTS.ADMIN_WITHDRAWALS),
-                adminJson(API_ENDPOINTS.ADMIN_USERS),
-            ]);
+            const { response, data } = await adminJson(API_ENDPOINTS.ADMIN_DASHBOARD_SUMMARY);
 
-            if (
-                depositsRes.response.status === 401 ||
-                withdrawalsRes.response.status === 401 ||   
-                usersRes.response.status === 401
-            ) {
+            if (response.status === 401) {
                 clearAdminAuthenticated();
                 navigate("/admin/login");
                 return;
             }
 
-            const deposits = normalizePaginatedRows(depositsRes.data);
-            const withdrawals = normalizePaginatedRows(withdrawalsRes.data);
-            const users = normalizePaginatedRows(usersRes.data);
+            if (!response.ok) {
+                throw new Error(data?.message || "Failed to load dashboard metrics.");
+            }
 
-            const uniqueUsers = new Set([
-                ...deposits.map((item) => item.user_id),
-                ...withdrawals.map((item) => item.user_id),
-                ...users.map((item) => item.id),
-            ]);
-
-            const pendingStatuses = new Set(["waiting", "requested", "processing", "pending"]);
-            const pendingCount =
-                deposits.filter((item) => pendingStatuses.has(String(item.payment_status).toLowerCase())).length +
-                withdrawals.filter((item) => pendingStatuses.has(String(item.status).toLowerCase())).length;
-
-            const txRows = [
-                ...deposits.map((item) => ({
-                    id: `dep_${item.id}`,
-                    type: "Deposit",
-                    user: item.user?.email || item.user?.name || `#${item.user_id}`,
-                    status: item.payment_status,
-                    amount: Number(item.price_amount || 0),
-                    createdAt: item.created_at,
-                })),
-                ...withdrawals.map((item) => ({
-                    id: `wd_${item.id}`,
-                    type: "Withdrawal",
-                    user: item.user?.email || item.user?.name || `#${item.user_id}`,
+            const apiMetrics = data?.metrics || {};
+            const txRows = Array.isArray(data?.transactions)
+                ? data.transactions.map((item) => ({
+                    id: item.id,
+                    type: item.type,
+                    user: item.user,
                     status: item.status,
-                    amount: Number(item.amount_minor || 0),
+                    amount: Number(item.amount || 0),
                     createdAt: item.created_at,
-                })),
-            ]
-                .sort((a, b) => new Date(b.createdAt || 0).getTime() - new Date(a.createdAt || 0).getTime())
-                .slice(0, 10);
+                }))
+                : [];
 
             setMetrics({
-                activeUsers: uniqueUsers.size,
-                totalDeposits: deposits.length,
-                totalWithdrawals: withdrawals.length,
-                pendingRequests: pendingCount,
+                activeUsers: Number(apiMetrics.active_users || 0),
+                totalDeposits: Number(apiMetrics.total_deposits || 0),
+                totalWithdrawals: Number(apiMetrics.total_withdrawals || 0),
+                pendingRequests: Number(apiMetrics.pending_requests || 0),
             });
             setTransactions(txRows);
         } catch (err) {
@@ -148,7 +119,7 @@ export default function AdminDashboard() {
                     </div>
                 ) : (
                     <div className="overflow-x-auto">
-                        <table className="w-full">
+                        <table className="w-full min-w-[960px]">
                             <thead>
                                 <tr className="border-b border-zinc-800">
                                     <th className="text-left py-3 text-sm text-zinc-400">Type</th>

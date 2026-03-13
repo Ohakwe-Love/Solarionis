@@ -40,7 +40,7 @@ header li a:hover {
 
 .hero-wrapper {
     height: 100vh;
-    background: linear-gradient(rgb(0, 0, 0, 0.3), rgb(0, 0, 0, 0.3)), url('/src/assets/images/hero/1.webp') no-repeat center center/cover;
+    background: linear-gradient(rgb(0, 0, 0, 0.3), rgb(0, 0, 0, 0.3)), url('/images/hero/1.webp') no-repeat center center/cover;
 }
 
 .hero-content {
@@ -114,14 +114,29 @@ header li a:hover {
 }
 
 .retirement-investment {
-    background: linear-gradient(rgb(0, 0, 0, 0.5), rgb(0, 0, 0, 0.5)), url('assets/images/hero/2.webp') center/cover;
+    background: linear-gradient(rgb(0, 0, 0, 0.5), rgb(0, 0, 0, 0.5)), url('/images/hero/2.webp') center/cover;
 }
 
-.aside-nav::-webkit-scrollbar {
+.admin-nav {
+    max-height: calc(100vh - 200px);
+    overflow-y: auto;
+}
+
+.aside-nav::-webkit-scrollbar, .admin-nav::-webkit-scrollbar {
     width: 8px;
 }
 
-.aside-nav::-webkit-scrollbar-thumb {
+.aside-nav::-webkit-scrollbar-thumb, .admin-nav::-webkit-scrollbar-thumb {
+    background-color: var(--solar-gold);
+    border-radius: 30px;
+}
+
+::-webkit-scrollbar {
+    width: 8px;
+    background-color: var(--deep-black);
+}
+
+::-webkit-scrollbar-thumb {
     background-color: var(--solar-gold);
     border-radius: 30px;
 }

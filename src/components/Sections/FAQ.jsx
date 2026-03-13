@@ -87,7 +87,7 @@ const FAQ = () => {
           <div className="relative group lg:sticky lg:top-8">
             <div className="relative overflow-hidden rounded-lg">
               <img
-                src="/src/assets/images/product/5.webp"
+                src="/images/product/5.webp"
                 alt="Luxury Watch Display"
                 className="w-full h-[600px] object-cover transition-transform duration-700 group-hover:scale-105"
               />

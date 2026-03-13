@@ -109,7 +109,7 @@ export default function UserDocuments() {
                     <p className="text-sm text-gray-600">No distribution records found.</p>
                 ) : (
                     <div className="overflow-x-auto">
-                        <table className="w-full">
+                        <table className="w-full min-w-[720px]">
                             <thead>
                                 <tr className="border-b border-gray-200">
                                     <th className="text-left text-xs text-gray-500 pb-3">Project</th>

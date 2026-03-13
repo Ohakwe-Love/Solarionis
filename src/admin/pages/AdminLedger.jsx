@@ -66,7 +66,7 @@ export default function AdminLedger() {
             <div className="rounded-xl border border-zinc-800 bg-zinc-950 p-6">
                 <h2 className="text-2xl font-bold text-white mb-4">Wallet Balances (Non-zero)</h2>
                 <div className="overflow-x-auto">
-                    <table className="w-full">
+                    <table className="w-full min-w-[960px]">
                         <thead>
                             <tr className="border-b border-zinc-800">
                                 <th className="text-left py-3 text-sm text-zinc-400">User</th>
@@ -99,7 +99,7 @@ export default function AdminLedger() {
             <div className="rounded-xl border border-zinc-800 bg-zinc-950 p-6">
                 <h2 className="text-2xl font-bold text-white mb-4">Ledger Transactions</h2>
                 <div className="overflow-x-auto">
-                    <table className="w-full">
+                    <table className="w-full min-w-[960px]">
                         <thead>
                             <tr className="border-b border-zinc-800">
                                 <th className="text-left py-3 text-sm text-zinc-400">TX ID</th>

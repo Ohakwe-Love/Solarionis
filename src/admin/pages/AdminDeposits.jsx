@@ -6,6 +6,7 @@ import {
     adminJson,
     adminRequest,
     clearAdminAuthenticated,
+    getPagination,
     normalizePaginatedRows,
 } from "../adminApi";
 
@@ -28,23 +29,33 @@ export default function AdminDeposits() {
     const [error, setError] = useState("");
     const [actionLoadingId, setActionLoadingId] = useState(null);
     const [statusFilter, setStatusFilter] = useState("all");
+    const [page, setPage] = useState(1);
+    const [pagination, setPagination] = useState({
+        currentPage: 1,
+        lastPage: 1,
+        perPage: 50,
+        total: 0,
+    });
 
     useEffect(() => {
-        load();
+        load(page);
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+    }, [page]);
 
     const filteredRows = useMemo(() => {
         const predicate = STATUS_GROUPS[statusFilter] || STATUS_GROUPS.all;
         return rows.filter((row) => predicate(String(row.payment_status || "").toLowerCase()));
     }, [rows, statusFilter]);
 
-    const load = async () => {
+    const load = async (targetPage = 1) => {
         setLoading(true);
         setError("");
 
         try {
-            const { response, data } = await adminJson(API_ENDPOINTS.ADMIN_DEPOSITS);
+            const url = new URL(API_ENDPOINTS.ADMIN_DEPOSITS);
+            url.searchParams.set("page", String(targetPage));
+            url.searchParams.set("per_page", "25");
+            const { response, data } = await adminJson(url.toString());
             if (response.status === 401) {
                 clearAdminAuthenticated();
                 navigate("/admin/login");
@@ -56,6 +67,7 @@ export default function AdminDeposits() {
             }
 
             setRows(normalizePaginatedRows(data));
+            setPagination(getPagination(data));
         } catch (err) {
             setError(err.message || "Failed to load deposits.");
         } finally {
@@ -74,7 +86,7 @@ export default function AdminDeposits() {
             if (!response.ok) {
                 throw new Error(data?.message || "Retry failed.");
             }
-            await load();
+            await load(page);
         } catch (err) {
             setError(err.message || "Retry failed.");
         } finally {
@@ -90,12 +102,14 @@ export default function AdminDeposits() {
                     {["all", "new", "pending", "finished", "failed"].map((status) => (
                         <button
                             key={status}
-                            onClick={() => setStatusFilter(status)}
-                            className={`rounded-lg px-3 py-1.5 text-sm capitalize ${
-                                statusFilter === status
+                            onClick={() => {
+                                setStatusFilter(status);
+                                setPage(1);
+                            }}
+                            className={`rounded-lg px-3 py-1.5 text-sm capitalize ${statusFilter === status
                                     ? "bg-[var(--solar-gold)] text-black font-semibold"
                                     : "bg-zinc-900 text-zinc-300"
-                            }`}
+                                }`}
                         >
                             {status}
                         </button>
@@ -110,7 +124,7 @@ export default function AdminDeposits() {
             )}
 
             <div className="overflow-x-auto">
-                <table className="w-full">
+                <table className="w-full min-w-[960px]">
                     <thead>
                         <tr className="border-b border-zinc-800">
                             <th className="text-left py-3 text-sm text-zinc-400">ID</th>
@@ -143,7 +157,7 @@ export default function AdminDeposits() {
                                     </td>
                                     <td className="py-3 text-sm">
                                         {String(row.payment_status).toLowerCase() === "finished" &&
-                                        row.credited_at === null ? (
+                                            row.credited_at === null ? (
                                             <button
                                                 onClick={() => retryCredit(row.id)}
                                                 disabled={actionLoadingId === row.id}
@@ -165,6 +179,28 @@ export default function AdminDeposits() {
             {!loading && filteredRows.length === 0 && (
                 <p className="text-zinc-500 text-sm">No deposits found for this filter.</p>
             )}
+
+            <div className="flex items-center justify-between gap-3 text-sm text-zinc-400">
+                <p>
+                    Showing page {pagination.currentPage} of {pagination.lastPage} ({pagination.total} total deposits)
+                </p>
+                <div className="flex gap-2">
+                    <button
+                        onClick={() => setPage((prev) => Math.max(prev - 1, 1))}
+                        disabled={loading || page <= 1}
+                        className="rounded-lg border border-zinc-700 px-3 py-1.5 disabled:opacity-40"
+                    >
+                        Previous
+                    </button>
+                    <button
+                        onClick={() => setPage((prev) => Math.min(prev + 1, Math.max(1, pagination.lastPage)))}
+                        disabled={loading || page >= pagination.lastPage}
+                        className="rounded-lg border border-zinc-700 px-3 py-1.5 disabled:opacity-40"
+                    >
+                        Next
+                    </button>
+                </div>
+            </div>
         </div>
     );
 }

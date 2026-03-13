@@ -9,12 +9,16 @@ import {
     ArrowUpCircle,
     BriefcaseBusiness,
     FolderKanban,
+    House,
+    CircleHelp,
     Newspaper,
     MessageSquareQuote,
+    Mailbox,
     UserCircle2,
     LogOut,
     X,
     Globe,
+    Settings,
 } from "lucide-react";
 import { adminLogout } from "./adminApi";
 
@@ -24,7 +28,11 @@ const navItems = [
     { to: "/admin/withdrawals", label: "Withdrawals", icon: ArrowUpCircle },
     { to: "/admin/investments", label: "Investments", icon: BriefcaseBusiness },
     { to: "/admin/projects", label: "Projects", icon: FolderKanban },
+    { to: "/admin/homepage", label: "Homepage", icon: House },
+    { to: "/admin/site-settings", label: "Site Settings", icon: Settings },
+    { to: "/admin/faqs", label: "FAQs", icon: CircleHelp },
     { to: "/admin/articles", label: "Articles", icon: Newspaper },
+    { to: "/admin/messages", label: "Messages", icon: Mailbox },
     { to: "/admin/testimonials", label: "Testimonials", icon: MessageSquareQuote },
     { to: "/admin/users", label: "Users & KYC", icon: Users },
     { to: "/admin/ledger", label: "Ledger", icon: Landmark },
@@ -63,7 +71,7 @@ export default function AdminLayout() {
                     </button>
                 </div>
 
-                <nav className="p-4 space-y-1">
+                <nav className="p-4 space-y-1 admin-nav">
                     {navItems.map((item) => {
                         const Icon = item.icon;
                         return (
@@ -73,7 +81,7 @@ export default function AdminLayout() {
                                 className={({ isActive }) =>
                                     `flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-colors ${
                                         isActive
-                                            ? "bg-[var(--solar-gold)] text-black"
+                                            ? "bg-(--solar-gold) text-black"
                                             : "text-zinc-300 hover:bg-zinc-900"
                                     }`
                                 }
@@ -98,7 +106,7 @@ export default function AdminLayout() {
             </aside>
 
             <div className="lg:ml-64">
-                <header className="h-24 bg-[var(--solar-gold)] text-black border-b border-zinc-800 px-4 md:px-6 flex items-center justify-between sticky top-0 z-30">
+                <header className="h-24 bg-(--solar-gold) text-black border-b border-zinc-800 px-4 md:px-6 flex items-center justify-between sticky top-0 z-30">
                     <div className="flex items-center gap-3">
                         <button onClick={() => setSidebarOpen(true)} className="lg:hidden">
                             <Menu className="w-6 h-6" />

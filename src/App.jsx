@@ -9,7 +9,9 @@ import AboutPage from "./Pages/AboutPage";
 import TermsOfService from "./Pages/TermsOfService";
 import PrivacyPolicy from "./Pages/PrivacyPolicy";
 import HelpPage from "./Pages/HelpPage";
+import GettingStartedPage from "./Pages/GettingStartedPage";
 import FaqPage from "./Pages/FaqPage";
+import InvestmentGuidePage from "./Pages/InvestmentGuidePage";
 import ArticlesPage from "./Pages/ArticlesPage";
 import ArticleDetailPage from "./Pages/ArticleDetailPage";
 import PerformancePage from "./Pages/PerformancePage";
@@ -36,7 +38,11 @@ import AdminDeposits from "./admin/pages/AdminDeposits";
 import AdminWithdrawals from "./admin/pages/AdminWithdrawals";
 import AdminInvestments from "./admin/pages/AdminInvestments";
 import AdminProjects from "./admin/pages/AdminProjects";
+import AdminHomePage from "./admin/pages/AdminHomePage";
+import AdminSiteSettings from "./admin/pages/AdminSiteSettings";
+import AdminFaqs from "./admin/pages/AdminFaqs";
 import AdminArticles from "./admin/pages/AdminArticles";
+import AdminMessages from "./admin/pages/AdminMessages";
 import AdminTestimonials from "./admin/pages/AdminTestimonials";
 import AdminLedger from "./admin/pages/AdminLedger";
 import AdminProfile from "./admin/pages/AdminProfile";
@@ -59,6 +65,8 @@ function App() {
         <Route path="/contact" element={<ContactPage />} />
         <Route path="/faq" element={<FaqPage />} />
         <Route path="/help" element={<HelpPage />} />
+        <Route path="/getting-started" element={<GettingStartedPage />} />
+        <Route path="/investment-guide" element={<InvestmentGuidePage />} />
         <Route path="/performance" element={<PerformancePage />} />
         <Route path="/articles" element={<ArticlesPage />} />
         <Route path="/articles/:slug" element={<ArticleDetailPage />} />
@@ -125,7 +133,11 @@ function App() {
           <Route path="withdrawals" element={<AdminWithdrawals />} />
           <Route path="investments" element={<AdminInvestments />} />
           <Route path="projects" element={<AdminProjects />} />
+          <Route path="homepage" element={<AdminHomePage />} />
+          <Route path="site-settings" element={<AdminSiteSettings />} />
+          <Route path="faqs" element={<AdminFaqs />} />
           <Route path="articles" element={<AdminArticles />} />
+          <Route path="messages" element={<AdminMessages />} />
           <Route path="testimonials" element={<AdminTestimonials />} />
           <Route path="users" element={<AdminUsers />} />
           <Route path="ledger" element={<AdminLedger />} />

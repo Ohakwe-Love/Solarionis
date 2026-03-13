@@ -80,7 +80,7 @@ export default function AdminOrders() {
             )}
 
             <div className="overflow-x-auto">
-                <table className="w-full">
+                <table className="w-full min-w-[960px]">
                     <thead>
                         <tr className="border-b border-zinc-800">
                             <th className="text-left py-3 text-sm text-zinc-400">ID</th>
@@ -106,11 +106,11 @@ export default function AdminOrders() {
                                     <td className="py-3 text-sm text-zinc-200 capitalize">{row.payment_status}</td>
                                     <td className="py-3 text-sm">
                                         {String(row.payment_status).toLowerCase() === "finished" &&
-                                        row.credited_at === null ? (
+                                            row.credited_at === null ? (
                                             <button
                                                 onClick={() => retryCredit(row.id)}
                                                 disabled={actionLoadingId === row.id}
-                                                className="inline-flex items-center gap-1 rounded-lg px-3 py-1.5 bg-[var(--solar-gold)] text-black font-semibold disabled:opacity-60"
+                                                className="inline-flex items-center gap-1 rounded-lg px-3 py-1.5 bg-(--solar-gold) text-black font-semibold disabled:opacity-60"
                                             >
                                                 <RotateCcw className="w-4 h-4" />
                                                 {actionLoadingId === row.id ? "Retrying..." : "Retry Credit"}

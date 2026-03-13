@@ -1,6 +1,5 @@
 import React from 'react';
 import Header from '../components/Layout/Header';
-import image from '../assets/images/hero/wealth.webp';
 import Footer from '../components/Layout/Footer';
 
 import { ArrowRight, TrendingUp, Shield, Users, BarChart3, Clock, Award, CheckCircle, FileText, DollarSign, LineChart } from 'lucide-react';
@@ -98,7 +97,7 @@ export default function WealthPage() {
             <section className="relative text-white  overflow-hidden z-1 bg-red-500">
                 <Header />
                 <div className='absolute top-0 left-0 w-full h-full z-[-2]'>
-                    <img src={image} alt="" className='w-full h-full' />
+                    <img src="/images/hero/wealth.webp" alt="" className='w-full h-full' />
                 </div>
 
                 <div className='absolute top-0 left-0 w-full h-full z-[-1] bg-[rgb(0,0,0,0.4)]'>

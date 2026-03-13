@@ -112,11 +112,10 @@ export default function AdminTestimonials() {
                         <button
                             key={status}
                             onClick={() => setStatusFilter(status)}
-                            className={`rounded-lg px-3 py-1.5 text-sm capitalize ${
-                                statusFilter === status
-                                    ? "bg-[var(--solar-gold)] text-black font-semibold"
+                            className={`rounded-lg px-3 py-1.5 text-sm capitalize ${statusFilter === status
+                                    ? "bg-(--solar-gold) text-black font-semibold"
                                     : "bg-zinc-900 text-zinc-300"
-                            }`}
+                                }`}
                         >
                             {status}
                         </button>
@@ -131,7 +130,7 @@ export default function AdminTestimonials() {
             )}
 
             <div className="overflow-x-auto">
-                <table className="w-full">
+                <table className="w-full min-w-[960px]">
                     <thead>
                         <tr className="border-b border-zinc-800">
                             <th className="text-left py-3 text-sm text-zinc-400">User</th>
@@ -157,11 +156,10 @@ export default function AdminTestimonials() {
                                                 {Array.from({ length: 5 }).map((_, i) => (
                                                     <Star
                                                         key={`${row.id}-star-${i}`}
-                                                        className={`w-4 h-4 ${
-                                                            i < Number(row.rating || 0)
+                                                        className={`w-4 h-4 ${i < Number(row.rating || 0)
                                                                 ? "fill-yellow-400 text-yellow-400"
                                                                 : "text-zinc-600"
-                                                        }`}
+                                                            }`}
                                                     />
                                                 ))}
                                             </div>
@@ -181,7 +179,7 @@ export default function AdminTestimonials() {
                                                 <button
                                                     onClick={() => approve(row.id)}
                                                     disabled={actionId === row.id || status === "approved"}
-                                                    className="rounded-lg px-3 py-1.5 bg-[var(--solar-gold)] text-black font-semibold disabled:opacity-40"
+                                                    className="rounded-lg px-3 py-1.5 bg-(--solar-gold) text-black font-semibold disabled:opacity-40"
                                                 >
                                                     Approve
                                                 </button>

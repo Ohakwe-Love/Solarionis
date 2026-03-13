@@ -98,7 +98,7 @@ export default function AdminProducts() {
             )}
 
             <div className="overflow-x-auto">
-                <table className="w-full">
+                <table className="w-full min-w-[960px]">
                     <thead>
                         <tr className="border-b border-zinc-800">
                             <th className="text-left py-3 text-sm text-zinc-400">ID</th>
@@ -142,7 +142,7 @@ export default function AdminProducts() {
                                                 <button
                                                     onClick={() => runAction(row.id, "sent")}
                                                     disabled={!canSend || actionId === row.id}
-                                                    className="rounded-lg px-3 py-1.5 bg-[var(--solar-gold)] text-black font-semibold disabled:opacity-40"
+                                                    className="rounded-lg px-3 py-1.5 bg-(--solar-gold) text-black font-semibold disabled:opacity-40"
                                                 >
                                                     Sent
                                                 </button>

@@ -32,11 +32,17 @@ export default function UserWallet() {
     const [deposits, setDeposits] = useState([]);
     const [withdrawals, setWithdrawals] = useState([]);
     const [loading, setLoading] = useState(true);
-    const [submitting, setSubmitting] = useState(false);
+    const [depositSubmitting, setDepositSubmitting] = useState(false);
+    const [withdrawSubmitting, setWithdrawSubmitting] = useState(false);
     const [error, setError] = useState('');
     const [success, setSuccess] = useState('');
     const [kycRequired, setKycRequired] = useState(false);
-    const [form, setForm] = useState({
+    const [depositInstructions, setDepositInstructions] = useState(null);
+    const [depositForm, setDepositForm] = useState({
+        assetCode: '',
+        priceAmount: '',
+    });
+    const [withdrawForm, setWithdrawForm] = useState({
         assetCode: '',
         amount: '',
         destination: '',
@@ -90,8 +96,10 @@ export default function UserWallet() {
             setDeposits(Array.isArray(depositData?.data) ? depositData.data : []);
             setWithdrawals(Array.isArray(withdrawalData?.data) ? withdrawalData.data : []);
 
-            if (!form.assetCode && walletRows.length > 0) {
-                setForm((prev) => ({ ...prev, assetCode: walletRows[0].asset_code }));
+            if (walletRows.length > 0) {
+                const defaultAsset = walletRows[0].asset_code;
+                setDepositForm((prev) => ({ ...prev, assetCode: prev.assetCode || defaultAsset }));
+                setWithdrawForm((prev) => ({ ...prev, assetCode: prev.assetCode || defaultAsset }));
             }
         } catch (err) {
             setError(err.message || 'Failed to load wallet data.');
@@ -100,9 +108,54 @@ export default function UserWallet() {
         }
     };
 
+    const submitDeposit = async (event) => {
+        event.preventDefault();
+        setDepositSubmitting(true);
+        setError('');
+        setSuccess('');
+
+        try {
+            if (!token) {
+                throw new Error('Please log in again.');
+            }
+
+            const amount = Number(depositForm.priceAmount);
+            if (!Number.isFinite(amount) || amount < 5) {
+                throw new Error('Minimum deposit is $5.');
+            }
+
+            const response = await fetch(API_ENDPOINTS.DEPOSITS, {
+                method: 'POST',
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                    Accept: 'application/json',
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    asset_code: depositForm.assetCode,
+                    price_amount: amount,
+                }),
+            });
+
+            const data = await safeJson(response);
+            if (!response.ok) {
+                throw new Error(data?.message || data?.error || 'Deposit request failed.');
+            }
+
+            setDepositInstructions(data);
+            setSuccess('Deposit created. Send funds to the generated address.');
+            setDepositForm((prev) => ({ ...prev, priceAmount: '' }));
+            await fetchData();
+        } catch (err) {
+            setError(err.message || 'Failed to create deposit.');
+        } finally {
+            setDepositSubmitting(false);
+        }
+    };
+
     const submitWithdrawal = async (event) => {
         event.preventDefault();
-        setSubmitting(true);
+        setWithdrawSubmitting(true);
         setError('');
         setSuccess('');
         setKycRequired(false);
@@ -112,12 +165,12 @@ export default function UserWallet() {
                 throw new Error('Please log in again.');
             }
 
-            const selectedWallet = wallets.find((w) => w.asset_code === form.assetCode);
+            const selectedWallet = wallets.find((w) => w.asset_code === withdrawForm.assetCode);
             if (!selectedWallet) {
                 throw new Error('Select a valid asset.');
             }
 
-            const amount = Number(form.amount);
+            const amount = Number(withdrawForm.amount);
             if (!Number.isFinite(amount) || amount <= 0) {
                 throw new Error('Enter a valid amount.');
             }
@@ -125,7 +178,7 @@ export default function UserWallet() {
             const decimals = Number(selectedWallet.decimals || 2);
             const amountMinor = Math.round(amount * (10 ** decimals));
 
-            if (!form.destination || form.destination.trim().length < 10) {
+            if (!withdrawForm.destination || withdrawForm.destination.trim().length < 10) {
                 throw new Error('Enter a valid destination address.');
             }
 
@@ -137,9 +190,9 @@ export default function UserWallet() {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
-                    asset_code: form.assetCode,
+                    asset_code: withdrawForm.assetCode,
                     amount_minor: amountMinor,
-                    destination: form.destination.trim(),
+                    destination: withdrawForm.destination.trim(),
                 }),
             });
 
@@ -160,12 +213,12 @@ export default function UserWallet() {
             }
 
             setSuccess('Withdrawal requested successfully.');
-            setForm((prev) => ({ ...prev, amount: '', destination: '' }));
+            setWithdrawForm((prev) => ({ ...prev, amount: '', destination: '' }));
             await fetchData();
         } catch (err) {
             setError(err.message || 'Failed to request withdrawal.');
         } finally {
-            setSubmitting(false);
+            setWithdrawSubmitting(false);
         }
     };
 
@@ -248,61 +301,121 @@ export default function UserWallet() {
                     )}
                 </div>
 
-                <form onSubmit={submitWithdrawal} className="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm">
-                    <h3 className="text-lg font-bold text-gray-900 mb-4">Request Withdrawal</h3>
-                    <div className="space-y-4">
-                        <div>
-                            <label className="block text-sm font-medium text-gray-700 mb-1">Asset</label>
-                            <select
-                                value={form.assetCode}
-                                onChange={(e) => setForm((prev) => ({ ...prev, assetCode: e.target.value }))}
-                                className="w-full border border-gray-300 rounded-xl px-3 py-2 text-sm"
-                                required
+                <div className="space-y-6">
+                    <form onSubmit={submitDeposit} className="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm">
+                        <h3 className="text-lg font-bold text-gray-900 mb-4">Create Deposit</h3>
+                        <div className="space-y-4">
+                            <div>
+                                <label className="block text-sm font-medium text-gray-700 mb-1">Asset</label>
+                                <select
+                                    value={depositForm.assetCode}
+                                    onChange={(e) => setDepositForm((prev) => ({ ...prev, assetCode: e.target.value }))}
+                                    className="w-full border border-gray-300 rounded-xl px-3 py-2 text-sm"
+                                    required
+                                >
+                                    {wallets.length === 0 && <option value="">No assets</option>}
+                                    {wallets.map((wallet) => (
+                                        <option key={wallet.asset_code} value={wallet.asset_code}>
+                                            {wallet.symbol} ({wallet.asset_code})
+                                        </option>
+                                    ))}
+                                </select>
+                            </div>
+
+                            <div>
+                                <label className="block text-sm font-medium text-gray-700 mb-1">Amount (USD)</label>
+                                <input
+                                    type="number"
+                                    min="5"
+                                    step="any"
+                                    value={depositForm.priceAmount}
+                                    onChange={(e) => setDepositForm((prev) => ({ ...prev, priceAmount: e.target.value }))}
+                                    className="w-full border border-gray-300 rounded-xl px-3 py-2 text-sm"
+                                    placeholder="Minimum 5"
+                                    required
+                                />
+                            </div>
+
+                            <button
+                                type="submit"
+                                disabled={depositSubmitting || wallets.length === 0}
+                                className="w-full bg-green-600 text-white font-semibold py-3 rounded-xl hover:bg-green-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                             >
-                                {wallets.length === 0 && <option value="">No assets</option>}
-                                {wallets.map((wallet) => (
-                                    <option key={wallet.asset_code} value={wallet.asset_code}>
-                                        {wallet.symbol} ({wallet.asset_code})
-                                    </option>
-                                ))}
-                            </select>
+                                {depositSubmitting ? 'Creating...' : 'Create Deposit'}
+                            </button>
                         </div>
+                    </form>
 
-                        <div>
-                            <label className="block text-sm font-medium text-gray-700 mb-1">Amount</label>
-                            <input
-                                type="number"
-                                min="0"
-                                step="any"
-                                value={form.amount}
-                                onChange={(e) => setForm((prev) => ({ ...prev, amount: e.target.value }))}
-                                className="w-full border border-gray-300 rounded-xl px-3 py-2 text-sm"
-                                placeholder="0.00"
-                                required
-                            />
+                    {depositInstructions && (
+                        <div className="bg-green-50 rounded-2xl p-4 border border-green-200 text-sm text-green-900 space-y-1">
+                            <p className="font-semibold">Payment instructions</p>
+                            <p>Payment ID: {depositInstructions.payment_id || '-'}</p>
+                            <p>Address: {depositInstructions.pay_address || '-'}</p>
+                            {depositInstructions.payin_extra_id ? <p>Extra ID: {depositInstructions.payin_extra_id}</p> : null}
+                            <p>
+                                Amount: {depositInstructions.pay_amount || 0}{' '}
+                                {String(depositInstructions.pay_currency || '').toUpperCase()}
+                            </p>
+                            <p>Status: {depositInstructions.status || '-'}</p>
                         </div>
+                    )}
 
-                        <div>
-                            <label className="block text-sm font-medium text-gray-700 mb-1">Destination Address</label>
-                            <textarea
-                                rows={3}
-                                value={form.destination}
-                                onChange={(e) => setForm((prev) => ({ ...prev, destination: e.target.value }))}
-                                className="w-full border border-gray-300 rounded-xl px-3 py-2 text-sm"
-                                placeholder="Wallet address"
-                                required
-                            />
+                    <form onSubmit={submitWithdrawal} className="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm">
+                        <h3 className="text-lg font-bold text-gray-900 mb-4">Request Withdrawal</h3>
+                        <div className="space-y-4">
+                            <div>
+                                <label className="block text-sm font-medium text-gray-700 mb-1">Asset</label>
+                                <select
+                                    value={withdrawForm.assetCode}
+                                    onChange={(e) => setWithdrawForm((prev) => ({ ...prev, assetCode: e.target.value }))}
+                                    className="w-full border border-gray-300 rounded-xl px-3 py-2 text-sm"
+                                    required
+                                >
+                                    {wallets.length === 0 && <option value="">No assets</option>}
+                                    {wallets.map((wallet) => (
+                                        <option key={wallet.asset_code} value={wallet.asset_code}>
+                                            {wallet.symbol} ({wallet.asset_code})
+                                        </option>
+                                    ))}
+                                </select>
+                            </div>
+
+                            <div>
+                                <label className="block text-sm font-medium text-gray-700 mb-1">Amount</label>
+                                <input
+                                    type="number"
+                                    min="0"
+                                    step="any"
+                                    value={withdrawForm.amount}
+                                    onChange={(e) => setWithdrawForm((prev) => ({ ...prev, amount: e.target.value }))}
+                                    className="w-full border border-gray-300 rounded-xl px-3 py-2 text-sm"
+                                    placeholder="0.00"
+                                    required
+                                />
+                            </div>
+
+                            <div>
+                                <label className="block text-sm font-medium text-gray-700 mb-1">Destination Address</label>
+                                <textarea
+                                    rows={3}
+                                    value={withdrawForm.destination}
+                                    onChange={(e) => setWithdrawForm((prev) => ({ ...prev, destination: e.target.value }))}
+                                    className="w-full border border-gray-300 rounded-xl px-3 py-2 text-sm"
+                                    placeholder="Wallet address"
+                                    required
+                                />
+                            </div>
+
+                            <button
+                                type="submit"
+                                disabled={withdrawSubmitting || wallets.length === 0}
+                                className="w-full bg-yellow-400 text-black font-semibold py-3 rounded-xl hover:bg-yellow-500 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                            >
+                                {withdrawSubmitting ? 'Submitting...' : 'Submit Withdrawal'}
+                            </button>
                         </div>
-
-                        <button
-                            type="submit"
-                            disabled={submitting || wallets.length === 0}
-                            className="w-full bg-yellow-400 text-black font-semibold py-3 rounded-xl hover:bg-yellow-500 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-                        >
-                            {submitting ? 'Submitting...' : 'Submit Withdrawal'}
-                        </button>
-                    </div>
-                </form>
+                    </form>
+                </div>
             </div>
 
             <div className="grid grid-cols-1 xl:grid-cols-2 gap-6">

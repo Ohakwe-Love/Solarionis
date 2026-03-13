@@ -1,11 +1,12 @@
 import { API_ENDPOINTS } from "../config/api";
+import { isAdminSessionActive } from "../utils/authGuards";
 
 export const ADMIN_AUTH_KEY = "admin_auth";
 export const ADMIN_EMAIL_KEY = "admin_email";
 export const ADMIN_TOKEN_KEY = "admin_token";
 
 export function isAdminAuthenticated() {
-    return localStorage.getItem(ADMIN_AUTH_KEY) === "1";
+    return isAdminSessionActive();
 }
 
 export function setAdminAuthenticated(email, token) {
@@ -65,6 +66,24 @@ export function normalizePaginatedRows(payload) {
         return payload;
     }
     return [];
+}
+
+export function getPagination(payload) {
+    if (!payload || typeof payload !== "object") {
+        return {
+            currentPage: 1,
+            lastPage: 1,
+            perPage: 0,
+            total: 0,
+        };
+    }
+
+    return {
+        currentPage: Number(payload.current_page || 1),
+        lastPage: Number(payload.last_page || 1),
+        perPage: Number(payload.per_page || 0),
+        total: Number(payload.total || 0),
+    };
 }
 
 export function getAdminEmail() {

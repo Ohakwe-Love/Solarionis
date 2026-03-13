@@ -219,7 +219,7 @@ export default function AdminArticles() {
                     <div className="flex gap-2">
                         <button
                             disabled={saving}
-                            className="rounded-lg px-4 py-2 bg-[var(--solar-gold)] text-black font-semibold disabled:opacity-50"
+                            className="rounded-lg px-4 py-2 bg-(--solar-gold) text-black font-semibold disabled:opacity-50"
                         >
                             {saving ? "Saving..." : editingId ? "Update Article" : "Create Article"}
                         </button>
@@ -243,11 +243,10 @@ export default function AdminArticles() {
                                 <button
                                     key={value}
                                     onClick={() => setFilter(value)}
-                                    className={`rounded-lg px-3 py-1.5 text-sm capitalize ${
-                                        filter === value
-                                            ? "bg-[var(--solar-gold)] text-black font-semibold"
-                                            : "bg-zinc-900 text-zinc-300"
-                                    }`}
+                                    className={`rounded-lg px-3 py-1.5 text-sm capitalize ${filter === value
+                                        ? "bg-(--solar-gold) text-black font-semibold"
+                                        : "bg-zinc-900 text-zinc-300"
+                                        }`}
                                 >
                                     {value}
                                 </button>
@@ -256,7 +255,7 @@ export default function AdminArticles() {
                     </div>
 
                     <div className="overflow-x-auto">
-                        <table className="w-full">
+                        <table className="w-full min-w-[960px]">
                             <thead>
                                 <tr className="border-b border-zinc-800">
                                     <th className="text-left py-3 text-sm text-zinc-400">Title</th>
@@ -287,7 +286,7 @@ export default function AdminArticles() {
                                                     <button
                                                         onClick={() => togglePublish(row)}
                                                         disabled={saving}
-                                                        className="rounded-md px-2 py-1 bg-[var(--solar-gold)]/20 text-[var(--solar-gold)] text-xs disabled:opacity-40"
+                                                        className="rounded-md px-2 py-1 bg-(--solar-gold)/20 text-(--solar-gold) text-xs disabled:opacity-40"
                                                     >
                                                         {row.status === "published" ? "Unpublish" : "Publish"}
                                                     </button>

@@ -1,22 +1,24 @@
 import React, { useState } from 'react';
 import { ArrowRight, Plus, Minus, Instagram, Facebook, Linkedin, Youtube } from 'lucide-react';
 import { NavLink, Link } from "react-router-dom";
-import logo from '../../assets/images/logo/logo.png';
+import { useSiteSettings } from "../../hooks/useSiteSettings";
 
 export default function Footer() {
     const [openSection, setOpenSection] = useState(null);
+    const settings = useSiteSettings();
 
     const toggleSection = (section) => {
         setOpenSection(openSection === section ? null : section);
     };
 
     const currentYear = new Date().getFullYear();
+    const isInternalLink = (href) => typeof href === 'string' && href.startsWith('/') && !href.startsWith('//');
 
     const footerSections = {
         product: {
             title: 'PRODUCT',
             links: [
-                { name: 'Investments', href: '#' },
+                { name: 'Investments', href: '/investment' },
                 { name: 'Referral Program', href: '#' },
                 { name: 'Solarionis IRA', href: '#' },
                 { name: 'Wealth Advisors', href: '#' },
@@ -27,7 +29,7 @@ export default function Footer() {
         company: {
             title: 'COMPANY',
             links: [
-                { name: 'About Us', href: '#' },
+                { name: 'About Us', href: '/about' },
                 { name: 'Contact', href: '/contact' },
                 { name: 'Project Developers', href: '#' },
                 { name: 'Careers', href: '#' },
@@ -38,7 +40,9 @@ export default function Footer() {
         resources: {
             title: 'RESOURCES',
             links: [
-                { name: 'FAQ', href: '#' },
+                { name: 'FAQ', href: '/faq' },
+                { name: 'Getting Started Guide', href: '/getting-started' },
+                { name: 'Investment Guide', href: '/investment-guide' },
                 { name: 'Articles', href: '/articles' },
                 { name: 'Quarterly Webinars', href: '#' },
                 { name: 'Films', href: '#' },
@@ -58,7 +62,7 @@ export default function Footer() {
                         <div className="mb-8">
                             <div className="flex items-center gap-2 mb-6">
                                 <NavLink to="/">
-                                    <img src={logo} alt="" className='w-25 h-auto' />
+                                    <img src="/images/logo/logo.png" alt="" className='w-25 h-auto' />
                                 </NavLink>
                             </div>
                             <h2 className="text-3xl sm:text-4xl font-bold mb-6">
@@ -70,7 +74,7 @@ export default function Footer() {
 
                         {/* CTA Buttons */}
                         <div className="flex flex-col sm:flex-row gap-4 mb-8">
-                            <NavLink to="/login" className="btn rounded btn-primary">
+                            <NavLink to="/getting-started" className="btn rounded btn-primary">
                                 GET STARTED
                                 <ArrowRight className="w-5 h-5" />
                             </NavLink>
@@ -111,13 +115,23 @@ export default function Footer() {
                                 <ul className="space-y-4">
                                     {section.links.map((link, idx) => (
                                         <li key={idx}>
-                                            <a
-                                                href={link.href}
-                                                className="text-gray-300 hover:text-(--solar-gold) transition-colors flex items-center justify-between group"
-                                            >
-                                                <span>{link.name}</span>
-                                                <ArrowRight className="w-4 h-4 opacity-0 group-hover:opacity-100 transition-opacity" />
-                                            </a>
+                                            {isInternalLink(link.href) ? (
+                                                <Link
+                                                    to={link.href}
+                                                    className="text-gray-300 hover:text-(--solar-gold) transition-colors flex items-center justify-between group"
+                                                >
+                                                    <span>{link.name}</span>
+                                                    <ArrowRight className="w-4 h-4 opacity-0 group-hover:opacity-100 transition-opacity" />
+                                                </Link>
+                                            ) : (
+                                                <a
+                                                    href={link.href}
+                                                    className="text-gray-300 hover:text-(--solar-gold) transition-colors flex items-center justify-between group"
+                                                >
+                                                    <span>{link.name}</span>
+                                                    <ArrowRight className="w-4 h-4 opacity-0 group-hover:opacity-100 transition-opacity" />
+                                                </a>
+                                            )}
                                         </li>
                                     ))}
                                 </ul>
@@ -146,12 +160,21 @@ export default function Footer() {
                                 <ul className="pb-6 space-y-4 animate-slideDown">
                                     {section.links.map((link, idx) => (
                                         <li key={idx}>
-                                            <a
-                                                href={link.href}
-                                                className="text-gray-300 hover:text-(--solar-gold) transition-colors block"
-                                            >
-                                                {link.name}
-                                            </a>
+                                            {isInternalLink(link.href) ? (
+                                                <Link
+                                                    to={link.href}
+                                                    className="text-gray-300 hover:text-(--solar-gold) transition-colors block"
+                                                >
+                                                    {link.name}
+                                                </Link>
+                                            ) : (
+                                                <a
+                                                    href={link.href}
+                                                    className="text-gray-300 hover:text-(--solar-gold) transition-colors block"
+                                                >
+                                                    {link.name}
+                                                </a>
+                                            )}
                                         </li>
                                     ))}
                                 </ul>
@@ -163,27 +186,23 @@ export default function Footer() {
                 {/* Legal Disclaimer */}
                 <div className="text-gray-400 text-xs leading-relaxed mb-8 space-y-4">
                     <p>
-                        Solarionis Global LLC ("Solarionis") operates a website at www.Solarionis.com (the "Site"). By creating an account, you accept our{' '}
-                        <Link to="#" className="text-(--solar-gold) hover:underline">Terms of Service</Link> and{' '}
-                        <Link to="#" className="text-(--solar-gold) hover:underline">Privacy Policy</Link> as well as our partner Dwolla's{' '}
+                        Solarionis Global LLC ("Solarionis") operates a website at https://www.solarionis.net (the "Site"). By creating an account, you accept our{' '}
+                        <Link to="/terms" className="text-(--solar-gold) hover:underline">Terms of Service</Link> and{' '}
+                        <Link to="/privacy-policy" className="text-(--solar-gold) hover:underline">Privacy Policy</Link> as well as our partner Dwolla's{' '}
                         <Link to="#" className="text-(--solar-gold) hover:underline">Terms of Service</Link> and{' '}
                         <Link to="#" className="text-(--solar-gold) hover:underline">Privacy Policy</Link>. Creating an account on the Site simultaneously creates a Dwolla account to handle ACH transfers when making investments or receiving dividends. For more information on Dwolla, please reference our FAQ. Past performance is no guarantee of future returns, nor of profitability. investments may not reflect future performance and are not intended to reflect the future return of Solarionis, its projects, or historical performance may not reflect the real or probabilistic properties and/or in partial or in total loss. Neither Solarionis nor any of its affiliates provide tax advice and do not represent in any manner that the outcome described herein will result in any particular tax consequence. Prospective investors should confer with their personal tax advisors regarding the tax consequences of an investment based on their particular circumstances. Neither Solarionis nor any of its affiliates assume responsibility for the tax consequences of any investment for any investor. Additionally, neither Solarionis nor any of its affiliates provide investment advice in any manner. We can only provide information about our offerings and how to use our platform. Any investment decisions based on the information we provide are purely that of the investor.
                     </p>
                     <p>
-                        Solarionis does not in any way sell personal information. In compliance with the California Consumer Compliancy Act (CCPA) you may request to retrieve or delete any data that we have collected about you by{' '}
-                        <a href="#" className="text-(--solar-gold) hover:underline">filling out this form</a>.
-                    </p>
-                    <p>
                         For questions or assistance, please reach out:{' '}
-                        <a href="mailto:info@Solarionis.com" className="text-(--solar-gold) hover:underline">info@Solarionis.com</a>
+                        <a href={`mailto:${settings.support_email}`} className="text-(--solar-gold) hover:underline">{settings.support_email}</a>
                     </p>
                 </div>
 
                 {/* Bottom Bar */}
                 <div className="flex flex-col sm:flex-row justify-between items-center gap-4 pt-8 border-t border-gray-800 text-gray-400 text-sm">
                     <div className="flex gap-6">
-                        <a href="#" className="hover:text-(--solar-gold) transition-colors">PRIVACY POLICY</a>
-                        <a href="#" className="hover:text-(--solar-gold) transition-colors">TERMS OF SERVICE</a>
+                        <Link to="/privacy-policy" className="hover:text-(--solar-gold) transition-colors">PRIVACY POLICY</Link>
+                        <Link to="/terms" className="hover:text-(--solar-gold) transition-colors">TERMS OF SERVICE</Link>
                     </div>
                     <div>© {currentYear} Solarionis. All Rights Reserved.</div>
                 </div>

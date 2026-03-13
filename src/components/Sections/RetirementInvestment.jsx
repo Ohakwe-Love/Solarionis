@@ -1,7 +1,23 @@
 import React from 'react';
-import { ArrowRight, CheckCircle } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { DEFAULT_HOME_PAGE_CONTENT } from '../../content/defaultHomePageContent';
 
-export default function RetirementInvestment() {
+function splitRetirementTitle(title, highlightText) {
+    const safeTitle = String(title || DEFAULT_HOME_PAGE_CONTENT.retirement.title);
+    const safeHighlight = String(highlightText || DEFAULT_HOME_PAGE_CONTENT.retirement.highlight_text);
+    const parts = safeTitle.split(safeHighlight).join('').trim();
+    const lines = parts.split(' ');
+
+    return {
+        first: lines.slice(0, 1).join(' '),
+        second: lines.slice(1).join(' '),
+        highlight: safeHighlight,
+    };
+}
+
+export default function RetirementInvestment({ content = DEFAULT_HOME_PAGE_CONTENT.retirement }) {
+    const titleParts = splitRetirementTitle(content.title, content.highlight_text);
     return (
         <div className="relative min-h-screen w-full overflow-hidden bg-gray-100 retirement-investment">
 
@@ -13,11 +29,11 @@ export default function RetirementInvestment() {
                         {/* Left Column - Main Heading */}
                         <div>
                             <h1 className="text-6xl sm:text-7xl lg:text-8xl font-bold text-white leading-tight">
-                                Retirement
+                                {titleParts.first}
                                 <br />
-                                Investing Now
+                                {titleParts.second}
                                 <br />
-                                <span className="text-(--solar-gold)">Available</span>
+                                <span className="text-(--solar-gold)">{titleParts.highlight}</span>
                             </h1>
                         </div>
 
@@ -27,12 +43,12 @@ export default function RetirementInvestment() {
                             {/* Description and CTA */}
                             <div className="bg-white/95 w-[100%] sm:w-[80%] lg:w-[80%] ml-auto backdrop-blur-sm rounded-2xl p-8 shadow-xl">
                                 <p className="text-gray-800 text-lg mb-6 leading-relaxed">
-                                    Diversify your IRA by owning premium, dividend-producing clean energy projects backed by long-term contracts.
+                                    {content.description}
                                 </p>
-                                <button className="w-full bg-(--solar-gold) hover:bg-(--deep-black) text-gray-900 font-bold py-4 px-8 rounded-full flex items-center justify-center gap-3 transition-all duration-300 shadow-lg hover:shadow-xl text-lg group hover:text-white cursor-pointer">
-                                    LEARN MORE
+                                <Link to={content.button_href || DEFAULT_HOME_PAGE_CONTENT.retirement.button_href} className="w-full bg-(--solar-gold) hover:bg-(--deep-black) text-gray-900 font-bold py-4 px-8 rounded-full flex items-center justify-center gap-3 transition-all duration-300 shadow-lg hover:shadow-xl text-lg group hover:text-white cursor-pointer">
+                                    {content.button_label || DEFAULT_HOME_PAGE_CONTENT.retirement.button_label}
                                     <ArrowRight className="w-6 h-6 group-hover:translate-x-1 transition-transform" />
-                                </button>
+                                </Link>
                             </div>
                         </div>
                     </div>

@@ -258,7 +258,7 @@ export default function AdminProjects() {
             <div className="rounded-xl border border-zinc-800 bg-zinc-950 p-6">
                 <h2 className="text-2xl font-bold text-white mb-4">Project Registry</h2>
                 <div className="overflow-x-auto">
-                    <table className="w-full">
+                    <table className="w-full min-w-[960px]">
                         <thead>
                             <tr className="border-b border-zinc-800">
                                 <th className="text-left py-3 text-sm text-zinc-400">Project</th>

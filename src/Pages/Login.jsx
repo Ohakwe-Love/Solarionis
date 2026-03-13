@@ -3,6 +3,7 @@ import { ArrowRight, Mail, Lock, Eye, EyeOff, AlertCircle } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { API_ENDPOINTS } from '../config/api';
 
+const PENDING_PROJECT_KEY = 'pending_invest_project_id';
 
 export default function Login() {
     const [formData, setFormData] = useState({
@@ -82,6 +83,13 @@ export default function Login() {
                     localStorage.setItem('user', JSON.stringify(data.user));
                 }
 
+                const pendingProjectId = sessionStorage.getItem(PENDING_PROJECT_KEY);
+                if (pendingProjectId) {
+                    sessionStorage.removeItem(PENDING_PROJECT_KEY);
+                    window.location.href = `/dashboard/invest?project=${encodeURIComponent(pendingProjectId)}`;
+                    return;
+                }
+
                 // Redirect to dashboard
                 window.location.href = '/dashboard';
             } else {
@@ -116,7 +124,7 @@ export default function Login() {
                         {/* General Error Message */}
                         {errors.general && (
                             <div className="bg-red-500/10 border border-red-500/50 rounded-xl p-4 flex items-start gap-3">
-                                <AlertCircle className="w-5 h-5 text-red-400 flex-shrink-0 mt-0.5" />
+                                <AlertCircle className="w-5 h-5 text-red-400 shrink-0 mt-0.5" />
                                 <p className="text-red-400 text-sm">{errors.general}</p>
                             </div>
                         )}
@@ -135,8 +143,8 @@ export default function Login() {
                                     value={formData.email}
                                     onChange={handleInputChange}
                                     className={`w-full pl-12 pr-4 py-3 bg-transparent border rounded-xl focus:outline-none transition-all text-(--deep-black) placeholder-gray-500 ${errors.email
-                                            ? 'border-red-500 focus:border-red-500'
-                                            : 'border-(--deep-black)/10 focus:border-(--solar-gold)'
+                                        ? 'border-red-500 focus:border-red-500'
+                                        : 'border-(--deep-black)/10 focus:border-(--solar-gold)'
                                         }`}
                                     placeholder="you@example.com"
                                     autoComplete="email"
@@ -161,8 +169,8 @@ export default function Login() {
                                     value={formData.password}
                                     onChange={handleInputChange}
                                     className={`w-full pl-12 pr-12 py-3 bg-transparent border rounded-xl focus:outline-none transition-all text-(--deep-black) placeholder-gray-500 ${errors.password
-                                            ? 'border-red-500 focus:border-red-500'
-                                            : 'border-(--deep-black)/10 focus:border-(--solar-gold)'
+                                        ? 'border-red-500 focus:border-red-500'
+                                        : 'border-(--deep-black)/10 focus:border-(--solar-gold)'
                                         }`}
                                     placeholder="••••••••"
                                     autoComplete="current-password"

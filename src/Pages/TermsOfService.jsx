@@ -1,363 +1,153 @@
 import React from 'react';
-import { FileText, Scale, AlertTriangle, Shield } from 'lucide-react';
+import { Scale, Mail } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import Header from '../components/Layout/Header'
-import Footer from '../components/Layout/Footer'
+import Header from '../components/Layout/Header';
+import Footer from '../components/Layout/Footer';
+import { useSiteSettings } from '../hooks/useSiteSettings';
 
 export default function TermsOfService() {
+    const settings = useSiteSettings();
     const sections = [
         {
             id: 'acceptance',
             title: '1. Acceptance of Terms',
-            content: `By accessing or using the Solarionis platform, website, mobile applications, or any related services (collectively, the "Services"), you agree to be bound by these Terms of Service ("Terms"). If you do not agree to these Terms, you may not access or use our Services.
+            content: `These Terms of Service govern your access to and use of the Solarionis website, investment dashboard, admin interfaces, and related services. By using Solarionis, you agree to these Terms and to our Privacy Policy.
 
-These Terms constitute a legally binding agreement between you and Solarionis Global LLC ("Solarionis," "we," "us," or "our"). Please read them carefully before using our Services.`
+If you do not agree, do not use the platform.`
+        },
+        {
+            id: 'platform',
+            title: '2. What Solarionis Provides',
+            content: `Solarionis is a digital platform for viewing renewable energy investment opportunities, creating an account, completing identity verification, funding your wallet, requesting withdrawals, reviewing content published by Solarionis, and interacting with platform features such as testimonials and contact support.
+
+Solarionis may provide project information, expected returns, funding progress, and educational or marketing content. Platform content is intended for informational purposes and operational use of the service.`
         },
         {
             id: 'eligibility',
-            title: '2. Eligibility and Account Registration',
-            content: `**Age and Legal Capacity:**
-You must be at least 18 years of age and have the legal capacity to enter into contracts to use our Services.
+            title: '3. Eligibility and Accounts',
+            content: `You must be at least 18 years old and legally able to enter into a binding agreement to use Solarionis.
 
-**Accredited Investor Status:**
-Certain investment opportunities on our platform are available only to accredited investors as defined by the Securities and Exchange Commission (SEC). By investing in these opportunities, you represent and warrant that you meet the applicable investor qualifications.
+When creating an account, you agree to:
+- provide accurate and complete information
+- keep your login credentials confidential
+- maintain updated profile and contact information
+- use the platform only for lawful purposes
 
-**Account Registration:**
-To access our investment platform, you must:
-- Provide accurate, current, and complete information during registration
-- Maintain and promptly update your account information
-- Keep your login credentials confidential
-- Notify us immediately of any unauthorized access
-- Accept responsibility for all activities under your account
-
-**Identity Verification:**
-We are required by law to verify your identity. You agree to provide government-issued identification and other documentation as requested for KYC (Know Your Customer) and AML (Anti-Money Laundering) compliance.
-
-**Account Termination:**
-We reserve the right to suspend or terminate your account at any time for:
-- Violation of these Terms
-- Fraudulent or illegal activity
-- Providing false or misleading information
-- Any other reason at our sole discretion`
+You are responsible for all activity under your account unless you promptly notify Solarionis of unauthorized access.`
         },
         {
-            id: 'investment-risks',
-            title: '3. Investment Risks and Disclaimers',
-            content: `**Risk of Loss:**
-Investing in solar energy infrastructure and renewable energy projects involves substantial risk, including the possible loss of your entire investment. Past performance is not indicative of future results.
+            id: 'verification',
+            title: '4. Identity Verification and Compliance',
+            content: `Solarionis may require identity verification, KYC, AML screening, and additional compliance checks before allowing deposits, withdrawals, investments, or other actions.
 
-**No Investment Advice:**
-Solarionis is a platform that facilitates investments in renewable energy projects. We do not provide investment, legal, or tax advice. The information on our platform is for informational purposes only and should not be considered as:
-- Investment advice or recommendations
-- An offer to sell or solicitation to buy securities
-- A substitute for professional financial advice
-
-**Due Diligence:**
-You are solely responsible for:
-- Conducting your own due diligence on investment opportunities
-- Evaluating the risks and merits of each investment
-- Determining whether an investment is suitable for you
-- Consulting with financial, legal, and tax advisors
-
-**Forward-Looking Statements:**
-Our platform may contain forward-looking statements regarding projected returns, performance expectations, and project timelines. These statements are based on current assumptions and involve risks and uncertainties. Actual results may differ materially from projected results.
-
-**No Guarantee of Returns:**
-We make no guarantees regarding:
-- Investment returns or performance
-- Dividend payments or distributions
-- Liquidity or ability to sell your investments
-- Project completion or operational success`
+You agree to provide truthful information and any documents reasonably requested for compliance. Solarionis may suspend or restrict access where verification is incomplete, inconsistent, expired, or appears suspicious.`
         },
         {
-            id: 'securities-regulations',
-            title: '4. Securities Laws and Regulations',
-            content: `**Offering Materials:**
-Investment opportunities on our platform are offered through private placement memorandums, subscription agreements, and other offering documents. You must carefully review these documents before investing.
+            id: 'funding',
+            title: '5. Deposits, Wallet Funding, and Withdrawals',
+            content: `Solarionis supports wallet funding through supported payment methods, including crypto payment flows processed through integrated providers.
 
-**Regulation D Offerings:**
-Many investments on our platform are offered under Rule 506(b) or Rule 506(c) of Regulation D and are exempt from SEC registration requirements.
+You understand and agree that:
+- deposit instructions must be followed exactly
+- crypto transactions may require network confirmation before crediting
+- provider delays, blockchain congestion, invalid payment data, or failed webhooks can delay processing
+- withdrawals may be reviewed and processed manually by platform administrators
+- withdrawal requests may be placed on hold pending compliance, security, or operational review
 
-**State Securities Laws:**
-You represent that you are not located in a jurisdiction where the offered securities cannot be legally sold.
-
-**Transfer Restrictions:**
-Securities purchased through our platform are subject to significant restrictions on transferability and resale. These securities:
-- Have not been registered with the SEC
-- Cannot be sold or transferred except in compliance with federal and state securities laws
-- May be subject to holding period requirements
-- May have limited liquidity
-
-**Investor Acknowledgments:**
-By investing through our platform, you acknowledge:
-- You have received and reviewed all offering materials
-- You understand the risks and illiquid nature of the investment
-- You meet all investor qualification requirements
-- You are investing for your own account and not for others
-- You have the financial means to hold the investment long-term`
+Solarionis may reject, delay, reverse, or investigate funding activity where required by law, platform policy, or security controls.`
         },
         {
-            id: 'fees',
-            title: '5. Fees and Payments',
-            content: `**Platform Fees:**
-Solarionis charges fees for accessing and using our platform, which may include:
-- Account setup or annual fees
-- Investment processing fees
-- Asset management fees
-- Performance fees or carried interest
+            id: 'investments',
+            title: '6. Investments and Risk Disclosure',
+            content: `Investing through Solarionis involves risk. Any investment may lose value, underperform expectations, become illiquid, or fail to generate projected returns.
 
-**Fee Disclosure:**
-All applicable fees are disclosed in the offering documents for each investment opportunity. Fees may vary by investment type and investor classification.
+You are responsible for your own investment decisions. Solarionis does not guarantee profits, distributions, liquidity, exit opportunities, or portfolio performance. Past performance, projected returns, target IRR, expected payouts, and similar metrics are not guarantees of future results.
 
-**Payment Processing:**
-- Payments and distributions are processed through our authorized payment partners
-- You authorize us to debit your linked bank account for investments
-- You are responsible for ensuring sufficient funds for all transactions
-- Failed payments may result in account suspension or investment cancellation
+Nothing on Solarionis should be treated as legal, tax, accounting, or personalized investment advice. You should review offering information carefully and seek independent professional advice where appropriate.`
+        },
+        {
+            id: 'content',
+            title: '7. Platform Content and User Submissions',
+            content: `Solarionis may publish projects, articles, updates, marketing materials, dashboards, and performance information. Solarionis may update, correct, pause, or remove content at any time.
 
-**Refund Policy:**
-- Investment commitments are generally non-refundable once accepted
-- Exceptions may be made as outlined in specific offering documents
-- Processing fees are generally non-refundable`
+If you submit content such as testimonials, feedback, or contact messages:
+- you must provide lawful, truthful, and non-infringing content
+- you must not upload abusive, fraudulent, defamatory, or misleading material
+- Solarionis may review, moderate, reject, or remove submissions
+- testimonials may be held for admin approval before publication`
+        },
+        {
+            id: 'prohibited',
+            title: '8. Prohibited Conduct',
+            content: `You may not:
+- use Solarionis for unlawful, fraudulent, deceptive, or abusive activity
+- attempt to bypass authentication, verification, throttling, or security controls
+- interfere with the platform, servers, APIs, or third-party integrations
+- scrape, copy, reverse engineer, or misuse platform content or data
+- impersonate another user, admin, or organization
+- submit false KYC, payment, or withdrawal information
+- use the platform to launder funds or conceal source of funds`
+        },
+        {
+            id: 'admin',
+            title: '9. Suspension, Restriction, and Termination',
+            content: `Solarionis may suspend, restrict, or terminate accounts or transactions where necessary for security, compliance, operational integrity, legal obligations, or violation of these Terms.
+
+Termination or suspension does not automatically cancel obligations already created on the platform, including pending reviews, investment records, or required compliance cooperation.`
         },
         {
             id: 'intellectual-property',
-            title: '6. Intellectual Property Rights',
-            content: `**Our Property:**
-All content, features, and functionality of our Services, including but not limited to:
-- Text, graphics, logos, images, and software
-- Platform design and user interface
-- Investment tools and calculators
-- Educational materials and research
+            title: '10. Intellectual Property',
+            content: `The Solarionis brand, website design, software, text, graphics, dashboards, code, and related materials are owned by Solarionis or its licensors and are protected by applicable intellectual property laws.
 
-are owned by Solarionis or our licensors and are protected by copyright, trademark, and other intellectual property laws.
-
-**Limited License:**
-We grant you a limited, non-exclusive, non-transferable license to access and use our Services for personal, non-commercial purposes. You may not:
-- Copy, modify, or create derivative works
-- Reverse engineer or decompile any software
-- Remove or alter any copyright or trademark notices
-- Use our content for commercial purposes without permission
-- Frame or link to our Services without authorization
-
-**User Content:**
-You retain ownership of any content you submit to our platform. By submitting content, you grant us a worldwide, non-exclusive, royalty-free license to use, reproduce, and display such content for operating and improving our Services.`
-        },
-        {
-            id: 'user-conduct',
-            title: '7. User Conduct and Prohibited Activities',
-            content: `You agree not to:
-
-**Illegal Activities:**
-- Engage in money laundering or terrorist financing
-- Violate any applicable laws or regulations
-- Use our Services for fraudulent purposes
-- Impersonate others or misrepresent your identity
-
-**Platform Misuse:**
-- Attempt to gain unauthorized access to our systems
-- Interfere with or disrupt our Services
-- Use automated tools to access or scrape our platform
-- Transmit viruses, malware, or harmful code
-- Overload our servers or infrastructure
-
-**Prohibited Communications:**
-- Send spam or unsolicited communications to other users
-- Harass, threaten, or abuse others
-- Share false or misleading information
-- Violate others' privacy or intellectual property rights
-
-**Market Manipulation:**
-- Engage in wash trading or other manipulative practices
-- Spread false information to affect investment values
-- Coordinate with others to manipulate markets
-
-Violation of these prohibitions may result in account termination, legal action, and reporting to law enforcement.`
+You may use the platform only for your personal or internal business use in connection with Solarionis services. You may not reproduce or commercially exploit platform content without permission.`
         },
         {
             id: 'disclaimers',
-            title: '8. Disclaimers and Warranties',
-            content: `**"AS IS" Basis:**
-Our Services are provided on an "as is" and "as available" basis without warranties of any kind, either express or implied, including but not limited to:
-- Merchantability or fitness for a particular purpose
-- Accuracy, reliability, or completeness of information
-- Uninterrupted or error-free operation
-- Security or freedom from viruses
+            title: '11. Disclaimers',
+            content: `Solarionis is provided on an "as is" and "as available" basis to the maximum extent permitted by law.
 
-**Third-Party Content:**
-We may provide links to third-party websites, services, or content. We do not endorse or assume responsibility for any third-party materials.
-
-**Investment Performance:**
-We make no warranties regarding:
-- The performance of any investment
-- The accuracy of project valuations
-- The reliability of project sponsors
-- The likelihood of achieving projected returns
-
-**System Availability:**
-We do not guarantee continuous, uninterrupted access to our Services. We may suspend or restrict access for:
-- Scheduled maintenance
-- Emergency repairs
-- Technical issues
-- Security concerns
-- Legal or regulatory requirements`
+Solarionis does not guarantee:
+- uninterrupted access
+- error-free operation
+- immediate processing of deposits or withdrawals
+- accuracy of third-party data
+- successful completion of any project or transaction
+- availability of any specific project, article, or feature`
         },
         {
-            id: 'limitation-of-liability',
-            title: '9. Limitation of Liability',
-            content: `**Maximum Liability:**
-To the fullest extent permitted by law, Solarionis and its officers, directors, employees, agents, and affiliates shall not be liable for:
+            id: 'liability',
+            title: '12. Limitation of Liability',
+            content: `To the maximum extent permitted by law, Solarionis and its affiliates, officers, employees, contractors, and service providers are not liable for indirect, incidental, special, consequential, or punitive damages, including loss of profits, investment losses, lost opportunities, loss of data, or interruption of service.
 
-**Indirect Damages:**
-- Lost profits or investment returns
-- Loss of data or business opportunities
-- Indirect, incidental, or consequential damages
-- Punitive or exemplary damages
-
-**Investment Losses:**
-We are not liable for:
-- Investment losses or underperformance
-- Project failures or defaults
-- Changes in market conditions
-- Tax consequences of investments
-
-**Cap on Liability:**
-Our total liability for any claims arising from or related to our Services shall not exceed the greater of:
-- The fees you paid to Solarionis in the 12 months preceding the claim, or
-- $100
-
-**Exceptions:**
-Nothing in these Terms limits our liability for:
-- Death or personal injury caused by our negligence
-- Fraud or fraudulent misrepresentation
-- Any liability that cannot be excluded under applicable law`
+Where liability cannot be excluded, Solarionis's total liability will be limited to the amount you paid directly to Solarionis for the specific service giving rise to the claim, if any.`
         },
         {
-            id: 'indemnification',
-            title: '10. Indemnification',
-            content: `You agree to indemnify, defend, and hold harmless Solarionis and its officers, directors, employees, agents, affiliates, and partners from and against any claims, liabilities, damages, losses, costs, or expenses (including reasonable attorneys' fees) arising from or related to:
+            id: 'changes',
+            title: '13. Changes to the Service or Terms',
+            content: `Solarionis may update the platform, features, fees, integrations, supported assets, content, and these Terms from time to time.
 
-- Your use of our Services
-- Your violation of these Terms
-- Your violation of any laws or regulations
-- Your violation of any third-party rights
-- Your investment decisions
-- Information you provide to us or other users
-- Your breach of any representations or warranties
-
-We reserve the right to assume the exclusive defense and control of any matter subject to indemnification, and you agree to cooperate with our defense of such claims.`
+Updated Terms become effective when posted unless a later date is stated. Continued use of Solarionis after updates means you accept the revised Terms.`
         },
         {
-            id: 'dispute-resolution',
-            title: '11. Dispute Resolution and Arbitration',
-            content: `**Informal Resolution:**
-Before initiating any formal dispute resolution, you agree to contact us at legal@solarionis.com to attempt to resolve the dispute informally.
+            id: 'law',
+            title: '14. Governing Law',
+            content: `These Terms are governed by the laws applicable to the operator of the Solarionis platform, without regard to conflict of laws principles, except where mandatory local consumer or financial laws apply.
 
-**Binding Arbitration:**
-Any dispute, controversy, or claim arising out of or relating to these Terms or our Services shall be resolved by binding arbitration administered by the American Arbitration Association (AAA) under its Commercial Arbitration Rules.
-
-**Arbitration Terms:**
-- The arbitration shall be conducted by a single arbitrator
-- The arbitration shall take place in San Francisco, California
-- The arbitration shall be conducted in English
-- The arbitrator's decision shall be final and binding
-- Each party shall bear its own costs and attorneys' fees
-
-**Class Action Waiver:**
-You agree that any arbitration or proceeding shall be limited to the dispute between you and Solarionis individually. You waive any right to participate in a class action, collective action, or representative proceeding.
-
-**Exceptions:**
-Either party may seek injunctive or equitable relief in court to protect intellectual property rights or confidential information.
-
-**Governing Law:**
-These Terms shall be governed by and construed in accordance with the laws of the State of Delaware, without regard to conflict of law principles.`
-        },
-        {
-            id: 'modifications',
-            title: '12. Modifications to Terms',
-            content: `We reserve the right to modify these Terms at any time. We will notify you of material changes by:
-- Posting the updated Terms on our website
-- Sending an email to your registered address
-- Displaying a prominent notice on our platform
-
-Your continued use of our Services after the effective date of the updated Terms constitutes your acceptance of the changes. If you do not agree to the modified Terms, you must stop using our Services.`
-        },
-        {
-            id: 'termination',
-            title: '13. Termination',
-            content: `**By You:**
-You may terminate your account at any time by:
-- Contacting our support team
-- Following the account closure process in your settings
-- Sending written notice to our address
-
-**By Us:**
-We may suspend or terminate your access to our Services immediately, without prior notice, for:
-- Violation of these Terms
-- Suspicious or fraudulent activity
-- Legal or regulatory requirements
-- Extended period of inactivity
-- Any other reason at our sole discretion
-
-**Effect of Termination:**
-Upon termination:
-- Your right to access and use our Services will cease
-- You remain liable for all commitments and obligations incurred
-- Existing investments will continue according to their terms
-- Provisions that by their nature should survive will remain in effect`
-        },
-        {
-            id: 'general',
-            title: '14. General Provisions',
-            content: `**Entire Agreement:**
-These Terms, together with our Privacy Policy and any applicable offering documents, constitute the entire agreement between you and Solarionis.
-
-**Severability:**
-If any provision of these Terms is found to be invalid or unenforceable, the remaining provisions will continue in full force and effect.
-
-**No Waiver:**
-Our failure to enforce any right or provision of these Terms shall not constitute a waiver of such right or provision.
-
-**Assignment:**
-You may not assign or transfer these Terms or your account without our prior written consent. We may assign these Terms to any successor or affiliate.
-
-**Force Majeure:**
-We shall not be liable for any failure or delay in performance due to circumstances beyond our reasonable control, including but not limited to acts of God, war, terrorism, riots, embargoes, acts of civil or military authorities, fire, floods, accidents, network infrastructure failures, strikes, or shortages of transportation facilities, fuel, energy, labor, or materials.
-
-**Notices:**
-All notices to Solarionis must be sent to:
-Solarionis Global LLC
-Legal Department
-123 Energy Plaza, Suite 500
-San Francisco, CA 94105
-Email: legal@solarionis.com
-
-**Electronic Communications:**
-You consent to receive electronic communications from us, including emails, text messages, and platform notifications. These electronic communications satisfy any legal requirement for written communications.`
+If any provision is found unenforceable, the remaining provisions remain in effect.`
         },
         {
             id: 'contact',
             title: '15. Contact Information',
-            content: `If you have questions about these Terms of Service, please contact us:
+            content: `If you have questions about these Terms, contact Solarionis at:
 
-**Solarionis Legal Team**
-Email: legal@solarionis.com
-Phone: 1-800-SOLARIONIS
-Mail: Solarionis Global LLC
-      Legal Department
-      123 Energy Plaza, Suite 500
-      San Francisco, CA 94105
-
-**Customer Support:**
-Email: support@solarionis.com
-Phone: 1-800-SOLARIONIS
-Hours: Monday-Friday, 9:00 AM - 6:00 PM PST`
+Email: ${settings.support_email}
+${settings.support_phone ? `Phone: ${settings.support_phone}\n` : ''}Contact Page: /contact`
         }
     ];
 
     return (
         <div className="min-h-screen bg-gray-50">
-            {/* Hero Section */}
             <section className="bg-(--deep-black) text-white pt-2">
                 <Header />
                 <div className="max-w-4xl mx-auto text-center py-16 sm:py-20 px-4 sm:px-6 lg:px-8">
@@ -368,54 +158,31 @@ Hours: Monday-Friday, 9:00 AM - 6:00 PM PST`
                         Terms of Service
                     </h1>
                     <p className="text-lg sm:text-xl text-gray-300 mb-6">
-                        Please read these terms carefully before using our platform
+                        Terms governing use of the Solarionis platform and services
                     </p>
                     <p className="text-sm text-gray-400">
-                        Last Updated: February 1, 2026
+                        Last Updated: March 11, 2026
                     </p>
                 </div>
             </section>
 
-            {/* Important Notice */}
-            {/* <section className="py-8 px-4 sm:px-6 lg:px-8">
-                <div className="max-w-4xl mx-auto">
-                    <div className="bg-orange-50 border-2 border-orange-200 rounded-2xl p-6 sm:p-8">
-                        <div className="flex items-start gap-4">
-                            <AlertTriangle className="w-6 h-6 text-orange-600 flex-shrink-0 mt-1" />
-                            <div>
-                                <h3 className="text-lg font-bold text-orange-900 mb-2">
-                                    Important Legal Notice
-                                </h3>
-                                <p className="text-orange-800 leading-relaxed">
-                                    These Terms of Service contain important information about your legal rights, remedies, and obligations. They include various limitations and exclusions, and a binding arbitration clause and class action waiver. Please read them carefully.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section> */}
-
-            {/* Content Section */}
             <section className="py-8 sm:py-12 lg:py-16 px-4 sm:px-6 lg:px-8">
                 <div className="max-w-4xl mx-auto">
-
-                    {/* Introduction */}
                     <div className="bg-white rounded-2xl p-6 sm:p-8 shadow-sm mb-8">
                         <p className="text-gray-700 leading-relaxed mb-4">
-                            Welcome to Solarionis. These Terms of Service ("Terms") govern your access to and use of the Solarionis platform, website, and services. By accessing or using our services, you acknowledge that you have read, understood, and agree to be bound by these Terms.
+                            These Terms apply to use of Solarionis as a renewable energy investment platform, including account registration, KYC verification, wallet funding, withdrawals, admin-reviewed content, and related support features.
                         </p>
                         <p className="text-gray-700 leading-relaxed">
-                            Solarionis Global LLC operates an online platform that allows qualified investors to invest in solar energy infrastructure and renewable energy projects. Our platform is not a broker-dealer and does not provide investment advice.
+                            You should read these Terms together with the Privacy Policy and any specific investment or offering information made available on the platform.
                         </p>
                     </div>
 
-                    {/* Table of Contents */}
                     <div className="bg-gray-100 rounded-2xl p-6 sm:p-8 mb-8">
                         <h2 className="text-2xl font-bold text-gray-900 mb-4">Table of Contents</h2>
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                            {sections.map((section, index) => (
+                            {sections.map((section) => (
                                 <a
-                                    key={index}
+                                    key={section.id}
                                     href={`#${section.id}`}
                                     className="text-(--deep-black) hover:underline text-sm"
                                 >
@@ -425,11 +192,10 @@ Hours: Monday-Friday, 9:00 AM - 6:00 PM PST`
                         </div>
                     </div>
 
-                    {/* Terms Sections */}
                     <div className="space-y-8">
-                        {sections.map((section, index) => (
+                        {sections.map((section) => (
                             <div
-                                key={index}
+                                key={section.id}
                                 id={section.id}
                                 className="bg-white rounded-2xl p-6 sm:p-8 shadow-sm scroll-mt-24"
                             >
@@ -437,49 +203,30 @@ Hours: Monday-Friday, 9:00 AM - 6:00 PM PST`
                                     {section.title}
                                 </h2>
                                 <div className="prose prose-gray max-w-none">
-                                    {section.content.split('\n\n').map((paragraph, pIndex) => {
-                                        // Check if it's a bold heading
-                                        if (paragraph.startsWith('**') && paragraph.endsWith('**')) {
-                                            return (
-                                                <h3 key={pIndex} className="text-xl font-bold text-gray-900 mt-6 mb-3">
-                                                    {paragraph.replace(/\*\*/g, '')}
-                                                </h3>
-                                            );
-                                        }
-
-                                        // Parse bold text within paragraphs
-                                        const parts = paragraph.split(/(\*\*.*?\*\*)/g);
-                                        return (
-                                            <p key={pIndex} className="text-gray-700 leading-relaxed mb-4 whitespace-pre-line">
-                                                {parts.map((part, partIndex) => {
-                                                    if (part.startsWith('**') && part.endsWith('**')) {
-                                                        return <strong key={partIndex}>{part.replace(/\*\*/g, '')}</strong>;
-                                                    }
-                                                    return part;
-                                                })}
-                                            </p>
-                                        );
-                                    })}
+                                    {section.content.split('\n\n').map((paragraph, pIndex) => (
+                                        <p key={pIndex} className="text-gray-700 leading-relaxed mb-4 whitespace-pre-line">
+                                            {paragraph}
+                                        </p>
+                                    ))}
                                 </div>
                             </div>
                         ))}
                     </div>
 
-                    {/* Acceptance CTA */}
                     <div className="bg-gradient-to-r from-(--solar-gold) to-yellow-500 rounded-2xl p-8 sm:p-10 text-center mt-12">
-                        <FileText className="w-12 h-12 text-gray-900 mx-auto mb-4" />
+                        <Mail className="w-12 h-12 text-gray-900 mx-auto mb-4" />
                         <h3 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-4">
-                            Questions About Our Terms?
+                            Need Clarification?
                         </h3>
                         <p className="text-gray-800 mb-6 max-w-2xl mx-auto">
-                            Our legal team is available to answer any questions about these Terms of Service.
+                            If anything in these Terms is unclear, contact Solarionis before using the platform or making an investment decision.
                         </p>
                         <Link
                             to="/contact"
                             className="inline-flex items-center gap-2 bg-gray-900 text-white font-bold px-8 py-4 rounded-full hover:bg-gray-800 transition-all"
                         >
-                            Contact Legal Team
-                            <FileText className="w-5 h-5" />
+                            Contact Support
+                            <Mail className="w-5 h-5" />
                         </Link>
                     </div>
                 </div>

@@ -74,7 +74,7 @@ export default function AdminUsers() {
             )}
 
             <div className="overflow-x-auto">
-                <table className="w-full">
+                <table className="w-full min-w-[960px]">
                     <thead>
                         <tr className="border-b border-zinc-800">
                             <th className="text-left py-3 text-sm text-zinc-400">ID</th>

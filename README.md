@@ -1,18 +1,44 @@
-# React + Vite
+# Solarionis Frontend (React + Vite)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Frontend application for public pages, user dashboard, wallet operations, and admin panel.
 
-Currently, two official plugins are available:
+## Requirements
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Node.js 20+
+- npm
 
-## React Compiler
+## Setup
 
-The React Compiler is enabled on this template. See [this documentation](https://react.dev/learn/react-compiler) for more information.
+1. Install dependencies:
+```bash
+npm install
+```
+2. Create env file:
+```bash
+cp .env.example .env
+```
+3. Configure API base URL:
+```env
+VITE_API_BASE_URL=http://localhost:8000
+```
+4. Start dev server:
+```bash
+npm run dev
+```
 
-Note: This will impact Vite dev & build performances.
+Default local app URL:
 
-## Expanding the ESLint configuration
+- `http://localhost:5173`
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Scripts
+
+- `npm run dev` - start dev server
+- `npm run build` - production build
+- `npm run lint` - eslint checks
+- `npm run preview` - preview production build
+
+## Notes
+
+- User and admin tokens are attached to API requests via Bearer auth.
+- Wallet page supports both deposit creation and withdrawal request flows.
+- Admin deposits/withdrawals pages support server-side pagination.

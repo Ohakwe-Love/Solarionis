@@ -1,29 +1,25 @@
 import React from 'react';
 // import { Send, FileText, MessageCircle, Mail } from 'lucide-react';
-import ReturnPolicySvg from '../../assets/icons/return-policy.svg?react';
-import ChatSvg from '../../assets/icons/chat.svg';
-import EmailSvg from '../../assets/icons/email.svg';
-import Stores from '../../assets/icons/stores.svg';
 
 const Features = () => {
     const features = [
         {
-            icon: ReturnPolicySvg,
+            icon: '/icons/return-policy.svg',
             title: "Return Policy",
             description: "Sodalesqu tellus hex par vestibulum intergue m."
         },
         {
-            icon: ChatSvg,
+            icon: '/icons/chat.svg',
             title: "Chat Helpdesk",
             description: "Cum maximus habitasse sociosqu placerat praesent."
         },
         {
-            icon: EmailSvg,
+            icon: '/icons/email.svg',
             title: "Email Interaction",
             description: "Commodo selle volutpat fusce eu eros massa netus."
         },
         {
-            icon: Stores,
+            icon: '/icons/stores.svg',
             title: "Store Locations",
             description: "Commodo selle volutpat fusce eu eros massa netus."
         }

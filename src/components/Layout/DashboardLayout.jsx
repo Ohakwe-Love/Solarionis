@@ -3,7 +3,6 @@ import { Outlet } from 'react-router-dom';
 import Sidebar from './Sidebar';
 import DashboardHeader from './DashboardHeader';
 import { Sun } from 'lucide-react';
-import Logo from '../../assets/images/logo/icon.png';
 import { API_ENDPOINTS } from '../../config/api';
 
 
@@ -52,7 +51,7 @@ export default function DashboardLayout() {
         return (
             <div className="min-h-screen bg-gray-50 flex items-center justify-center">
                 <div className="flex flex-col items-center gap-4">
-                    <img src={Logo} alt=""  className="animate-spin w-25"/>
+                    <img src="/images/logo/icon.png" alt="" className="animate-spin w-25" />
                     <p className="text-gray-600">Loading your data...</p>
                 </div>
             </div>

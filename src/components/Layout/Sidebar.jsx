@@ -11,20 +11,20 @@ import {
     X,
     PieChart
 } from 'lucide-react';
-import Logo from '../../assets/images/logo/logo.png';
 import { API_ENDPOINTS } from '../../config/api';
 
 export default function Sidebar({ user, isOpen, onClose }) {
     const location = useLocation();
 
     const navItems = [
+        { path: '/', icon: LayoutDashboard, label: 'Home' },
         { path: '/dashboard', icon: LayoutDashboard, label: 'Overview' },
         { path: '/dashboard/portfolio', icon: PieChart, label: 'Portfolio' },
         { path: '/dashboard/invest', icon: TrendingUp, label: 'Invest' },
         { path: '/dashboard/kyc', icon: ShieldCheck, label: 'KYC' },
         { path: '/dashboard/wallet', icon: Wallet, label: 'Wallet' },
         { path: '/dashboard/documents', icon: FileText, label: 'Documents' },
-        { path: '/dashboard/settings', icon: Settings, label: 'Settings' }
+        { path: '/dashboard/settings', icon: Settings, label: 'Settings' },
     ];
 
     const handleLogout = async () => {
@@ -61,7 +61,7 @@ export default function Sidebar({ user, isOpen, onClose }) {
                 {/* Logo */}
                 <div className="h-25 flex items-center justify-between px-6 border-b border-gray-200 bg-(--deep-black)">
                     <Link to="/dashboard" className="flex items-center gap-2">
-                        <img src={Logo} alt="Solarionis Logo" className="w-12 h-12" />
+                        <img src="/images/logo/logo.png" alt="Solarionis Logo" className="w-12 h-12" />
                     </Link>
                     <button
                         onClick={onClose}
@@ -76,17 +76,16 @@ export default function Sidebar({ user, isOpen, onClose }) {
                     {navItems.map((item) => {
                         const Icon = item.icon;
                         const isActive = location.pathname === item.path;
-                        
+
                         return (
                             <Link
                                 key={item.path}
                                 to={item.path}
                                 onClick={onClose}
-                                className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl mb-2 transition-all ${
-                                    isActive
-                                        ? 'bg-gradient-to-r from-yellow-400 to-yellow-500 text-black font-semibold shadow-lg'
+                                className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl mb-2 transition-all ${isActive
+                                        ? 'bg-linear-to-r from-yellow-400 to-yellow-500 text-black font-semibold shadow-lg'
                                         : 'text-gray-600 hover:bg-gray-100'
-                                }`}
+                                    }`}
                             >
                                 <Icon className="w-5 h-5" />
                                 <span>{item.label}</span>
@@ -98,7 +97,7 @@ export default function Sidebar({ user, isOpen, onClose }) {
                 {/* User Profile & Logout */}
                 <div className="absolute bottom-0 left-0 right-0 p-4 border-t border-gray-200">
                     <div className="flex items-center gap-3 px-4 py-3 mb-2">
-                        <div className="w-10 h-10 rounded-full bg-gradient-to-r from-yellow-400 to-yellow-500 flex items-center justify-center text-black font-bold">
+                        <div className="w-10 h-10 rounded-full bg-linear-to-r from-yellow-400 to-yellow-500 flex items-center justify-center text-black font-bold">
                             {user?.first_name?.[0]}{user?.last_name?.[0]}
                         </div>
                         <div className="flex-1 min-w-0">

@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { Navigate } from 'react-router-dom';
 import { Sun } from 'lucide-react';
-import { API_ENDPOINTS } from '../config/api';
+import { isAdminSessionActive, validateUserSession } from '../utils/authGuards';
 
 export default function GuestRoute({ children }) {
-    const [isAuthenticated, setIsAuthenticated] = useState(null);
+    const [redirectPath, setRedirectPath] = useState(null);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
@@ -12,35 +12,15 @@ export default function GuestRoute({ children }) {
     }, []);
 
     const checkAuth = async () => {
-        const token = localStorage.getItem('auth_token');
-
-        if (!token) {
-            setIsAuthenticated(false);
+        if (isAdminSessionActive()) {
+            setRedirectPath('/admin/dashboard');
             setLoading(false);
             return;
         }
 
-        try {
-            const response = await fetch(API_ENDPOINTS.USER, {
-                headers: {
-                    'Authorization': `Bearer ${token}`,
-                    'Accept': 'application/json'
-                }
-            });
-
-            if (response.ok) {
-                setIsAuthenticated(true);
-            } else {
-                localStorage.removeItem('auth_token');
-                setIsAuthenticated(false);
-            }
-        } catch (error) {
-            console.error('Auth check failed:', error);
-            localStorage.removeItem('auth_token');
-            setIsAuthenticated(false);
-        } finally {
-            setLoading(false);
-        }
+        const isAuthenticated = await validateUserSession();
+        setRedirectPath(isAuthenticated ? '/dashboard' : null);
+        setLoading(false);
     };
 
     if (loading) {
@@ -55,8 +35,8 @@ export default function GuestRoute({ children }) {
     }
 
     // If user is authenticated, redirect to dashboard
-    if (isAuthenticated) {
-        return <Navigate to="/dashboard" replace />;
+    if (redirectPath) {
+        return <Navigate to={redirectPath} replace />;
     }
 
     // If not authenticated, show the guest page (login/register)

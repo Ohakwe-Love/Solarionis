@@ -36,7 +36,7 @@ export default class ErrorBoundary extends React.Component {
                     <button
                         type="button"
                         onClick={this.handleReload}
-                        className="rounded-lg bg-[var(--solar-gold)] px-4 py-2 font-semibold text-black"
+                        className="rounded-lg bg-(--solar-gold) px-4 py-2 font-semibold text-black"
                     >
                         Reload App
                     </button>

@@ -2,19 +2,19 @@
 
 @font-face {
     font-family: 'Marcellus';
-    src: url('/src/assets/fonts/Marcellus/Marcellus-Regular.ttf') format('truetype');
+    src: url('/fonts/Marcellus/Marcellus-Regular.ttf') format('truetype');
     font-weight: normal;
 }
 
 @font-face {
     font-family: 'Mulish';
-    src: url('/src/assets/fonts/Mulish/Mulish-VariableFont_wght.ttf') format('truetype');
+    src: url('/fonts/Mulish/Mulish-VariableFont_wght.ttf') format('truetype');
     font-weight: 100 900;
 }
 
 @font-face {
     font-family: 'Mulish';
-    src: url('/src/assets/fonts/Mulish/Mulish-Italic-VariableFont_wght.ttf') format('truetype');
+    src: url('/fonts/Mulish/Mulish-Italic-VariableFont_wght.ttf') format('truetype');
     font-weight: 100 900;
     font-style: italic;
 }

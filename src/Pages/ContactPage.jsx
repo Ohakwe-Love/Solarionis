@@ -5,9 +5,12 @@ import Header from '../components/Layout/Header';
 import { Link } from 'react-router-dom';
 import React, { useState } from 'react';
 import { MapPin, ChevronRight, Phone, Mail, Clock, Send } from 'lucide-react';
+import { API_ENDPOINTS } from '../config/api';
+import { useSiteSettings } from '../hooks/useSiteSettings';
 
 
 export default function ContactPage() {
+    const settings = useSiteSettings();
     const [formData, setFormData] = useState({
         name: '',
         phone: '',
@@ -17,6 +20,7 @@ export default function ContactPage() {
 
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [submitted, setSubmitted] = useState(false);
+    const [error, setError] = useState('');
 
     const handleChange = (e) => {
         setFormData({
@@ -25,18 +29,40 @@ export default function ContactPage() {
         });
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
+        setError('');
         setIsSubmitting(true);
 
-        // Simulate form submission
-        setTimeout(() => {
-            setIsSubmitting(false);
+        try {
+            const response = await fetch(API_ENDPOINTS.CONTACT_SUBMIT, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json',
+                },
+                body: JSON.stringify({
+                    name: formData.name,
+                    phone: formData.phone,
+                    email: formData.email,
+                    message: formData.comment,
+                }),
+            });
+
+            const data = await response.json().catch(() => ({}));
+
+            if (!response.ok) {
+                throw new Error(data?.message || 'Failed to send your message. Please try again.');
+            }
+
             setSubmitted(true);
             setFormData({ name: '', phone: '', email: '', comment: '' });
-
             setTimeout(() => setSubmitted(false), 3000);
-        }, 1500);
+        } catch (err) {
+            setError(err.message || 'Failed to send your message. Please try again.');
+        } finally {
+            setIsSubmitting(false);
+        }
     };
 
     return (
@@ -60,15 +86,14 @@ export default function ContactPage() {
                 <div className="max-w-7xl mx-auto bg-gradient-to-b from-slate-800 to-slate-900 pt-20 px-4 sm:px-6 lg:px-8">
                     <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
                         <div>
-                            <p className="section-label">
+                            <p className="section-label text-(--primary-color) mb-2">
                                 TEXT US A NOTE
                             </p>
                             <h2 className="text-3xl sm:text-3xl lg:text-4xl font-serif text-white mb-4">
                                 Never-Ending Customer Service
                             </h2>
                             <p className="text-gray-400 max-w-3xl mx-auto leading-relaxed mb-10">
-                                Sed Id Semper Risus In Hendrerit Gravida Rutrum Quisque. Vitae Proin Sagittis
-                                Nisl Vel Elit Scelerisque Mauris Rhoncus Mattis Rhoncus Urna.
+                                Whether you have a question about our services, need assistance with your account, or just want to say hello, we're here for you. Our dedicated support team is available 24/7 to ensure you get the help you need, whenever you need it. Reach out to us through the form below, and we'll respond as quickly as possible.
                             </p>
 
                             {/* Contact Info Cards */}
@@ -81,7 +106,8 @@ export default function ContactPage() {
                                     </div>
                                     <h3 className="text-white font-semibold mb-2">Visit Us</h3>
                                     <p className="text-gray-400 text-sm leading-relaxed">
-                                        123 Fifth Avenue, New York, NY 10160, United States
+                                        {/* {settings.support_address} */}
+                                        USA
                                     </p>
                                 </div>
 
@@ -91,7 +117,7 @@ export default function ContactPage() {
                                         <Phone className="w-6 h-6 text-(--primary-color) group-hover:text-white transition-all duration-300" />
                                     </div>
                                     <h3 className="text-white font-semibold mb-2">Call Us</h3>
-                                    <p className="text-gray-400 text-sm">+1 (555) 123-4567</p>
+                                    <p className="text-gray-400 text-sm">{settings.support_phone || 'Phone support will be added here.'}</p>
                                 </div>
 
                                 {/* Email */}
@@ -100,8 +126,7 @@ export default function ContactPage() {
                                         <Mail className="w-6 h-6 text-(--primary-color) group-hover:text-white transition-all duration-300" />
                                     </div>
                                     <h3 className="text-white font-semibold mb-2">Email Us</h3>
-                                    <p className="text-gray-400 text-sm">info@Solarionis.com</p>
-                                    <p className="text-gray-400 text-sm">support@Solarionis.com</p>
+                                    <p className="text-gray-400 text-sm">{settings.support_email}</p>
                                 </div>
 
                                 {/* Hours */}
@@ -110,8 +135,8 @@ export default function ContactPage() {
                                         <Clock className="w-6 h-6 text-(--primary-color) group-hover:text-white transition-all duration-300" />
                                     </div>
                                     <h3 className="text-white font-semibold mb-2">Working Hours</h3>
-                                    <p className="text-gray-400 text-sm">Mon - Fri: 9AM - 6PM</p>
-                                    <p className="text-gray-400 text-sm">Sat - Sun: 10AM - 4PM</p>
+                                    <p className="text-gray-400 text-sm">{settings.working_hours_weekdays}</p>
+                                    <p className="text-gray-400 text-sm">{settings.working_hours_weekends}</p>
                                 </div>
                             </div>
                         </div>
@@ -131,6 +156,11 @@ export default function ContactPage() {
                                     </div>
                                 ) : (
                                     <form onSubmit={handleSubmit} className="space-y-5">
+                                        {error && (
+                                            <div className="rounded-xl border border-red-500/40 bg-red-500/10 px-4 py-3 text-sm text-red-200">
+                                                {error}
+                                            </div>
+                                        )}
                                         <div className="grid sm:grid-cols-2 gap-5">
                                             <div className="relative">
                                                 <input

@@ -5,6 +5,7 @@ import {
     adminJson,
     adminRequest,
     clearAdminAuthenticated,
+    getPagination,
     normalizePaginatedRows,
 } from "../adminApi";
 
@@ -20,18 +21,33 @@ export default function AdminWithdrawals() {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState("");
     const [actionId, setActionId] = useState(null);
+    const [page, setPage] = useState(1);
+    const [statusFilter, setStatusFilter] = useState("all");
+    const [pagination, setPagination] = useState({
+        currentPage: 1,
+        lastPage: 1,
+        perPage: 25,
+        total: 0,
+    });
 
     useEffect(() => {
-        load();
+        load(page, statusFilter);
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+    }, [page, statusFilter]);
 
-    const load = async () => {
+    const load = async (targetPage = 1, targetStatus = "all") => {
         setLoading(true);
         setError("");
 
         try {
-            const { response, data } = await adminJson(API_ENDPOINTS.ADMIN_WITHDRAWALS);
+            const url = new URL(API_ENDPOINTS.ADMIN_WITHDRAWALS);
+            url.searchParams.set("page", String(targetPage));
+            url.searchParams.set("per_page", "25");
+            if (targetStatus !== "all") {
+                url.searchParams.set("status", targetStatus);
+            }
+
+            const { response, data } = await adminJson(url.toString());
             if (response.status === 401) {
                 clearAdminAuthenticated();
                 navigate("/admin/login");
@@ -41,6 +57,7 @@ export default function AdminWithdrawals() {
                 throw new Error(data?.message || "Failed to load withdrawals.");
             }
             setRows(normalizePaginatedRows(data));
+            setPagination(getPagination(data));
         } catch (err) {
             setError(err.message || "Failed to load withdrawals.");
         } finally {
@@ -81,7 +98,7 @@ export default function AdminWithdrawals() {
                 throw new Error(data?.message || "Action failed.");
             }
 
-            await load();
+            await load(page, statusFilter);
         } catch (err) {
             setError(err.message || "Action failed.");
         } finally {
@@ -91,7 +108,23 @@ export default function AdminWithdrawals() {
 
     return (
         <div className="rounded-xl border border-zinc-800 bg-zinc-950 p-6">
-            <h1 className="text-3xl font-bold text-white mb-4">Withdrawals</h1>
+            <div className="mb-4 flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
+                <h1 className="text-3xl font-bold text-white">Withdrawals</h1>
+                <select
+                    value={statusFilter}
+                    onChange={(e) => {
+                        setStatusFilter(e.target.value);
+                        setPage(1);
+                    }}
+                    className="rounded-lg border border-zinc-700 bg-zinc-900 px-3 py-2 text-sm text-zinc-200"
+                >
+                    <option value="all">All statuses</option>
+                    <option value="requested">Requested</option>
+                    <option value="processing">Processing</option>
+                    <option value="sent">Sent</option>
+                    <option value="failed">Failed</option>
+                </select>
+            </div>
 
             {error && (
                 <div className="mb-4 rounded-xl border border-red-800 bg-red-950/40 p-3 text-sm text-red-200">
@@ -100,7 +133,7 @@ export default function AdminWithdrawals() {
             )}
 
             <div className="overflow-x-auto">
-                <table className="w-full">
+                <table className="w-full min-w-[960px]">
                     <thead>
                         <tr className="border-b border-zinc-800">
                             <th className="text-left py-3 text-sm text-zinc-400">ID</th>
@@ -148,7 +181,7 @@ export default function AdminWithdrawals() {
                                                 <button
                                                     onClick={() => runAction(row.id, "sent")}
                                                     disabled={!canSend || actionId === row.id}
-                                                    className="rounded-lg px-3 py-1.5 bg-[var(--solar-gold)] text-black font-semibold disabled:opacity-40"
+                                                    className="rounded-lg px-3 py-1.5 bg-(--solar-gold) text-black font-semibold disabled:opacity-40"
                                                 >
                                                     Mark Sent
                                                 </button>
@@ -171,6 +204,28 @@ export default function AdminWithdrawals() {
             {!loading && rows.length === 0 && (
                 <p className="text-zinc-500 text-sm mt-4">No withdrawals found.</p>
             )}
+
+            <div className="mt-4 flex items-center justify-between gap-3 text-sm text-zinc-400">
+                <p>
+                    Showing page {pagination.currentPage} of {pagination.lastPage} ({pagination.total} total withdrawals)
+                </p>
+                <div className="flex gap-2">
+                    <button
+                        onClick={() => setPage((prev) => Math.max(prev - 1, 1))}
+                        disabled={loading || page <= 1}
+                        className="rounded-lg border border-zinc-700 px-3 py-1.5 disabled:opacity-40"
+                    >
+                        Previous
+                    </button>
+                    <button
+                        onClick={() => setPage((prev) => Math.min(prev + 1, Math.max(1, pagination.lastPage)))}
+                        disabled={loading || page >= pagination.lastPage}
+                        className="rounded-lg border border-zinc-700 px-3 py-1.5 disabled:opacity-40"
+                    >
+                        Next
+                    </button>
+                </div>
+            </div>
         </div>
     );
 }
